@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - TechShop</title>
+    <link rel="stylesheet" href="../css/producto.css">
+</head>
+<body>
+  <header>
+    <div class="left-section">
+      <p>TechShop</p>
+    </div>
+    <div class="middle-section">
+      <input class="search-bar" type="text" placeholder="Search">
+      <button class="search-button">
+      <img class="icon-search" src="../img/icons/search.svg">
+    </button>
+    </div>
+    <div class="righ-section">
+      <a class="cart-container">
+          <img class="img-cart" src="../img/icons/carrito-removebg-preview.png">
+          <div id="cart-counter" class="cart-counter">           
+          </div>
+      </a>
+      <a href="soporte.html">
+          <button>Soporte Chatbot</button>
+      </a>
+    </div>
+    <div class="right-most-section">
+      <div class="log-sign-buttons">
+          <a href="log-in.html"><button>Login</button></a>
+          <a href="sign-in.html"><button>Sign In</button></a>
+      </div>
+  </div>
+  </header>
+
+    <main>
+        <div class="product-detail-container">
+            <div class="image-section">
+                <div class="product-image-container"><img id="product-img" class="product-img" src=""></div>
+            </div>
+            <div class="info-section">
+                <h1 id="product-name"></h1>
+                <p id="price" class="price"></p>
+                <p id="stock" class="stock"></p>
+                <div class="description">
+                    <h3>Descripción del producto</h3>
+                    <p id="description">
+                    </p>
+                    <div class="buttons">
+                      <a href="pago.html">
+                        <button class="buy-btn">Comprar</button>
+                      </a>
+                      <button id="add-to-cart-btn" onclick="addToCart()" class="add-to-cart-btn">Añadir al Carrito</button>
+                      <label for="quantity">Cantidad:</label>
+                      <select id="quantity" name="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                      <div class="added-to-cart"></div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 TechShop. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/validar-sesion.js"></script>
+    <script src="../js/leer-productos.js"></script>
+    <script src="../js/añadir-carrito.js"></script>
+</body>
+</html>

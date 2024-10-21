@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Personal - TechShop</title>
+    <link rel="stylesheet" href="../css/informacion-personal.css">
+</head>
+<body>
+    <header>
+        <div class="left-section">
+          <p>TechShop</p>
+        </div>
+        <div class="middle-section">
+          <input class="search-bar" type="text" placeholder="Search">
+          <button class="search-button">
+          <img class="icon-search" src="../img/icons/search.svg">
+        </button>
+        </div>
+        <div class="righ-section">
+          <a class="cart-container">
+              <img class="img-cart" src="../img/icons/carrito-removebg-preview.png">
+              <div id="cart-counter" class="cart-counter">           
+              </div>
+          </a>
+          <a href="soporte.html">
+              <button>Soporte Chatbot</button>
+          </a>
+        </div>
+        <div class="right-most-section">
+          <div class="log-sign-buttons">
+              <a href="log-in.html"><button>Login</button></a>
+              <a href="sign-in.html"><button>Sign In</button></a>
+          </div>
+      </div>
+      </header>
+    <main>
+        <section class="user-personal-info">
+            <div class="user-personal-info-header">
+                <h2>Tu Información Personal</h2>
+                <button onclick="leerDatosUsuario()">Ver</button>
+                <button onclick="logout()">log out</button>
+            </div>
+            <table id="table-user">
+                <tr>
+                    <th>Nombre Completo</th>
+                    <td id="nombre">***********</td>
+                </tr>
+                <tr>
+                    <th>Número de Teléfono</th>
+                    <td id="telefono">***********</td>
+                </tr>
+                <tr>
+                    <th>Correo Electrónico</th>
+                    <td id="correo">***********</td>
+                </tr>
+                <tr>
+                    <th>Dirección</th>
+                    <td id="direccion">***********</td>
+                </tr>
+                <tr>
+                    <th>Identificación</th>
+                    <td id="identificacion">***********</td>
+                </tr>
+                <tr>
+                    <th>Contraseña</th>
+                    <td id="password">***********</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 TechShop. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../js/validar-sesion.js"></script>
+    <script src="../js/leer-usuario.js"></script>
+</body>
+</html>
