@@ -28,6 +28,7 @@ const validarIdProducto = (idProducto) => {
   localStorage.setItem('idProducto',idProducto)
 }
 
+/*
 async function traerProductos(){
   try {
       const responseProductos = await fetch('http://127.0.0.1:8000/products/');
@@ -46,3 +47,4 @@ async function traerProductos(){
 }
 
 traerProductos();
+*/
