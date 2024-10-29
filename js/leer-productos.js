@@ -7,5 +7,5 @@ document.getElementById('product-name').innerHTML = productoSeleccionado.nombre;
 document.getElementById('price').innerHTML = `$${productoSeleccionado.precio}`;
 document.getElementById('description').innerHTML = productoSeleccionado.descripcion;
 document.getElementById('product-img').src = productoSeleccionado.imagen;
-const stockText = productoSeleccionado.en_stock ? "En stock" : "Agotado";
+const stockText = productoSeleccionado.existencias ? "En stock" : "Agotado";
 document.getElementById('stock').innerHTML = stockText;

@@ -1,13 +1,20 @@
 if (!localStorage.getItem('userName')) { 
-  document.querySelector('.log-sign-buttons').innerHTML = `
-  <a href="../html/log-in.html"><button>Login</button></a>
-  <a href="../html/sign-in.html"><button>Sign In</button></a>
+  document.querySelector('.user-login').innerHTML = `
+  <li>
+      <a href="/html/sign-in.html">Sign In</a>
+  </li>
+  <li>
+      <a href="/html/log-in.html">Log In</a>
+  </li>
   `
+  document.querySelector('.user').innerHTML = '';
 }else {
   let userName = localStorage.getItem('userName');
-  document.querySelector('.log-sign-buttons').innerHTML = `
-  <p class="user-name">${userName}</p>
-  <a href="/html/informacion-personal.html"><img class="img-avatar" src="../img/icons/avatar.png"></a>
+  document.querySelector('.user').innerHTML = 'hola!';
+  document.querySelector('.user-login').innerHTML = `
+  <li>
+    <a href="/html/informacion-personal.html"><p class="user-name">${userName}</p></a>
+  </li>
   `
   let cartCounter = localStorage.getItem('cartCounter');
   if(!cartCounter){

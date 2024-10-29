@@ -32,11 +32,27 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 @router.get("/users/{id}", response_model=userSchema.User)
-def read_user(id: str, db: Session = Depends(get_db)):
+def read_user(id: int, db: Session = Depends(get_db)):
     db_user = crudUser.get_user(db, id=id)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+@router.put("/users/{id}", response_model=userSchema.User)
+def update_user(id: int, user: userSchema.UserCreate, db: Session = Depends(get_db)):
+    db_user = crudUser.get_user(db, id=id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    updated_user = crudUser.update_user(db=db, id=id, updated_user=user)
+    return updated_user
+  
+@router.delete("/users/{id}", response_model=userSchema.User)
+def delete_user(id: int, db: Session = Depends(get_db)):
+    db_user = crudUser.get_user(db, id=id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    deleted_user = crudUser.delete_user(db=db, id=id)
+    return deleted_user
         
 
 

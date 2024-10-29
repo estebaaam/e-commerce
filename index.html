@@ -1,277 +1,716 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="no-js" lang="zxx">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda - TechShop</title>
-    <link rel="stylesheet" href="css/tienda.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ShopGrids - Bootstrap 5 eCommerce HTML Template.</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.svg" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/LineIcons.3.0.css" />
+    <link rel="stylesheet" href="/css/tiny-slider.css" />
+    <link rel="stylesheet" href="/css/glightbox.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+
 </head>
+
 <body>
-    <header>
-      <div class="left-section">
-        <p>TechShop</p>
-      </div>
-      <div class="middle-section">
-        <input class="search-bar" type="text" placeholder="Search">
-        <button class="search-button">
-        <img class="icon-search" src="img/icons/search.svg">
-      </button>
-      </div>
-      <div class="righ-section">
-        <a href="html/carrito.html" class="cart-container">
-            <img class="img-cart" src="img/icons/carrito-removebg-preview.png">
-            <div id="cart-counter" class="cart-counter">           
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- Start Header Area -->
+    <header class="header navbar-area">
+        <!-- Start Topbar -->
+        <div class="topbar">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="top-left">
+                            <ul class="menu-top-link">
+                                <li>
+                                    <div class="select-position">
+                                        <select id="select5">
+                                            <option value="0" selected>English</option>
+                                            <option value="1">Español</option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="top-middle">
+                            <ul class="useful-links">
+                            <li><a href="index.html">Hogar</a></li>
+                                <li><a href="about-us.html">Sobre Nosotros</a></li>
+                                <li><a href="contact.html">Contactanos</a></li>
+                                <li><a href="html/asistente.html">Asistente</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="top-end">
+                            <div class="user">
+                            </div>
+                            <ul class="user-login">
+                                <li>
+                                    <a href="login.html">Sign In</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Register</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </a>
-        <a href="html/soporte.html">
-            <button>Soporte Chatbot</button>
-        </a>
-      </div>
-      <div class="right-most-section">
-        <div class="log-sign-buttons">
-            <a href="html/log-in.html"><button>Login</button></a>
-            <a href="html/sign-in.html"><button>Sign In</button></a>
         </div>
-    </div>
+        <!-- End Topbar -->
+        <!-- Start Header Middle -->
+        <div class="header-middle">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3 col-7">
+                        <!-- Start Header Logo -->
+                        <a class="navbar-brand" href="index.html">
+                            <h2>TechShop</h2>
+                        </a>
+                        <!-- End Header Logo -->
+                    </div>
+                    <div class="col-lg-5 col-md-7 d-xs-none">
+                        <!-- Start Main Menu Search -->
+                        <div class="main-menu-search">
+                            <!-- navbar search start -->
+                            <div class="navbar-search search-style-5">
+                                <div class="search-input">
+                                    <input type="text" placeholder="Search">
+                                </div>
+                                <div class="search-btn">
+                                    <button><i class="lni lni-search-alt"></i></button>
+                                </div>
+                            </div>
+                            <!-- navbar search Ends -->
+                        </div>
+                        <!-- End Main Menu Search -->
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-5">
+                        <div class="middle-right-area">
+                            <div class="nav-hotline">
+                                <i class="lni lni-phone"></i>
+                                <h3>Linea Directa:
+                                    <span>(+57) 314 781 0003</span>
+                                </h3>
+                            </div>
+                            <div class="navbar-cart">
+                                <div class="cart-items">
+                                    <a href="/html/carrito.html" class="main-btn">
+                                        <i class="lni lni-cart"></i>
+                                        <span class="cart-counter"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header Middle -->
+        <!-- Start Header Bottom -->
+        <div class="container my-3">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-6 col-12">
+                    <div class="nav-inner">
+                        <!-- Start Mega Category Menu -->
+                        <div class="mega-category-menu">
+                            <span class="cat-button"><i class="lni lni-menu"></i>Categorias</span>
+                            <ul class="sub-category">
+                                <li><a href="product-grids.html">Portatiles</a></li>
+                                <li><a href="product-grids.html">Celulares</a></li>
+                                <li><a href="product-grids.html">Relojes</a></li>
+                                <li><a href="product-grids.html">Auriculares</a></li>
+                                <li><a href="product-grids.html">Monitores</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Mega Category Menu -->
+                        <!-- Start Navbar -->
+                        <nav class="navbar navbar-expand-lg">
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                        </nav>
+                        <!-- End Navbar -->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Nav Social -->
+                    <div class="nav-social">
+                        <h5 class="title">Siguenos:</h5>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Nav Social -->
+                </div>
+            </div>
+        </div>
+        <!-- End Header Bottom -->
     </header>
-    <div class="container-promotional-banner">
-        <div class="banner-information">
-            <h1>Descubre lo último en tecnología.</h1>
-            <p>Explora nuestra selección de productos electrónicos de calidad, diseñados para mejorar tu vida diaria.</p>
-            <button>Conoce mas</button>
-        </div>
-        <img class="img-beginning-banner" src="img/banners/img-beginning-banner.jpg">
-    </div>
+    <!-- End Header Area -->
 
-    <!--
-     <div class="center-container-carousel">
-        <div class="container-carousel">
-            <div class="carouseles">
-                <section class="slider-section">
-                    <div class="banner-information-carousel-1">
-                        <h1>Productividad sin límites!</h1>
-                        <p>Potencia y elegancia en cada tarea. Descubre lo mejor de Apple para trabajar, crear y disfrutar.</p>
-                        <button>Explorar</button>
+    <!-- Start Hero Area -->
+    <section class="hero-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12 custom-padding-right">
+                    <div class="slider-head">
+                        <!-- Start Hero Slider -->
+                        <div class="hero-slider">
+                            <!-- Start Single Slider -->
+                            <div class="single-slider"
+                                style="background-image: url(/images/hero/slider-bg1.jpg);">
+                                <div class="content">
+                                    <h2><span>No restocking fee ($35 savings)</span>
+                                        M75 Sport Watch
+                                    </h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua.</p>
+                                    <h3><span>Now Only</span> $320.99</h3>
+                                    <div class="button">
+                                        <a href="product-grids.html" class="btn">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Slider -->
+                            <!-- Start Single Slider -->
+                            <div class="single-slider"
+                                style="background-image: url(/images/hero/slider-bg2.jpg);">
+                                <div class="content">
+                                    <h2><span>Big Sale Offer</span>
+                                        Get the Best Deal on CCTV Camera
+                                    </h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua.</p>
+                                    <h3><span>Combo Only:</span> $590.00</h3>
+                                    <div class="button">
+                                        <a href="product-grids.html" class="btn">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Slider -->
+                        </div>
+                        <!-- End Hero Slider -->
                     </div>
-                    <img src="img/sliders/slider-1.jpg">
-                </section>
-                <section class="slider-section">
-                    <div class="banner-information-carousel-2">
-                        <h1>Innovación en la palma de tu mano</h1>
-                        <p>El Galaxy Note 20 te conecta con el futuro. Tecnología avanzada para lo que importa.</p>
-                        <button>Comprar Ahora</button>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
+                            <!-- Start Small Banner -->
+                            <div class="hero-small-banner"
+                                style="background-image: url('/images/hero/slider-bnr.jpg');">
+                                <div class="content">
+                                    <h2>
+                                        <span>New line required</span>
+                                        iPhone 12 Pro Max
+                                    </h2>
+                                    <h3>$259.99</h3>
+                                </div>
+                            </div>
+                            <!-- End Small Banner -->
+                        </div>
+                        <div class="col-lg-12 col-md-6 col-12">
+                            <!-- Start Small Banner -->
+                            <div class="hero-small-banner style2">
+                                <div class="content">
+                                    <h2>Weekly Sale!</h2>
+                                    <p>Saving up to 50% off all online store items this week.</p>
+                                    <div class="button">
+                                        <a class="btn" href="product-grids.html">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Start Small Banner -->
+                        </div>
                     </div>
-                    <img src="img/sliders/slider-2.jpg">
-                </section>
-                <section class="slider-section">
-                    <div class="banner-information-carousel-3">
-                        <h1>Versatilidad para todo lo que necesitas</h1>
-                        <p>Con un portátil HP, lleva tu creatividad y productividad al siguiente nivel, desde cualquier lugar.</p>
-                        <button>Explorar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Hero Area -->
+
+    <!-- Start Trending Product Area -->
+    <section class="trending-product section" style="margin-top: 12px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Productos En Tendencia</h2>
+                        <p>¿Buscas algo nuevo y emocionante? ¡Nuestra sección de Productos en Tendencia es el lugar perfecto para ti! Aquí encontrarás lo más destacado del momento, desde artículos innovadores hasta los favoritos de nuestros clientes.</p>
                     </div>
-                    <img src="img/sliders/slider-3.jpg">
-                </section>
+                </div>
             </div>
-            <div onclick="moveToLeft()" class="btn-left">  </div>
-            <div onclick="moveToRight()" class="btn-right"> > </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-1.png">
+                            <div onclick="validarIdProducto(1)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Watches</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">Xiaomi Mi Band 5</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star"></i></li>
+                                <li><span>4.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$199.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(1)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart1"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-2.jpg" style="width: 160px;">
+                            <div onclick="validarIdProducto(2)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Speaker</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">Big Power Sound Speaker</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><span>5.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$275.00</span>
+                                <span class="discount-price">$300.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(2)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart2"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-3.png">
+                            <div onclick="validarIdProducto(3)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Camera</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">WiFi Security Camera</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><span>5.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$399.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(3)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart3"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-4.png">
+                            <div onclick="validarIdProducto(4)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Phones</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">iphone 6x plus</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><span>5.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$400.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(4)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart4"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-5.png">
+                            <div onclick="validarIdProducto(5)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Headphones</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">Wireless Headphones</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><span>5.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$350.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(5)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart5"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-6.png">
+                            <div onclick="validarIdProducto(6)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Speaker</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">Mini Bluetooth Speaker</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star"></i></li>
+                                <li><span>4.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$70.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(6)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart6"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-7.png">
+                            <div onclick="validarIdProducto(7)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Headphones</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">PX7 Wireless Headphones</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star"></i></li>
+                                <li><span>4.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$100.00</span>
+                                <span class="discount-price">$200.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(7)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart7"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <img src="/images/products/producto-8.png">
+                            <div onclick="validarIdProducto(8)" class="button">
+                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category">Laptop</span>
+                            <h4 class="title">
+                                <a href="product-grids.html">Apple MacBook Air</a>
+                            </h4>
+                            <ul class="review">
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><i class="lni lni-star-filled"></i></li>
+                                <li><span>5.0 Review(s)</span></li>
+                            </ul>
+                            <div class="price">
+                                <span>$899.00</span>
+                            </div>
+                        </div>
+                        <button onclick="addToCartFromStore(8)" class="btn btn-primary">Add To Cart</button>
+                        <div class="added-to-cart8"></div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+            </div>
         </div>
-    </div>
-    -->
+    </section>
+    <!-- End Trending Product Area -->
 
-    <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active" style="height: 600px;">
-            <img src="img/sliders/slider-1.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item active" style="height: 600px;">
-            <img src="img/sliders/slider-2.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item active" style="height: 600px;">
-            <img src="img/sliders/slider-3.jpg" class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+    <!-- Start Call Action Area -->
+    <!-- End Call Action Area -->
 
-    <div class="categories-container">
-        <div class="category-title">
-            <h3>Categorias Populares</h3>
+    <!-- Start Banner Area -->
+    <section class="banner section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="single-banner" style="background-image:url('/images/banner/banner-1-bg.jpg')">
+                        <div class="content">
+                            <h2>Smart Watch 2.0</h2>
+                            <p>Space Gray Aluminum Case with <br>Black/Volt Real Sport Band </p>
+                            <div class="button">
+                                <a href="product-grids.html" class="btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="single-banner custom-responsive-margin"
+                        style="background-image:url('/images/banner/banner-2-bg.jpg')">
+                        <div class="content">
+                            <h2>Smart Headphone</h2>
+                            <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
+                                incididunt ut labore.</p>
+                            <div class="button">
+                                <a href="product-grids.html" class="btn">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container-categories-img">
-            <section class="container-category-img">
-                <p>Portatiles</p>
-                <img class="img-category" src="img/banners/laptop-section-img.jpg">
-            </section>
-            <section class="container-category-img">
-                <p>Celulares</p>
-                <img class="img-category" src="img/banners/phone-section-img.jpg">
-            </section>
-            <section class="container-category-img">
-                <p>Relojes</p>
-                <img class="img-category" src="img/banners/clock-section-img.jpg">
-            </section>
-            <section class="container-category-img">
-                <p>Auriculares</p>
-                <img class="img-category" src="img/banners/headphone-section-img.jpg">
-            </section>
-            <section class="container-category-img">
-                <p>Monitores</p>
-                <img class="img-category" src="img/banners/monitor-section-img.jpg">
-            </section>
+    </section>
+    <!-- End Banner Area -->
+
+    <!-- Start Shipping Info -->
+    <section class="shipping-info">
+        <div class="container">
+            <ul>
+                <!-- Free Shipping -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-delivery"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>Free Shipping</h5>
+                        <span>On order over $99</span>
+                    </div>
+                </li>
+                <!-- Money Return -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-support"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>24/7 Support.</h5>
+                        <span>Live Chat Or Call.</span>
+                    </div>
+                </li>
+                <!-- Support 24/7 -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-credit-cards"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>Online Payment.</h5>
+                        <span>Secure Payment Services.</span>
+                    </div>
+                </li>
+                <!-- Safe Payment -->
+                <li>
+                    <div class="media-icon">
+                        <i class="lni lni-reload"></i>
+                    </div>
+                    <div class="media-body">
+                        <h5>Easy Return.</h5>
+                        <span>Hassle Free Shopping.</span>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
+    </section>
+    <!-- End Shipping Info -->
 
-    <main>
-        <h1 class="best-of-today-title">Lo Mejor De Hoy!</h1>
-        <section class="catalogo">
-            <div class="product">
-                <a onclick="validarIdProducto(1)" href="/html/producto.html">
-                    <div class="product-container"><img class="product-img" src="img/img products/producto4.png"></div>
-                </a>
-                <div class="product-information">
-                    <h3>Iphon 15</h3>
-                    <p>$299.99</p>
-                </div>
-                <div class="add-to-cart-section">
-                    <button onclick="addToCartFromStore(1)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                    <div class="added-to-cart1"></div>
-                </div>
-            </div>
-            <div class="product">
-                <a onclick="validarIdProducto(2)" href="html/producto.html">
-                    <div class="product-container"><img class="product-img" src="img/img products/producto2.jpg"></div>
-                </a>
-                <div class="product-information">
-                    <h3>Iphon 15</h3>
-                    <p>$299.99</p>
-                </div>
-                <div class="add-to-cart-section">
-                    <button onclick="addToCartFromStore(2)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                    <div class="added-to-cart2"></div>
-                </div>
-            </div>
-            <div class="product">
-            <a onclick="validarIdProducto(3)" href="html/producto.html">
-                <div class="product-container"><img class="product-img" src="img/img products/producto3.png"></div>
-            </a>
-            <div class="product-information">
-                <h3>Iphon 15</h3>
-                <p>$299.99</p>
-            </div>
-            <div class="add-to-cart-section">
-                <button onclick="addToCartFromStore(3)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                <div class="added-to-cart3"></div>
-            </div>
-            </div>
-            <div class="product">
-                <a onclick="validarIdProducto(4)" href="html/producto.html">
-                <div class="product-container"><img class="product-img" src="img/img products/producto1.png"></div>
-                </a>
-                <div class="product-information">
-                    <h3>Iphon 15</h3>
-                    <p>$299.99</p>
-                </div>
-                <div class="add-to-cart-section">
-                    <button onclick="addToCartFromStore(4)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                    <div class="added-to-cart4"></div>
+    <!-- Start Footer Area -->
+    <footer class="footer">
+        <!-- Start Footer Top -->
+        <!-- End Footer Top -->
+        <!-- Start Footer Middle -->
+        <div class="footer-middle">
+            <div class="container">
+                <div class="bottom-inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-contact">
+                                <h3>Contactanos</h3>
+                                <p class="phone">Telefono: +57 314 781 0003</p>
+                                <p class="mail">
+                                    <a href="jbaleta@unibarranquilla.edu.co">jbaleta@unibarranquilla.edu.co</a>
+                                </p>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-link">
+                                <h3>Informacion</h3>
+                                <ul>
+                                    <li><a href="about-us.html">Sobre Nosotros</a></li>
+                                    <li><a href="contact.html">Contactanos</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-link">
+                                <h3>Categorias Populares</h3>
+                                <ul>
+                                    <li><a href="product-grids.html">Portatiles</a></li>
+                                    <li><a href="product-grids.html">Celulares</a></li>
+                                    <li><a href="product-grids.html">Relojes</a></li>
+                                    <li><a href="product-grids.html">Auriculares</a></li>
+                                    <li><a href="product-grids.html">Monitores</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="product">
-                <a onclick="validarIdProducto(5)" href="html/producto.html">
-                <div class="product-container"><img class="product-img" src="img/img products/producto5.png"></div>
-                </a>
-                <div class="product-information">
-                    <h3>Iphon 15</h3>
-                    <p>$299.99</p>
-                </div>
-                <div class="add-to-cart-section">
-                    <button onclick="addToCartFromStore(5)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                    <div class="added-to-cart5"></div>
-                </div>
-            </div>
-            <div class="product">
-                <a onclick="validarIdProducto(6)" href="html/producto.html">
-                <div class="product-container"><img class="product-img" src="img/img products/producto6.png"></div>
-                </a>
-                <div class="product-information">
-                    <h3>Iphon 15</h3>
-                    <p>$299.99</p>
-                </div>
-                <div class="add-to-cart-section">
-                    <button onclick="addToCartFromStore(6)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                    <div class="added-to-cart6"></div>
-                </div>
-            </div>
-            <div class="product">
-                <a onclick="validarIdProducto(7)" href="html/producto.html">
-                <div class="product-container"><img class="product-img" src="img/img products/producto7.png"></div>
-                </a>
-                <div class="product-information">
-                    <h3>Iphon 15</h3>
-                    <p>$299.99</p>
-                </div>
-                <div class="add-to-cart-section">
-                    <button onclick="addToCartFromStore(7)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                    <div class="added-to-cart7"></div>
+        </div>
+        <!-- End Footer Middle -->
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="inner-content">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-12">
+                            <div class="payment-gateway">
+                                <span>Aceptamos:</span>
+                                <img src="/images/footer/credit-cards-footer.png" alt="#">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <div class="copyright">
+                                <p>Diseñado y Desarrollado por TechShop</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <ul class="socila">
+                                <li>
+                                    <span>Siguenos en:</span>
+                                </li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="product">
-                <a onclick="validarIdProducto(8)" href="html/producto.html">
-                <div class="product-container"><img class="product-img" src="img/img products/producto8.png"></div>
-                </a>
-                <div class="product-information">
-                    <h3>Iphon 15</h3>
-                    <p>$299.99</p>
-                </div>
-                <div class="add-to-cart-section">
-                    <button onclick="addToCartFromStore(8)" class="add-to-cart-btn">Añadir Al Carrito</button>
-                    <div class="added-to-cart8"></div>
-                </div>
-            </div>
-        </section>
-        <h1 class="choose-by-brand-title">Escoge Por Marca</h1>
-
-        <section class="brands-container">
-            <div class="brand">
-                <img class="img-brand" src="img/icons/logo-apple.png">
-            </div>
-            <div class="brand">
-                <img class="img-brand" src="img/icons/samsung-logo.avif">
-            </div>
-            <div class="brand">
-                <img class="img-brand" src="img/icons/HP-logo.png">
-            </div>
-            <div class="brand">
-                <img class="img-brand" src="img/icons/Dell-Logo.png">
-            </div>
-            <div class="brand">
-                <img class="img-brand" src="img/icons/sony-logo.webp">
-            </div>
-            <div class="brand">
-                <img class="img-brand" src="img/icons/logo-lenovo.jpg">
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <p>TechShop © 2024 - Todos los derechos reservados.</p>
+        </div>
+        <!-- End Footer Bottom -->
     </footer>
-<script src="js/validar-sesion.js"></script>
-<script src="js/slider.js"></script>
-<script src="js/añadir-carrito.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/tiny-slider.js"></script>
+    <script src="/js/glightbox.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/validar-sesion.js"></script>
+    <script src="/js/añadir-carrito.js"></script>
 </body>
+
 </html>

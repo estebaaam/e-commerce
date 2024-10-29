@@ -26,6 +26,7 @@ async function signIn (event) {
         });
         if (updateResponse.ok) {
             localStorage.setItem('userName',nuevoUsuario.nombre);
+            localStorage.setItem('user', JSON.stringify(nuevoUsuario));
             await traerProductos();
             window.location.href = "../index.html";
         } else {
@@ -40,9 +41,8 @@ async function signIn (event) {
 
 async function traerProductos(){
     try {
-        const responseProductos = await fetch('https://api.jsonbin.io/v3/b/66ff0863ad19ca34f8b243e9');
-        const dataProductos = await responseProductos.json();
-        const productos = dataProductos.record.productos;
+        const responseProductos = await fetch('http://127.0.0.1:8000/products/');
+        const productos = await responseProductos.json();
 
         localStorage.setItem('productos',JSON.stringify(productos));
 

@@ -22,11 +22,11 @@ const addToCart = () => {
 
     localStorage.setItem('cartCounter', cartCounter);
 
-    document.getElementById('cart-counter').innerHTML = cartCounter;
+    document.querySelector('.cart-counter').innerHTML = cartCounter;
 
-    document.querySelector(`.added-to-cart`).innerHTML = 'añadido';
+    document.querySelector(`.added-to-cart1`).innerHTML = 'añadido';
     setTimeout(() => {
-      document.querySelector(`.added-to-cart`).innerHTML = '';
+      document.querySelector(`.added-to-cart1`).innerHTML = '';
     }, 2000);
   }
 };
@@ -54,7 +54,7 @@ const addToCartFromStore = (idProducto) => {
 
     localStorage.setItem('cartCounter', cartCounter);
 
-    document.getElementById('cart-counter').innerHTML = cartCounter;
+    document.querySelector('.cart-counter').innerHTML = cartCounter;
 
     document.querySelector(`.added-to-cart${idProducto}`).innerHTML = 'añadido';
     setTimeout(() => {

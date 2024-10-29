@@ -1,42 +1,66 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - TechShop</title>
-    <link rel="stylesheet" href="../css/sign-in.css">
+    <title>Sign-In</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <div class="form-box">
-            <h2>Crea tu cuenta</h2>
-            <form id="signInForm">
-                <div class="input-box">
-                    <label for="nombre">Nombre completo</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div class="input-box">
-                    <label for="telefono">Número de teléfono</label>
-                    <input type="tel" id="telefono" name="telefono" required>
-                </div>
-                <div class="input-box">
-                    <label for="correo">Correo electrónico</label>
-                    <input type="email" id="correo" name="correo" required>
-                </div>
-                <div class="input-box">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion" name="direccion" required>
-                </div>
-                <div class="input-box">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="button-box">
-                    <button type="submit" onclick="signIn(event)">Sign In</button>
-                </div>
-            </form>
+<section class="">
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+                Encuentra lo que buscas <br/>
+              <span class="text-primary">descubre lo inesperado.</span>
+            </h1>
+            <p style="color: hsl(217, 10%, 50.8%)">
+                ¡Regístrate hoy y sé parte de nuestra comunidad! Al unirte, accedes a ofertas exclusivas, recomendaciones personalizadas, y el apoyo constante de nuestro chatbot para resolver todas tus dudas. ¡No te pierdas la experiencia completa!
+            </p>
+          </div>
+  
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="nombre" class="form-control" />
+                    <label class="form-label" for="nombre">Nombre</label>
+                  </div>
+  
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="telefono" class="form-control" />
+                    <label class="form-label" for="telefono">Número de teléfono</label>
+                  </div>
+  
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="correo" class="form-control" />
+                    <label class="form-label" for="correo">Correo electrónico</label>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="direccion" class="form-control" />
+                    <label class="form-label" for="direccion">Dirección</label>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="password" class="form-control" />
+                    <label class="form-label" for="password">Contraseña</label>
+                  </div>
+  
+                  <button onclick="signIn(event)" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">
+                    Sign in
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <script src="../js/sign-in.js"></script>
+  </section>
+  <script src="../js/sign-in.js"></script>
 </body>
 </html>

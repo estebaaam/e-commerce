@@ -2,7 +2,6 @@ async function logIn (event) {
     event.preventDefault();
     const correo = document.getElementById('correo').value;
     const contraseña = document.getElementById('password').value;
-
     try {
         const responseUsers = await fetch('http://127.0.0.1:8000/users/');
         const users = await responseUsers.json();
@@ -11,6 +10,7 @@ async function logIn (event) {
         if (user) {
             const rol =user.rol;
             localStorage.setItem('userName', user.nombre);
+            localStorage.setItem('user', JSON.stringify(user));
             await traerProductos();
             if (rol === 'administrador') {
                 window.location.href = "../dashboard.html";

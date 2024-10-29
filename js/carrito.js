@@ -12,21 +12,17 @@ function mostrarCarrito() {
   if (!cartCounter) {
     document.querySelector('.cart-wrapper').innerHTML = `
   <div class="empty-cart-message-container">
-  <p class="empty-cart-message">su carrito está vacío.</p>
-  <button class="empty-cart-message-button">Explorar la tienda</button>
-  </div>
-  <div class="cart-summary">
-  <h2>Resumen del Carrito</h2>
-  <p>Subtotal (${0} productos): <span>$0</span></p>
-  <a href="pago.html">
-  </a>
+  <h2 class="my-4">su carrito está vacío.</h2>
+  <button class="btn btn-primary">Explorar la tienda</button>
   </div>
   `
+  document.querySelector('.cart-summary-wrapper').innerHTML = '';
   } else {
     const productosFiltrados = filtrarProductos();
     let contadorProductos = JSON.parse(localStorage.getItem('contadorProductos'));
     const listaIdProductos = JSON.parse(localStorage.getItem('listaIdProductos'));
     let productosHTML = '';
+    let cartSumaryHTML = '';
     let stockText = '';
     let precioTotal = 0;
     productosFiltrados.forEach(producto => {
@@ -34,39 +30,40 @@ function mostrarCarrito() {
       precioTotal += producto.precio * contadorProductos[producto.id]
       productosHTML += `
     <div class="product-section">
-    <div class="product-image-container">
-    <img class="product-img" src="${producto.imagen}">
-    </div>
-    <div class="info-section">
-    <h1 class="product-title">${producto.nombre}</h1>
-    <p class="price">$${producto.precio}</p>
-    <p class="stock">${stockText}</p>
-    <p class="product-description">${producto.descripcion}</p>
-    <div class="delete-from-cart-section">
-    <div class="add-sustract-section">
-    <p class="product-quantity-title">cantidad:</p>
-    <p class="minus-sign">-</p>
-    <p class="product-quantity">${contadorProductos[producto.id]}</p>
-    <p class="plus-sign">+</p>
-    </div>
-    <button class="delete-from-cart-button">Eliminar Del Carrito</button>
-    </div>
-    </div>
-    </div>
+            <div class="product-image-container">
+              <img class="product-img" src="${producto.imagen}">
+              </div>
+              <div class="info-section">
+                <h3 class="product-title">${producto.nombre}</h3>
+                <p class="price">$${producto.precio}</p>
+                <p class="stock">${stockText}</p>
+                <p class="product-description">${producto.descripcion}</p>
+                <div class="delete-from-cart-section">
+                <div class="add-sustract-section">
+                <p class="product-quantity-title">cantidad:</p>
+                <p class="minus-sign">-</p>
+                <p class="product-quantity">${contadorProductos[producto.id]}</p>
+                <p class="plus-sign">+</p>
+                </div>
+                <button class="delete-from-cart-button btn btn-danger">Eliminar Del Carrito</button>
+                </div>
+                </div>
+          </div>
     `
     })
 
-    productosHTML += `
+    cartSumaryHTML = `
   <div class="cart-summary">
-  <h2>Resumen del Carrito</h2>
-  <p>Subtotal (${cartCounter} productos): <span>$${precioTotal}</span></p>
-  <a href="pago.html">
-  <button class="checkout-btn">Proceder con el Pago</button>
-  </a>
-  </div>
+              <h2>Resumen del Carrito</h2>
+              <p>Subtotal (${cartCounter} productos): <span>$${precioTotal}</span></p>
+              <a href="pago.html">
+              <button class="btn btn-primary">Proceder con el Pago</button>
+              </a>
+          </div>
   `
 
     document.querySelector('.cart-wrapper').innerHTML = productosHTML;
+    document.querySelector('.cart-summary-wrapper').innerHTML = cartSumaryHTML;
 
     document.querySelectorAll('.minus-sign').forEach((minusSign, index) => {
       minusSign.addEventListener('click', () => {
@@ -79,7 +76,7 @@ function mostrarCarrito() {
 
           localStorage.setItem('cartCounter', cartCounter);
           localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
-          document.getElementById('cart-counter').innerHTML = cartCounter;
+          document.querySelector('.cart-counter').innerHTML = cartCounter;
           mostrarCarrito();
         } else {
           minusSign.style.opacity = 0.2;
@@ -98,7 +95,7 @@ function mostrarCarrito() {
 
         localStorage.setItem('cartCounter', cartCounter);
         localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
-        document.getElementById('cart-counter').innerHTML = cartCounter;
+        document.querySelector('.cart-counter').innerHTML = cartCounter;
         mostrarCarrito();
       })
     })
@@ -117,7 +114,7 @@ function mostrarCarrito() {
         localStorage.setItem('cartCounter', cartCounter);
         localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
         localStorage.setItem('listaIdProductos', JSON.stringify(listaIdProductos));
-        document.getElementById('cart-counter').innerHTML = cartCounter;
+        document.querySelector('.cart-counter').innerHTML = cartCounter;
         mostrarCarrito();
       });
     });
