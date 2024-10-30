@@ -27,6 +27,11 @@ async function signIn (event) {
         if (updateResponse.ok) {
             localStorage.setItem('userName',nuevoUsuario.nombre);
             localStorage.setItem('user', JSON.stringify(nuevoUsuario));
+            let contadorProductos = {};
+            let cartCounter = 0;
+            localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
+            localStorage.setItem('cartCounter',cartCounter)
+            await traerUsuario(nuevoUsuario.correo);
             await traerProductos();
             window.location.href = "../index.html";
         } else {
@@ -44,11 +49,29 @@ async function traerProductos(){
         const responseProductos = await fetch('http://127.0.0.1:8000/products/');
         const productos = await responseProductos.json();
 
-        localStorage.setItem('productos',JSON.stringify(productos));
-
         if (!responseProductos.ok) {
             throw new Error('Error al traer los productos');
         }
+
+        localStorage.setItem('productos',JSON.stringify(productos));
+   
+    }catch (error) {
+        console.error('Hubo un problema al traer los productos:', error);
+        alert('Hubo un error al traer los productos.');
+    }
+}
+
+async function traerUsuario(correo){
+    try {
+        const responseUsers = await fetch('http://127.0.0.1:8000/users/');
+        const users = await responseUsers.json();
+        const user = users.find(user => user.correo === correo);
+
+        if (!responseProductos.ok) {
+            throw new Error('Error al traer los usuarios');
+        }
+
+        localStorage.setItem('userId', user.id);
    
     }catch (error) {
         console.error('Hubo un problema al traer los productos:', error);

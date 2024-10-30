@@ -17,10 +17,6 @@ if (!localStorage.getItem('userName')) {
   </li>
   `
   let cartCounter = localStorage.getItem('cartCounter');
-  if(!cartCounter){
-    localStorage.setItem('cartCounter',0)
-    cartCounter = localStorage.getItem('cartCounter');
-  }
   cartCounter = parseInt(cartCounter);
   document.querySelector('.cart-counter').innerHTML = cartCounter;
 }

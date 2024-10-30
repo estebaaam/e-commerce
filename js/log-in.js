@@ -10,10 +10,12 @@ async function logIn (event) {
         if (user) {
             const rol =user.rol;
             localStorage.setItem('userName', user.nombre);
+            localStorage.setItem('userId', user.id);
             localStorage.setItem('user', JSON.stringify(user));
             await traerProductos();
+            await traerCarrito(user.id);
             if (rol === 'administrador') {
-                window.location.href = "../dashboard.html";
+                window.location.href = "../html/dashboard.html";
             } else if (rol === 'cliente') {
                 window.location.href = "../index.html";
             }
@@ -21,7 +23,7 @@ async function logIn (event) {
             alert("Usuario o contraseña incorrectos");
         }
     } catch (error) {
-        console.error('Error al cargar los datos del JSON:', error);
+        console.error('Error al cargar los datos:', error);
     }
 }
 
@@ -30,14 +32,43 @@ async function traerProductos(){
         const responseProductos = await fetch('http://127.0.0.1:8000/products/');
         const productos = await responseProductos.json();
 
-        localStorage.setItem('productos',JSON.stringify(productos));
-
         if (!responseProductos.ok) {
             throw new Error('Error al traer los productos');
         }
+
+        localStorage.setItem('productos',JSON.stringify(productos));
    
     }catch (error) {
         console.error('Hubo un problema al traer los productos:', error);
         alert('Hubo un error al traer los productos.');
+    }
+}
+
+async function traerCarrito(id){
+    try {
+        const responseCarrito = await fetch(`http://127.0.0.1:8000/cart/${id}`);
+        const carrito = await responseCarrito.json();
+
+        let contadorProductos = {};
+        let cartCounter = 0;
+
+        if(!carrito){
+            localStorage.setItem('contadorProductos',JSON.stringify(contadorProductos));
+        }else{
+            carrito.forEach(item => {
+                contadorProductos[item.id_producto] = item.cantidad;
+            });
+            localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
+
+            for (let id_producto in contadorProductos) {
+                cartCounter += contadorProductos[id_producto];
+              }
+        }
+
+        localStorage.setItem('cartCounter',cartCounter)
+   
+    }catch (error) {
+        console.error('Hubo un problema al traer el carrito:', error);
+        alert('Hubo un error al traer el carriro.');
     }
 }

@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import userRouter
 from app.routers import productRouter
 from app.routers import categoryRouter
+from app.routers import cartRouter
 
 app = FastAPI()
 
@@ -17,6 +18,7 @@ app.add_middleware(
 app.include_router(userRouter.router)
 app.include_router(productRouter.router)
 app.include_router(categoryRouter.router)
+app.include_router(cartRouter.router)
 
 @app.get("/")
 async def root():

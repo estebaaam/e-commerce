@@ -9,6 +9,7 @@ function filtrarProductos() {
 
 function mostrarCarrito() {
   let cartCounter = parseInt(localStorage.getItem('cartCounter'));
+  let userId = parseInt(localStorage.getItem('userId'));
   if (!cartCounter) {
     document.querySelector('.cart-wrapper').innerHTML = `
   <div class="empty-cart-message-container">
@@ -66,13 +67,21 @@ function mostrarCarrito() {
     document.querySelector('.cart-summary-wrapper').innerHTML = cartSumaryHTML;
 
     document.querySelectorAll('.minus-sign').forEach((minusSign, index) => {
-      minusSign.addEventListener('click', () => {
+      minusSign.addEventListener('click', async () => {
         if (contadorProductos[listaIdProductos[index]] > 1) {
           contadorProductos[listaIdProductos[index]]--;
           cartCounter = 0;
           for (let idProducto in contadorProductos) {
             cartCounter += contadorProductos[idProducto];
           }
+
+          let carritoActualizado = {
+            id_producto: listaIdProductos[index],
+            id_usuario: userId,
+            cantidad: contadorProductos[listaIdProductos[index]]
+          }
+          
+          await updateCart(carritoActualizado);
 
           localStorage.setItem('cartCounter', cartCounter);
           localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
@@ -86,12 +95,20 @@ function mostrarCarrito() {
 
 
     document.querySelectorAll('.plus-sign').forEach((minusSign, index) => {
-      minusSign.addEventListener('click', () => {
+      minusSign.addEventListener('click', async () => {
         contadorProductos[listaIdProductos[index]]++;
         cartCounter = 0;
         for (let idProducto in contadorProductos) {
           cartCounter += contadorProductos[idProducto];
         }
+
+        let carritoActualizado = {
+          id_producto: listaIdProductos[index],
+          id_usuario: userId,
+          cantidad: contadorProductos[listaIdProductos[index]]
+        }
+        
+        await updateCart(carritoActualizado);
 
         localStorage.setItem('cartCounter', cartCounter);
         localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
@@ -103,7 +120,16 @@ function mostrarCarrito() {
 
 
     document.querySelectorAll('.delete-from-cart-button').forEach((deleteButton, index) => {
-      deleteButton.addEventListener('click', () => {
+      deleteButton.addEventListener('click', async () => {
+
+        let carritoAeliminar = {
+          id_producto: listaIdProductos[index],
+          id_usuario: userId,
+          cantidad: contadorProductos[listaIdProductos[index]]
+        }
+
+        await deleteCart(carritoAeliminar);
+
         delete contadorProductos[listaIdProductos[index]];
         listaIdProductos.splice(index, 1);
         cartCounter = 0;
@@ -122,5 +148,43 @@ function mostrarCarrito() {
   }
 
 }
+
+async function updateCart(carritoActualizado) {
+  try {
+    const updateResponse = await fetch(`http://127.0.0.1:8000/cart/${carritoActualizado.id_usuario}/${carritoActualizado.id_producto}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(carritoActualizado)
+    });
+    if (!updateResponse.ok) {
+      throw new Error('Error al guardar el carrito');
+    }
+
+}catch (error) {
+    console.error('Hubo un problema con el carrito:', error);
+    alert('Hubo un problema con el carrito. Por favor, intenta de nuevo.');
+}
+}
+
+async function deleteCart(carritoAeliminar) {
+  try {
+    const updateResponse = await fetch(`http://127.0.0.1:8000/cart/${carritoAeliminar.id_usuario}/${carritoAeliminar.id_producto}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    if (!updateResponse.ok) {
+      throw new Error('Error al eliminar el registro');
+    }
+
+}catch (error) {
+    console.error('Hubo un problema con el carrito:', error);
+    alert('Hubo un problema con el carrito. Por favor, intenta de nuevo.');
+}
+}
+
 
 mostrarCarrito();
