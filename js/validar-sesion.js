@@ -20,12 +20,6 @@ if (!localStorage.getItem('userName')) {
   cartCounter = parseInt(cartCounter);
   document.querySelector('.cart-counter').innerHTML = cartCounter;
 }
-const logout = () => {
-  localStorage.removeItem('userName');
-  localStorage.removeItem('idCarrito');
-  localStorage.removeItem('productos');
-  window.location.href = "../index.html";
-}
 
 const validarIdProducto = (idProducto) => {
   localStorage.setItem('idProducto',idProducto)

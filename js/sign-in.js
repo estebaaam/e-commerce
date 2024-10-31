@@ -51,9 +51,9 @@ async function traerProductos(){
 
         if (!responseProductos.ok) {
             throw new Error('Error al traer los productos');
+        }else{
+            localStorage.setItem('productos',JSON.stringify(productos));   
         }
-
-        localStorage.setItem('productos',JSON.stringify(productos));
    
     }catch (error) {
         console.error('Hubo un problema al traer los productos:', error);
@@ -67,14 +67,14 @@ async function traerUsuario(correo){
         const users = await responseUsers.json();
         const user = users.find(user => user.correo === correo);
 
-        if (!responseProductos.ok) {
+        if (!user) {
             throw new Error('Error al traer los usuarios');
+        }else{
+            localStorage.setItem('userId', user.id);
         }
-
-        localStorage.setItem('userId', user.id);
    
     }catch (error) {
-        console.error('Hubo un problema al traer los productos:', error);
-        alert('Hubo un error al traer los productos.');
+        console.error('Hubo un problema al traer los usuarios:', error);
+        alert('Hubo un error al traer los usuarios.');
     }
 }

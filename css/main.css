@@ -1867,6 +1867,12 @@ top: -1px;
   font-size: 18px;
 }
 
+.title-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .header .main-menu-search .search-btn button:hover {
   color: #fff;
   background-color: #081828;
