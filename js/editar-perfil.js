@@ -7,6 +7,7 @@ const logout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('listaIdProductos');
   localStorage.removeItem('idProducto');
+  localStorage.removeItem('cart_order');
   window.location.href = "../index.html";
 }
 
@@ -95,4 +96,44 @@ async function updateUser() {
     console.error('Hubo un problema al actualizar el usuario:', error);
     alert('Hubo un problema al actualizar el usuario. Por favor, intenta de nuevo.');
 }
+}
+
+let cart_order = JSON.parse(localStorage.getItem('cart_order'));
+if(!cart_order){
+  document.querySelector('.cart-wrapper').innerHTML = `
+  <div class="empty-cart-message-container">
+  <h2 class="my-5">no tienes pedidos</h2>
+  <button class="btn btn-primary">Explorar la tienda</button>
+  </div>
+  `
+}else{
+  let listaProductosPedido = []
+  cart_order.forEach(order => {
+    listaProductosPedido.push(order.id_producto);
+  });
+  
+  const productos = JSON.parse(localStorage.getItem('productos'));
+  const productosFiltrados = productos.filter(producto => listaProductosPedido.includes(producto.id));
+  
+  let productosHTML = '';
+
+  productosHTML += '<h2 class="mb-5">tus pedidos</h2>'
+
+  listaProductosPedido.forEach(id_producto => {
+    const producto = productosFiltrados.find(producto => producto.id === id_producto);
+    productosHTML += `
+  <div class="product-section">
+    <div class="product-image-container">
+      <img class="product-img" src="${producto.imagen}">
+      </div>
+      <div class="info-section">
+        <h3 class="product-title">${producto.nombre}</h3>
+        <p class="price">$${producto.precio}</p>
+        <p class="product-description">${producto.descripcion}</p>
+        </div>
+  </div>
+  `
+  });
+  
+  document.querySelector('.cart-wrapper').innerHTML = productosHTML;
 }

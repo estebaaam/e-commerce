@@ -25,10 +25,10 @@ function mostrarCarrito() {
     let productosHTML = '';
     let cartSumaryHTML = '';
     let stockText = '';
-    let precioTotal = 0;
+    let totalPrice = 0;
     productosFiltrados.forEach(producto => {
       stockText = producto.existencias ? "En stock" : "Agotado";
-      precioTotal += producto.precio * contadorProductos[producto.id]
+      totalPrice += producto.precio * contadorProductos[producto.id]
       productosHTML += `
     <div class="product-section">
             <div class="product-image-container">
@@ -56,7 +56,7 @@ function mostrarCarrito() {
     cartSumaryHTML = `
   <div class="cart-summary">
               <h2>Resumen del Carrito</h2>
-              <p>Subtotal (${cartCounter} productos): <span>$${precioTotal}</span></p>
+              <p>Subtotal (${cartCounter} productos): <span>$${totalPrice}</span></p>
               <a href="pago.html">
               <button class="btn btn-primary">Proceder con el Pago</button>
               </a>
@@ -65,6 +65,7 @@ function mostrarCarrito() {
 
     document.querySelector('.cart-wrapper').innerHTML = productosHTML;
     document.querySelector('.cart-summary-wrapper').innerHTML = cartSumaryHTML;
+    localStorage.setItem('totalPrice', totalPrice);
 
     document.querySelectorAll('.minus-sign').forEach((minusSign, index) => {
       minusSign.addEventListener('click', async () => {

@@ -14,6 +14,7 @@ async function logIn (event) {
             localStorage.setItem('user', JSON.stringify(user));
             await traerProductos();
             await traerCarrito(user.id);
+            await getCartOrder(user.id);
             if (rol === 'administrador') {
                 window.location.href = "../html/dashboard.html";
             } else if (rol === 'cliente') {
@@ -72,3 +73,18 @@ async function traerCarrito(id){
         alert('Hubo un error al traer el carriro.');
     }
 }
+
+async function getCartOrder(id_usuario){
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/cartOrder/${id_usuario}`);
+        let cart_order = await response.json();
+  
+        if (cart_order) {
+            localStorage.setItem('cart_order',JSON.stringify(cart_order));
+        }
+  
+    }catch (error) {
+        console.error('Hubo un problema al traer los pedidos:', error);
+        alert('Hubo un error al traer los pedidos.');
+    }
+  }

@@ -4,6 +4,8 @@ from app.routers import userRouter
 from app.routers import productRouter
 from app.routers import categoryRouter
 from app.routers import cartRouter
+from app.routers import orderRouter
+from app.routers import cart_orderRouter
 
 app = FastAPI()
 
@@ -19,6 +21,8 @@ app.include_router(userRouter.router)
 app.include_router(productRouter.router)
 app.include_router(categoryRouter.router)
 app.include_router(cartRouter.router)
+app.include_router(orderRouter.router)
+app.include_router(cart_orderRouter.router)
 
 @app.get("/")
 async def root():
