@@ -26,5 +26,5 @@ def create_cart_order(cart_order: cart_orderSchema.CartOrder, db: Session = Depe
 def read_cart_order(id_usuario: int, db: Session = Depends(get_db)):
     cart_order = crudCart_order.get_cart_order(db, id_usuario=id_usuario)
     if cart_order is None:
-        return None
+        raise HTTPException(status_code=404, detail="Cart Order not found")
     return cart_order

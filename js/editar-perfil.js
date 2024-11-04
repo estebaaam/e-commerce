@@ -8,6 +8,7 @@ const logout = () => {
   localStorage.removeItem('listaIdProductos');
   localStorage.removeItem('idProducto');
   localStorage.removeItem('cart_order');
+  localStorage.removeItem('orders');
   window.location.href = "../index.html";
 }
 
@@ -98,8 +99,8 @@ async function updateUser() {
 }
 }
 
-let cart_order = JSON.parse(localStorage.getItem('cart_order'));
-if(!cart_order){
+let cart_orders = JSON.parse(localStorage.getItem('cart_order'));
+if(!cart_orders){
   document.querySelector('.cart-wrapper').innerHTML = `
   <div class="empty-cart-message-container">
   <h2 class="my-5">no tienes pedidos</h2>
@@ -107,20 +108,16 @@ if(!cart_order){
   </div>
   `
 }else{
-  let listaProductosPedido = []
-  cart_order.forEach(order => {
-    listaProductosPedido.push(order.id_producto);
-  });
-  
   const productos = JSON.parse(localStorage.getItem('productos'));
-  const productosFiltrados = productos.filter(producto => listaProductosPedido.includes(producto.id));
+  let orders = JSON.parse(localStorage.getItem('orders'));
   
   let productosHTML = '';
 
   productosHTML += '<h2 class="mb-5">tus pedidos</h2>'
 
-  listaProductosPedido.forEach(id_producto => {
-    const producto = productosFiltrados.find(producto => producto.id === id_producto);
+  cart_orders.forEach(cart_order => {
+    const producto = productos.find(producto => producto.id === cart_order.id_producto);
+    const order = orders.find(order => order.id === cart_order.id_pedido);
     productosHTML += `
   <div class="product-section">
     <div class="product-image-container">
@@ -130,6 +127,10 @@ if(!cart_order){
         <h3 class="product-title">${producto.nombre}</h3>
         <p class="price">$${producto.precio}</p>
         <p class="product-description">${producto.descripcion}</p>
+        <p class="product-description">estado: ${order.estado}</p>
+        <p class="product-description">fecha del pedido: ${order.fecha_pedido}</p>
+        <p class="product-description">id: ${order.id}</p>
+        <p class="product-description">cantidad de productos: ${cart_order.cantidad}</p>
         </div>
   </div>
   `

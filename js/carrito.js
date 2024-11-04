@@ -97,7 +97,14 @@ function mostrarCarrito() {
 
     document.querySelectorAll('.plus-sign').forEach((minusSign, index) => {
       minusSign.addEventListener('click', async () => {
+        const productos = JSON.parse(localStorage.getItem('productos'));
+        const producto = productos.find(producto => producto.id === parseInt(listaIdProductos[index]));
         contadorProductos[listaIdProductos[index]]++;
+        if(contadorProductos[listaIdProductos[index]] > producto.existencias){
+          alert('Ups! Parece que nos quedamos sin este producto')
+          contadorProductos[listaIdProductos[index]] -= cantidadSeleccionada;
+          return
+        }
         cartCounter = 0;
         for (let idProducto in contadorProductos) {
           cartCounter += contadorProductos[idProducto];

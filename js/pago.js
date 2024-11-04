@@ -65,6 +65,19 @@ async function placeOrder(event) {
     let id_pedido = orderResponse.id;
 
     let contadorProductos = JSON.parse(localStorage.getItem('contadorProductos'));
+    let productos = JSON.parse(localStorage.getItem('productos'));
+
+    for (let idProducto in contadorProductos) {
+      let producto = productos.find(producto => producto.id === parseInt(idProducto));
+    
+      if (producto) {
+        producto.existencias -= contadorProductos[idProducto];
+        await updateProducts(producto, idProducto);
+      }
+    }
+
+    localStorage.setItem('productos', JSON.stringify(productos));
+
 
     for (const [id_producto, cantidad] of Object.entries(contadorProductos)) {
       let cart_order = {
@@ -95,6 +108,7 @@ async function placeOrder(event) {
     localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
 
     await getCartOrder(id_usuario);
+    await getOrders(id_usuario);
 
     alert('su pedido se realizo con exito')
     window.location.href = "../html/informacion-personal.html";
@@ -157,4 +171,40 @@ async function getCartOrder(id_usuario){
       console.error('Hubo un problema al traer los pedidos:', error);
       alert('Hubo un error al traer los pedidos.');
   }
+}
+
+async function getOrders(id_usuario){
+  try {
+      const response = await fetch(`http://127.0.0.1:8000/orders/${id_usuario}`);
+      const orders = await response.json();
+
+      if (!orders) {
+        throw new Error('Error al traer los pedidos');
+      }
+
+      localStorage.setItem('orders',JSON.stringify(orders));
+
+  }catch (error) {
+      console.error('Hubo un problema al traer los pedidos:', error);
+      alert('Hubo un error al traer los pedidos.');
+  }
+}
+
+async function updateProducts(Productoctualizado,id_producto) {
+  try {
+    const updateResponse = await fetch(`http://127.0.0.1:8000/products/${id_producto}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Productoctualizado)
+    });
+    if (!updateResponse.ok) {
+      throw new Error('Error al guardar el producto actualizado');
+    }
+
+}catch (error) {
+    console.error('Hubo un problema con el producto actualizado:', error);
+    alert('Hubo un problema con el producto actualizado. Por favor, intenta de nuevo.');
+}
 }
