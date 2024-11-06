@@ -25,13 +25,6 @@ const validarIdProducto = (idProducto) => {
   localStorage.setItem('idProducto',idProducto)
 }
 
-const guardarBusqueda = () => {
-  busquedaUsuario = document.querySelector('.search').value;
-  localStorage.setItem('busquedaUsuario',busquedaUsuario);
-  window.location.href = "../html/buscador.html"
-}
-
-
 /*
 async function traerProductos(){
   try {

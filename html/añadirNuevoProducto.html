@@ -141,10 +141,68 @@
 
     <!-- Sección Principal -->
     <main id="content" class="main-container">
-        <div>
-            <h2>Bienvenido al Dashboard</h2>
-            <p>Selecciona una opción del menú para ver o modificar información.</p>
+        <div class="container">
+            <h1>Añadir Nuevo Producto</h1>
+            <br>
+            <form id="formularioProducto">
+                <div class="mb-3">
+                    <label class="form-label" for="nombre_producto">Nombre del producto:</label>
+                    <input type="text" class="form-control" id="nombre_producto" required />
+                    <div class="form-text text-danger d-none" id="nombreProducto_error">Este campo es obligatorio.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="descripcion">Descripción:</label>
+                    <textarea class="form-control" id="descripcion" placeholder="Escriba una descripción del producto" style="height: 100px" required></textarea>
+                    <div id="descripcion_error" class="form-text text-danger d-none">Este campo es obligatorio.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="precio">Precio:</label>
+                    <input type="number" class="form-control" id="precio" step="0.01" min="0" required />
+                    <div class="form-text text-danger d-none" id="precio_error">Ingrese un precio válido.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="imagen">Imagen (URL):</label>
+                    <input type="url" class="form-control" id="imagen" required />
+                    <div class="form-text text-danger d-none" id="imagen_error">Ingrese una URL válida para la imagen.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="existencia">Existencia:</label>
+                    <input type="number" class="form-control" id="existencia" min="0" required />
+                    <div class="form-text text-danger d-none" id="existencia_error">Ingrese un número de existencias válido.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="ulActualizacion">Última Actualización:</label>
+                    <input type="date" class="form-control" id="ulActualizacion" required />
+                    <div class="form-text text-danger d-none" id="ulActualizacion_error">Este campo es obligatorio.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="categoria">Categoría:</label>
+                    <select class="form-select" id="categoria" required>
+                        <option value="">Seleccione una Categoría</option>
+                        <option value="Portatiles">Portátiles</option>
+                        <option value="Celulares">Celulares</option>
+                        <option value="Relojes">Relojes</option>
+                        <option value="Auriculares">Auriculares</option>
+                        <option value="Monitores">Monitores</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <div class="form-text text-danger d-none" id="categoria_error">Seleccione una categoría.</div>
+                </div>
+                <button type="button" class="btn btn-secondary" id="addCategoryBtn">Añadir Categoría</button>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            
         </div>
+        
+        
+
 
     </main>
 
@@ -158,8 +216,9 @@
     <script type="text/javascript"></script>
 
 
-    
+    <script src="../js/añadirNuevoProducto.js"></script>
 
 </body>
 
 </html>
+
