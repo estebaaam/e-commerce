@@ -54,7 +54,7 @@
                 <ul class="sub-menu">
                     <div>
                         <li><a href="gestorInventario.html">
-                                    Ver Inventario
+                                Ver Inventario
                             </a></li>
                         <li><a href="añadirNuevoProducto.html">Añadir Nuevo Producto</a></li>
                     </div>
@@ -143,104 +143,33 @@
     <main id="content" class="main-container">
         <h3>Gestor de Usuario</h3>
 
-<main class="table" id="customers_table">
-    <table class="table align-middle mb-0 bg-white">
-        <thead class="bg-light">
-            <tr>
-                <th>Id</th>
-                <th>Nombre del Usuario</th>
-                <th>Email</th>
-                <th>Rol</th>
-                <th>Estado</th>
-                <th>Fecha de Registro</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <div class="d-flex align-items-center">
-                    <td>1</td>
-                    <td>Juan Perez</td>
-                    <td>juan_perez@email.com</td>
-                    <td>Administrador</td>
-                    <td>Activo</td>
-                    <td>2024-10-15</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                            data-mdb-ripple-color="dark"> Promover </button>
-                            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark"> Suspender </button>
-                    </td>
-                </div>
-            </tr>
-            <tr>
-                <div class="d-flex align-items-center">
-                    <td>2</td>
-                    <td>Maria Lopez</td>
-                    <td>maria_lopez@email.com</td>
-                    <td>Cliente</td>
-                    <td>Activo</td>
-                    <td>2024-10-20</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                            data-mdb-ripple-color="dark"> Promover </button>
-                            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark"> Suspender </button>
-                    </td>
-                </div>
-            </tr>
-            <tr>
-                <div class="d-flex align-items-center">
-                    <td>3</td>
-                    <td>Carlo Ruiz</td>
-                    <td>carlos_ruiz@email.com</td>
-                    <td>Administrador</td>
-                    <td>Inactivo</td>
-                    <td>2024-03-10</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                            data-mdb-ripple-color="dark"> Promover </button>
-                            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark"> Activar </button>
-                    </td>
-                </div>
-            </tr>
-            <tr>
-                <div class="d-flex align-items-center">
-                    <td>4</td>
-                    <td>Ana Gomez</td>
-                    <td>ana_gomez@email.com</td>
-                    <td>Administrador</td>
-                    <td>Activo</td>
-                    <td>2024-10-15</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                            data-mdb-ripple-color="dark"> Promover </button>
-                            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark"> Suspender </button>
-                    </td>
-                </div>
-            </tr>
-            <tr>
-                <div class="d-flex align-items-center">
-                    <td>5</td>
-                    <td>Juan Conrado</td>
-                    <td>juan_conrado@email.com</td>
-                    <td>Cliente</td>
-                    <td>Activo</td>
-                    <td>2024-10-29</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                            data-mdb-ripple-color="dark"> Promover </button>
-                            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                        data-mdb-ripple-color="dark"> Suspender </button>
-                    </td>
-                </div>
-            </tr>
-            
-        </tbody>
-    </table>
-    <!--
+        <main class="table" id="customers_table">
+            <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre del Usuario</th>
+                        <th>Email</th>
+                        <th>Contraseña</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Rol</th>
+                        <th>Acciones</th> <!-- Nueva columna para cambiar el rol -->
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- Aquí se añadirán las filas de usuarios desde JavaScript -->
+                </tbody>
+
+            </table>
+            <div id="paginationControls" class="d-flex justify-content-center" style="margin-top: 20px;">
+                <button id="prevPage" class="btn btn-secondary" disabled>Anterior</button>
+                <span id="pageInfo">Página 1</span>
+                <button id="nextPage" class="btn btn-secondary">Siguiente</button>
+            </div>
+
+
+            <!--
     <section id="reportes" class="section-contabilidad">
         <h2>Generar Reportes</h2>
         <button class="generate-report">Generar Reporte</button>
@@ -259,11 +188,65 @@
         </div>
     </section>
     -->
-</main>
+        </main>
 
     </main>
 
+    <!-- Modal de Edición de Usuario -->
+    <div id="editUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditUserModal()">&times;</span>
+            <h2>Editar Usuario</h2>
+            <form id="editUserForm" onsubmit="event.preventDefault(); saveUserEdit();">
+                <input type="hidden" id="userId">
+            
+                <div class="mb-3">
+                    <label class="form-label" for="editUserName">Nombre del Usuario:</label>
+                    <input type="text" class="form-control" id="editUserName" required>
+                </div>
+            
+                <div class="mb-3">
+                    <label class="form-label" for="editUserEmail">Correo Electrónico:</label>
+                    <input type="email" class="form-control" id="editUserEmail" required>
+                </div>
+            
+                <div class="mb-3">
+                    <label class="form-label" for="editUserPhone">Teléfono:</label>
+                    <input type="text" class="form-control" id="editUserPhone">
+                </div>
+            
+                <div class="mb-3">
+                    <label class="form-label" for="editUserAddress">Dirección:</label>
+                    <input type="text" class="form-control" id="editUserAddress">
+                </div>
+            
+                <div class="mb-3">
+                    <label class="form-label" for="editUserPassword">Contraseña:</label>
+                    <input type="password" class="form-control" id="editUserPassword" placeholder="Dejar en blanco para no cambiarla">
+                </div>
+            
+                <div class="mb-3">
+                    <label class="form-label" for="editUserRole">Rol:</label>
+                    <select class="form-select" id="editUserRole" required>
+                        <option value="cliente">Cliente</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
+            </form>
+            
+        </div>
+    </div>
+
+
+
+
+
+
     <script src="../js/scripts.js"></script>
+    <script src="../js/gestorUsuario.js"></script>
     <!-- ========================= JS here ========================= -->
 
     <script src="../js/bootstrap.min.js"></script>
@@ -271,12 +254,6 @@
     <script src="../js/glightbox.min.js"></script>
 
     <script type="text/javascript"></script>
-
-
-    
-
 </body>
 
 </html>
-
-
