@@ -36,7 +36,7 @@ function renderUsers() {
             <td>${user.rol}</td>
             <td>
                 <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark" onclick="openEditModal(${user.id})">Editar</button>
-                <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark" onclick="closeEditModal()">Eliminar</button>
+                <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold btn-delete" data-mdb-ripple-color="dark" onclick="deleteEditModal(${user.id})">Eliminar</button>
             </td>
         `;
         userList.appendChild(row);
@@ -91,6 +91,7 @@ function openEditModal(userId) {
             document.getElementById('userId').value = user.id;
             document.getElementById('editUserName').value = user.nombre;
             document.getElementById('editUserEmail').value = user.correo;
+            document.getElementById('editUserPassword').value = user.contraseña;
             document.getElementById('editUserPhone').value = user.telefono || ''; // Asegurarse de que sea vacío si no existe
             document.getElementById('editUserAddress').value = user.direccion || ''; // Asegurarse de que sea vacío si no existe
             document.getElementById('editUserRole').value = user.rol;
@@ -111,6 +112,12 @@ function closeEditModal() {
 
     // Limpiar el formulario de edición (opcional)
     document.getElementById('editUserForm').reset();
+}
+
+// Función para cerrar el modal de editar
+function closeEditUserModal() {
+    const modal = document.getElementById('editUserModal');
+    modal.style.display = 'none';  // Ocultar el modal
 }
 
 
@@ -148,4 +155,55 @@ function saveUserEdit() {
     })
     .catch(error => console.error('Error:', error));
 }
+
+
+
+/*Eliminar USER*/ 
+
+let userIdToDelete = null; // Variable para almacenar el ID del usuario a eliminar
+
+// Función para mostrar el modal de confirmación de eliminación
+function deleteEditModal(userId) {
+    userIdToDelete = userId; // Guarda el ID del usuario que deseas eliminar
+    const deleteModal = document.getElementById('deleteModal');
+    const backdrop = document.getElementById('deleteModalBackdrop');
+
+    deleteModal.classList.add('show'); // Muestra el modal
+    backdrop.classList.add('show'); // Muestra el fondo oscuro
+}
+
+// Función para cerrar el modal de confirmación de eliminación
+function closeDeleteModal() {
+    const deleteModal = document.getElementById('deleteModal');
+    const backdrop = document.getElementById('deleteModalBackdrop');
+
+    deleteModal.classList.remove('show'); // Oculta el modal
+    backdrop.classList.remove('show'); // Oculta el fondo oscuro
+    userIdToDelete = null; // Resetea el ID
+}
+
+// Función para eliminar el usuario
+function confirmDeleteUser() {
+    if (!userIdToDelete) return;
+
+    fetch(`http://localhost:8000/users/${userIdToDelete}`, {
+        method: 'DELETE', // Método DELETE para eliminar
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al eliminar el usuario');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Usuario eliminado:', data);
+        fetchUsers(); // Recarga la lista de usuarios después de eliminar
+        closeDeleteModal(); // Cierra el modal de confirmación
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al eliminar el usuario');
+    });
+}
+
 

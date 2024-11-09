@@ -25,3 +25,10 @@ class Order(BaseModel):
 
     class Config:
         orm_mode = True
+
+class OrderUpdate(BaseModel):
+    estado: str
+
+    class Config:
+        orm_mode = True
+

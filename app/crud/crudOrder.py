@@ -16,3 +16,11 @@ def create_order(db: Session, order: orderShema.OrderCreate):
     db.commit()
     db.refresh(db_order)
     return db_order
+
+def update_order(db: Session, order_id: int, updated_data: orderShema.OrderUpdate):
+    order = db.query(orderModel.Order).filter(orderModel.Order.id == order_id).first()
+    if order:
+        order.estado = updated_data.estado  # Actualiza solo el estado del pedido
+        db.commit()
+        db.refresh(order)
+    return order
