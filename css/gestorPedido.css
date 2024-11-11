@@ -13,19 +13,25 @@
 
 .modal-content {
     background-color: #fefefe;
-    margin: auto; /* Centrar el modal */
-    padding: 20px;
+    margin: 0; /* Centrar el modal */
+    padding: 10px;
     border: 1px solid #888;
     width: 50%; /* Ancho del modal (ajustar según necesidad) */
     max-width: 600px; /* Ancho máximo del modal */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
     border-radius: 8px; /* Esquinas redondeadas */
     position: relative; /* Para que el contenido del modal se posicione dentro de él */
-    top: 35%; /* Posicionar el contenido del modal */
+    top: 50%; /* Posicionar el contenido del modal */
+    left: 25%;
     transform: translateY(-50%); /* Centrar verticalmente */
 }
 
 .close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
     color: #aaa;
     font-size: 30px;
 }
@@ -33,4 +39,6 @@
     color: #c9302c;
     transition: 0.3s;
 }
-
+button {
+    margin-top: 10px;
+}

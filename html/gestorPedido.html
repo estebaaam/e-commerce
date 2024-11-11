@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../css/tiny-slider.css" />
     <link rel="stylesheet" href="../css/glightbox.min.css" />
     <link rel="stylesheet" href="../css/main.css" />
+
+    <link rel="stylesheet" href="../css/gestorPedido.css">
 </head>
 
 <body>
@@ -45,7 +47,7 @@
                         <path
                             d="M620-163 450-333l56-56 114 114 226-226 56 56-282 282Zm220-397h-80v-200h-80v120H280v-120h-80v560h240v80H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h167q11-35 43-57.5t70-22.5q40 0 71.5 22.5T594-840h166q33 0 56.5 23.5T840-760v200ZM480-760q17 0 28.5-11.5T520-800q0-17-11.5-28.5T480-840q-17 0-28.5 11.5T440-800q0 17 11.5 28.5T480-760Z" />
                     </svg>
-                    <span>Gestor Inventario</span>
+                    <span>Gestor Producto</span>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#e8eaed">
                         <path d="M480-360 280-560h400L480-360Z" />
@@ -53,8 +55,8 @@
                 </button>
                 <ul class="sub-menu">
                     <div>
-                        <li><a href="gestorInventario.html">
-                                    Ver Inventario
+                        <li><a href="gestorProducto.html">
+                                    Ver Productos
                             </a></li>
                         <li><a href="añadirNuevoProducto.html">Añadir Nuevo Producto</a></li>
                     </div>
@@ -71,16 +73,7 @@
                     <span>Gestion de Stock</span>
                 </a>
             </li>
-            <li>
-                <a href="gestorProducto.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M640-80q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170T640-80Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm-480 0q-33 0-56.5-23.5T80-240v-304q0-8 1.5-16t4.5-16l80-184h-6q-17 0-28.5-11.5T120-800v-40q0-17 11.5-28.5T160-880h280q17 0 28.5 11.5T480-840v40q0 17-11.5 28.5T440-760h-6l66 152q-19 10-36 21t-32 25l-84-198h-96l-92 216v304h170q5 21 13.5 41.5T364-160H160Zm480-440q-42 0-71-29t-29-71q0-42 29-71t71-29v200q0-42 29-71t71-29q42 0 71 29t29 71H640Z" />
-                    </svg>
-                    <span>Gestion de Producto</span>
-                </a>
-            </li>
+    
             <li>
                 <a href="gestorPedido.html">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -138,31 +131,35 @@
     </nav>
 
 
-
     <!-- Sección Principal -->
     <main id="content" class="main-container">
         <h3>Gestor de Pedido</h3>
 
-<main class="table" id="customers_table">
-    <table class="table align-middle mb-0 bg-white">
-        <thead class="bg-light">
-            <tr>
-                <th>Id</th>
-                <th>Id usuario</th>
-                <th>Estado</th>
-                <th>Nombre</th>
-                <th>Telefono</th>
-                <th>Correo</th>
-                <th>Direccion</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-        <tbody class="orders-container">
-        </tbody>
-    </table>
-    <!--
+        <main class="table" id="customers_table">
+            <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Id Pedido</th>
+                        <th>Id usuario</th>
+                        <th>Estado</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Direccion</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Fecha Pedido</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="orders-container">
+                </tbody>
+            </table>
+
+
+
+
+            <!--
     <section id="reportes" class="section-contabilidad">
         <h2>Generar Reportes</h2>
         <button class="generate-report">Generar Reporte</button>
@@ -181,24 +178,43 @@
         </div>
     </section>
     -->
-</main>
+
+
+    <!-- Modal para Editar Estado -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Editar Estado del Pedido</h3>
+            <input type="hidden" id="orderId">
+
+            <!-- Desplegable para seleccionar el nuevo estado -->
+            <label for="newStatus">Nuevo Estado:</label>
+            <select id="newStatus">
+                <option value="pendiente">Pendiente</option>
+                <option value="enviado">Enviado</option>
+                <option value="entregado">Entregado</option>
+            </select>
+
+            <!-- Botones para actualizar o cancelar -->
+            <button onclick="updateOrderStatus()">Actualizar</button>
+            <button onclick="closeEditModal()">Cancelar</button>
+        </div>
+    </div>
+
+    
+        </main>
+        
 
     </main>
 
     <script src="../js/gestorPedido.js"></script>
+    <script src="../js/scripts.js"></script>
     <!-- ========================= JS here ========================= -->
 
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/tiny-slider.js"></script>
     <script src="../js/glightbox.min.js"></script>
-
     <script type="text/javascript"></script>
-
-
-    
 
 </body>
 
 </html>
-
-
