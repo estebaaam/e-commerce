@@ -13,3 +13,4 @@ class Product(Base):
     existencias = Column(Integer)
     ultima_actualizacion = Column(Date, default=func.now(), onupdate=func.now())
     id_categoria = Column(Integer,ForeignKey("categoria.id"))
+    estado = Column(String(15))

@@ -30,3 +30,8 @@ def read_all_orders(skip: int = 0, limit: int = 100, db: Session = Depends(get_d
 def read_orders(id_usuario: int, db: Session = Depends(get_db)):
     orders = crudOrder.get_orders(db, id_usuario=id_usuario)
     return orders
+
+@router.put("/orders/{id}", response_model=orderShema.Order)
+def update_order(id: int, order: orderShema.OrderCreate, db: Session = Depends(get_db)):
+    updated_product = crudOrder.update_order(db=db, id=id, updated_order=order)
+    return updated_product

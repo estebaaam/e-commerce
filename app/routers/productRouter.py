@@ -27,6 +27,10 @@ def read_products(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
     products = crudProduct.get_products(db, skip=skip, limit=limit)
     return products
 
+@router.get("/products/active", response_model=list[productSchema.Product])
+def red_active_products(db: Session = Depends(get_db)):
+    products = crudProduct.get_active_products(db)
+    return products
 
 @router.get("/products/{id}", response_model=productSchema.Product)
 def read_product(id: int, db: Session = Depends(get_db)):

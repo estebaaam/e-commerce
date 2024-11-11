@@ -1,0 +1,83 @@
+.rating {
+  width: 75vw;
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  margin-bottom: 60px;
+}
+
+.rating_average {
+  width: 30%;
+  background-color: rgb(250, 248, 248);
+  padding: 1rem;
+  border-radius: .8rem;
+  text-align: center;
+}
+
+.rating_average .star-outer {
+  position: relative;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+.rating_average .star-outer::before {
+  content: "\2605 \2605 \2605 \2605 \2605";
+}
+
+
+.rating_average .star-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  overflow: hidden;
+}
+
+.rating_average .star-inner::before {
+  content: "\2605 \2605 \2605 \2605 \2605";
+  color: orange;
+}
+
+.rating_average h1 {
+  font-size: 3rem;
+}
+
+.rating_average p {
+  margin-top: .7rem;
+  letter-spacing: .1rem;
+}
+
+.rating_progress {
+  width: 70%;
+}
+
+.rating_progress-value {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  column-gap: 1rem;
+}
+
+.rating_progress-value .star {
+  font-size: 1.2rem;
+  color: orange;
+}
+
+.rating_progress-value p:last-child {
+  width: 10%;
+}
+
+.rating_progress .progress {
+  flex: 1 1 0;
+  height: .5rem;
+  border-radius: .5rem;
+  background-color: #ff02;
+}
+
+.bar {
+  height: 100%;
+  background-color: orange;
+  border-radius: .5rem;
+  width: 80%;
+}
