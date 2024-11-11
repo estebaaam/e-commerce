@@ -21,19 +21,24 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
     border-radius: 8px; /* Esquinas redondeadas */
     position: relative; /* Para que el contenido del modal se posicione dentro de él */
-    top: 25%; /* Posicionar el contenido del modal */
-    left: 30%;
+    top: 50%; /* Posicionar el contenido del modal */
+    left: 25%;
     transform: translateY(-50%); /* Centrar verticalmente */
 }
 
-.close {
+.close{
     position: absolute;
     top: 10px;
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+    color: #aaa;
+    font-size: 30px;
 }
-
+.close:hover{
+    color: #c9302c;
+    transition: 0.3s;
+}
 button {
     margin-top: 10px;
 }

@@ -158,28 +158,6 @@
 
 
 
-            <!-- Modal para Editar Estado -->
-            <div id="editModal" style="display: none;">
-                <div class="modal-content">
-                    <h3>Editar Estado del Pedido</h3>
-                    <input type="hidden" id="orderId">
-
-                    <!-- Desplegable para seleccionar el nuevo estado -->
-                    <label for="newStatus">Nuevo Estado:</label>
-                    <select id="newStatus">
-                        <option value="pendiente">Pendiente</option>
-                        <option value="enviado">Enviado</option>
-                        <option value="entregado">Entregado</option>
-                    </select>
-
-                    <!-- Botones para actualizar o cancelar -->
-                    <button onclick="updateOrderStatus()">Actualizar</button>
-                    <button onclick="closeEditModal()">Cancelar</button>
-                </div>
-            </div>
-
-
-
 
             <!--
     <section id="reportes" class="section-contabilidad">
@@ -200,7 +178,31 @@
         </div>
     </section>
     -->
+
+
+    <!-- Modal para Editar Estado -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Editar Estado del Pedido</h3>
+            <input type="hidden" id="orderId">
+
+            <!-- Desplegable para seleccionar el nuevo estado -->
+            <label for="newStatus">Nuevo Estado:</label>
+            <select id="newStatus">
+                <option value="pendiente">Pendiente</option>
+                <option value="enviado">Enviado</option>
+                <option value="entregado">Entregado</option>
+            </select>
+
+            <!-- Botones para actualizar o cancelar -->
+            <button onclick="updateOrderStatus()">Actualizar</button>
+            <button onclick="closeEditModal()">Cancelar</button>
+        </div>
+    </div>
+
+    
         </main>
+        
 
     </main>
 
@@ -212,9 +214,6 @@
     <script src="../js/tiny-slider.js"></script>
     <script src="../js/glightbox.min.js"></script>
     <script type="text/javascript"></script>
-
-
-
 
 </body>
 
