@@ -12,7 +12,6 @@ async function logIn (event) {
             localStorage.setItem('userName', user.nombre);
             localStorage.setItem('userId', user.id);
             localStorage.setItem('user', JSON.stringify(user));
-            await traerProductos();
             await traerCarrito(user.id);
             await getCartOrder(user.id);
             await getOrders(user.id);
@@ -27,23 +26,6 @@ async function logIn (event) {
     } catch (error) {
         console.error('Error al cargar los datos:', error);
         alert("Error al cargar los datos");
-    }
-}
-
-async function traerProductos(){
-    try {
-        const responseProductos = await fetch('http://127.0.0.1:8000/products/');
-        const productos = await responseProductos.json();
-
-        if (!responseProductos.ok) {
-            throw new Error('Error al traer los productos');
-        }
-
-        localStorage.setItem('productos',JSON.stringify(productos));
-   
-    }catch (error) {
-        console.error('Hubo un problema al traer los productos:', error);
-        alert('Hubo un error al traer los productos.');
     }
 }
 

@@ -31,9 +31,7 @@ def read_orders(id_usuario: int, db: Session = Depends(get_db)):
     orders = crudOrder.get_orders(db, id_usuario=id_usuario)
     return orders
 
-@router.put("/orders/{order_id}", response_model=orderShema.Order)
-def update_order(order_id: int, updated_order: orderShema.OrderUpdate, db: Session = Depends(get_db)):
-    order = crudOrder.update_order(db=db, order_id=order_id, updated_data=updated_order)
-    if order is None:
-        raise HTTPException(status_code=404, detail="Order not found")
-    return order
+@router.put("/orders/{id}", response_model=orderShema.Order)
+def update_order(id: int, order: orderShema.OrderCreate, db: Session = Depends(get_db)):
+    updated_product = crudOrder.update_order(db=db, id=id, updated_order=order)
+    return updated_product

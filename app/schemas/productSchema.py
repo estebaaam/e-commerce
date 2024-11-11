@@ -10,6 +10,7 @@ class ProductCreate(BaseModel):
     existencias: int
     ultima_actualizacion: date
     id_categoria: int
+    estado: str
 
 class Product(BaseModel):
     id: int
@@ -20,6 +21,7 @@ class Product(BaseModel):
     existencias: int
     ultima_actualizacion: date
     id_categoria: int
+    estado: str
 
     class Config:
         orm_mode = True

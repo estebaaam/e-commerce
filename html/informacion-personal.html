@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="../css/tiny-slider.css" />
     <link rel="stylesheet" href="../css/glightbox.min.css" />
     <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/carrito.css" />
-    
+    <link rel="stylesheet" href="../css/informacion-personal.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 </head>
 <body>
     <header class="header navbar-area">
@@ -211,12 +211,78 @@
             </section>
         </div>
         <div class="container">
-            <div class="cart-container">
-                <div class="cart-wrapper">
+                <div class="orders-wrapper">
                 </div>
-            </div>
         </div>
-    </main>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Comentario</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-rating">
+                        <p class="review-title">calificacion: </p>
+                        <span class="fa fa-star" onclick="calificarActualizacion(this)" style="cursor: pointer;" id="1-star-actualizar"></span>
+                        <span class="fa fa-star" onclick="calificarActualizacion(this)" style="cursor: pointer;" id="2-star-actualizar"></span>
+                        <span class="fa fa-star" onclick="calificarActualizacion(this)" style="cursor: pointer;" id="3-star-actualizar"></span>
+                        <span class="fa fa-star" onclick="calificarActualizacion(this)" style="cursor: pointer;" id="4-star-actualizar"></span>
+                        <span class="fa fa-star" onclick="calificarActualizacion(this)" style="cursor: pointer;" id="5-star-actualizar"></span>
+                    </div>
+                  <textarea id="updated-comment" class="form-control" rows="4" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="submitUpdatedComment()">Guardar Cambios</button>                    
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Eliminar comentario</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-body-message">Esta seguro que ejecutar esta accion? Una vez eliminado no se podra deshacer.</p>
+                  </div>
+                <div class="modal-footer">   
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="submitDeleteComment()">Eliminar</button>         
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="exampleModalCenterCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Dejar Comentario</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-rating">
+                        <p class="review-title">calificacion: </p>
+                        <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="1-star"></span>
+                        <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="2-star"></span>
+                        <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="3-star"></span>
+                        <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="4-star"></span>
+                        <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="5-star"></span>
+                    </div>
+                  <textarea id="comment" class="form-control" rows="4" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="submitCreateReview()">Guardar Cambios</button>                    
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </main> 
     <footer class="footer">
         <!-- Start Footer Top -->
         <!-- End Footer Top -->
@@ -300,8 +366,6 @@
         </div>
         <!-- End Footer Bottom -->
     </footer>
-    <script src="../js/validar-sesion.js"></script>
-    <script src="../js/leer-usuario.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/tiny-slider.js"></script>
     <script src="/js/glightbox.min.js"></script>
@@ -309,6 +373,6 @@
     <script src="/js/leer-usuario.js"></script>
     <script src="/js/validar-sesion.js"></script>
     <script src="/js/editar-perfil.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
 </body>
 </html>

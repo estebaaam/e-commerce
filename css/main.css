@@ -3127,6 +3127,7 @@ top: 2px;
 .single-product .product-info {
   padding: 20px;
   background-color: #fff;
+  text-align: center;
 }
 
 .single-product .product-info .category {
@@ -3192,9 +3193,9 @@ top: 2px;
 }
 
 .single-product .product-info .price span {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
-  color: #0167F3;
+  color: darkred;
   display: inline-block;
 }
 
