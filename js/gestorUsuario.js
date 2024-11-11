@@ -1,5 +1,5 @@
 let currentPage = 1;
-const usersPerPage = 10; // Cambia esto según el número de usuarios por página
+const usersPerPage = 14; // Cambia esto según el número de usuarios por página
 let users = [];
 
 async function fetchUsers() {

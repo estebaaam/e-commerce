@@ -4,6 +4,7 @@ from app.crud import crudOrder
 from app.models import orderModel
 from app.schemas import orderShema
 from app.core.config import SessionLocal, engine
+from app.schemas.orderShema import OrderUpdate
 
 orderModel.Base.metadata.create_all(bind=engine)
 
@@ -32,6 +33,8 @@ def read_orders(id_usuario: int, db: Session = Depends(get_db)):
     return orders
 
 @router.put("/orders/{id}", response_model=orderShema.Order)
-def update_order(id: int, order: orderShema.OrderCreate, db: Session = Depends(get_db)):
-    updated_product = crudOrder.update_order(db=db, id=id, updated_order=order)
-    return updated_product
+def update_order(id: int, order: OrderUpdate, db: Session = Depends(get_db)):
+    updated_order = crudOrder.update_order(db=db, id=id, updated_order=order)
+    if not updated_order:
+        raise HTTPException(status_code=404, detail="Pedido no encontrado")
+    return updated_order

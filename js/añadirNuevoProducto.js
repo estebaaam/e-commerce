@@ -91,26 +91,6 @@ async function updateCategoryList() {
     }
 }
 
-<<<<<<< HEAD
-=======
-// Función para verificar si el producto ya existe en la base de datos
-async function checkProductExistence(productName) {
-    try {
-        const response = await fetch(`http://localhost:8000/products/?nombre=${productName}`); // Asegúrate de que este es el endpoint correcto
-        if (!response.ok) {
-            throw new Error('Error al verificar si el producto existe');
-        }
-        
-        const products = await response.json();
-        return products.length > 0; // Si el array de productos no está vacío, el producto ya existe
-    } catch (error) {
-        console.error('Error al verificar la existencia del producto:', error);
-        alert('Error al verificar si el producto existe: ' + error.message);
-        return false; // En caso de error, asumir que el producto no existe
-    }
-}
-
->>>>>>> 429adb7 (para unir las ramas)
 // Enviar el formulario de producto
 document.getElementById('formularioProducto').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -123,20 +103,11 @@ document.getElementById('formularioProducto').addEventListener('submit', async f
     const existencias = parseInt(document.getElementById('existencia').value);
     const ultimaActualizacion = document.getElementById('ulActualizacion').value;
     const categoriaSeleccionada = document.getElementById('categoria').value;
+    const estadoSelecionado = document.getElementById('estadoProducto').value
 
     // Obtener el ID de categoría desde el mapa
     const id_categoria = categoriesMap[categoriaSeleccionada] || null; // Si no existe, se queda en null
 
-<<<<<<< HEAD
-=======
-    // Verificar si el producto ya existe
-    const productExists = await checkProductExistence(nombre);
-    if (productExists) {
-        alert('El producto ya existe en la base de datos.');
-        return; // Detener el proceso si el producto ya existe
-    }
-
->>>>>>> 429adb7 (para unir las ramas)
     const productData = {
         nombre: nombre,
         descripcion: descripcion,
@@ -145,6 +116,7 @@ document.getElementById('formularioProducto').addEventListener('submit', async f
         existencias: existencias,
         ultima_actualizacion: ultimaActualizacion,
         id_categoria: id_categoria, // Usar el ID de categoría obtenido
+        estado: estadoSelecionado
     };
 
     try {

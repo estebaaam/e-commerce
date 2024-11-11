@@ -5,220 +5,407 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <!-- ========================= CSS here ========================= -->
+    <!-- ========================= CSS here ========================= 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/LineIcons.3.0.css" />
     <link rel="stylesheet" href="../css/tiny-slider.css" />
     <link rel="stylesheet" href="../css/glightbox.min.css" />
-    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/main.css" />-->
+
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
-    <!-- Navegación -->
-    <nav id="sidebar">
-        <ul>
-            <li>
-                <span class="logo">TechShop</span>
-                <button onclick="toggleSidebar()" id="toggle-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z" />
-                    </svg>
-                </button>
-            </li>
-            <li class="active">
-                <a href="dashboard.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
-                    </svg>
-                    <span>Dashboard</span>
+    <div class="wrapper">
+        <!-- Navegación -->
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand" href="dashboard.html">
+                    <span class="align-middle">TechShop</span>
                 </a>
-            </li>
-            <li>
-                <button onclick="toggleSubMenu(this)" class="dropdown-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M620-163 450-333l56-56 114 114 226-226 56 56-282 282Zm220-397h-80v-200h-80v120H280v-120h-80v560h240v80H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h167q11-35 43-57.5t70-22.5q40 0 71.5 22.5T594-840h166q33 0 56.5 23.5T840-760v200ZM480-760q17 0 28.5-11.5T520-800q0-17-11.5-28.5T480-840q-17 0-28.5 11.5T440-800q0 17 11.5 28.5T480-760Z" />
-                    </svg>
-                    <span>Gestor Inventario</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path d="M480-360 280-560h400L480-360Z" />
-                    </svg>
-                </button>
-                <ul class="sub-menu">
-                    <div>
-                        <li><a href="gestorInventario.html">
-                                    Ver Inventario
-                            </a></li>
-                        <li><a href="añadirNuevoProducto.html">Añadir Nuevo Producto</a></li>
+
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">
+                        Panel de Control
+                    </li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="dashboard.html">
+                            <i class="align-middle" data-feather="sliders"></i> <span
+                                class="align-middle">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        Gestor Producto
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="gestorProducto.html">
+                            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Ver Lista de
+                                Productos</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="añadirNuevoProducto.html">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Añadir nuevo
+                                Producto</span>
+                        </a>
+                    </li>
+
+
+
+                    <li class="sidebar-header">
+                        Gestion de Stock
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="gestorStock.html">
+                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver Productos
+                                en Stock</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-header">
+                        Gestion de Pedido
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="gestorPedido.html">
+                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver
+                                Pedidos</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-header">
+                        Gestion de Usuario
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="gestorUsuario.html">
+                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver
+                                Usuarios</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-header">
+                        Gestion de Contabilidad
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="gestorContabilidad.html">
+                            <i class="align-middle" data-feather="square"></i> <span
+                                class="align-middle">Contabilidad</span>
+                        </a>
+                    </li>
+            </div>
+        </nav>
+
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav navbar-align">
+                        <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                                <div class="position-relative">
+                                    <i class="align-middle" data-feather="bell"></i>
+                                    <span class="indicator">4</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                                aria-labelledby="alertsDropdown">
+                                <div class="dropdown-menu-header">
+                                    4 New Notifications
+                                </div>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-danger" data-feather="alert-circle"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">Update completed</div>
+                                                <div class="text-muted small mt-1">Restart server 12 to complete the
+                                                    update.</div>
+                                                <div class="text-muted small mt-1">30m ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-warning" data-feather="bell"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">Lorem ipsum</div>
+                                                <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate
+                                                    hendrerit et.</div>
+                                                <div class="text-muted small mt-1">2h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-primary" data-feather="home"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">Login from 192.186.1.8</div>
+                                                <div class="text-muted small mt-1">5h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <i class="text-success" data-feather="user-plus"></i>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="text-dark">New connection</div>
+                                                <div class="text-muted small mt-1">Christina accepted your request.
+                                                </div>
+                                                <div class="text-muted small mt-1">14h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="dropdown-menu-footer">
+                                    <a href="#" class="text-muted">Show all notifications</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown"
+                                data-bs-toggle="dropdown">
+                                <div class="position-relative">
+                                    <i class="align-middle" data-feather="message-square"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                                aria-labelledby="messagesDropdown">
+                                <div class="dropdown-menu-header">
+                                    <div class="position-relative">
+                                        4 New Messages
+                                    </div>
+                                </div>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src="img/avatars/avatar-5.jpg"
+                                                    class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">Vanessa Tucker</div>
+                                                <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu
+                                                    tortor.</div>
+                                                <div class="text-muted small mt-1">15m ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src="img/avatars/avatar-2.jpg"
+                                                    class="avatar img-fluid rounded-circle" alt="William Harris">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">William Harris</div>
+                                                <div class="text-muted small mt-1">Curabitur ligula sapien euismod
+                                                    vitae.</div>
+                                                <div class="text-muted small mt-1">2h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src="img/avatars/avatar-4.jpg"
+                                                    class="avatar img-fluid rounded-circle" alt="Christina Mason">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">Christina Mason</div>
+                                                <div class="text-muted small mt-1">Pellentesque auctor neque nec urna.
+                                                </div>
+                                                <div class="text-muted small mt-1">4h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="row g-0 align-items-center">
+                                            <div class="col-2">
+                                                <img src="img/avatars/avatar-3.jpg"
+                                                    class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
+                                            </div>
+                                            <div class="col-10 ps-2">
+                                                <div class="text-dark">Sharon Lessman</div>
+                                                <div class="text-muted small mt-1">Aenean tellus metus, bibendum sed,
+                                                    posuere ac, mattis non.</div>
+                                                <div class="text-muted small mt-1">5h ago</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="dropdown-menu-footer">
+                                    <a href="#" class="text-muted">Show all messages</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+                                data-bs-toggle="dropdown">
+                                <i class="align-middle" data-feather="settings"></i>
+                            </a>
+
+                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+                                data-bs-toggle="dropdown">
+                                <img src="../images/avatar/avatar-dash.jpg" class="avatar img-fluid rounded me-1"
+                                    alt="Charles Hall" /> <span class="text-dark">Gerson</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
+                                        data-feather="user"></i> Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
+                                        data-feather="settings"></i> Settings & Privacy</a>
+                                <a class="dropdown-item" href="#"><i class="align-middle me-1"
+                                        data-feather="help-circle"></i> Help Center</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Log out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Sección Principal -->
+            <main id="content" class="main-container">
+                <div class="container">
+                    <h1>Añadir Nuevo Producto</h1>
+                    <br>
+                    <form id="formularioProducto">
+                        <div class="mb-3">
+                            <label class="form-label" for="nombre_producto">Nombre del producto:</label>
+                            <input type="text" class="form-control" id="nombre_producto" required />
+                            <div class="form-text text-danger d-none" id="nombreProducto_error">Este campo es
+                                obligatorio.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="descripcion">Descripción:</label>
+                            <textarea class="form-control" id="descripcion"
+                                placeholder="Escriba una descripción del producto" style="height: 100px"
+                                required></textarea>
+                            <div id="descripcion_error" class="form-text text-danger d-none">Este campo es obligatorio.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="precio">Precio:</label>
+                            <input type="number" class="form-control" id="precio" step="0.01" min="0" required />
+                            <div class="form-text text-danger d-none" id="precio_error">Ingrese un precio válido.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="imagen">Imagen (URL):</label>
+                            <input type="url" class="form-control" id="imagen" required />
+                            <div class="form-text text-danger d-none" id="imagen_error">Ingrese una URL válida para la
+                                imagen.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="existencia">Existencia:</label>
+                            <input type="number" class="form-control" id="existencia" min="0" required />
+                            <div class="form-text text-danger d-none" id="existencia_error">Ingrese un número de
+                                existencias
+                                válido.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="ulActualizacion">Última Actualización:</label>
+                            <input type="date" class="form-control" id="ulActualizacion" required />
+                            <div class="form-text text-danger d-none" id="ulActualizacion_error">Este campo es
+                                obligatorio.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="categoria">Categoría:</label>
+                            <select class="form-select" id="categoria" required>
+                                <option value="">Seleccione una Categoría</option>
+                                <option value="Portatiles">Portátiles</option>
+                                <option value="Celulares">Celulares</option>
+                                <option value="Relojes">Relojes</option>
+                                <option value="Auriculares">Auriculares</option>
+                                <option value="Monitores">Monitores</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <div class="form-text text-danger d-none" id="categoria_error">Seleccione una categoría.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="estadoProducto">Estado del Producto:</label>
+                            <select class="form-select" id="estadoProducto" required>
+                                <option value="">Seleccione un Estado</option>
+                                <option value="activado">Activo</option>
+                                <option value="Desactivado">Desactivo</option>
+                            </select>
+                            <div class="form-text text-danger d-none" id="estadoProducto_error">Seleccione un Estado.
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="addCategoryBtn">Añadir Categoría</button>
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-muted">
+                        <div class="col-6 text-start">
+                            <p class="mb-0">
+                                <a class="text-muted" href="../index.html" target="_blank"><strong>TechShop</strong></a> - 
+                                <strong class="text-muted">Tu mejor opción</strong> &copy;
+                            </p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a class="text-muted" href="#">Support</a></li>
+                                <li class="list-inline-item"><a class="text-muted" href="#">Help Center</a></li>
+                                <li class="list-inline-item"><a class="text-muted" href="#">Privacy</a></li>
+                                <li class="list-inline-item"><a class="text-muted" href="#">Terms</a></li>
+                            </ul>
+                        </div>
                     </div>
-
-                </ul>
-            </li>
-            <li>
-                <a href="gestorStock.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M841-518v318q0 33-23.5 56.5T761-120H201q-33 0-56.5-23.5T121-200v-318q-23-21-35.5-54t-.5-72l42-136q8-26 28.5-43t47.5-17h556q27 0 47 16.5t29 43.5l42 136q12 39-.5 71T841-518Zm-272-42q27 0 41-18.5t11-41.5l-22-140h-78v148q0 21 14 36.5t34 15.5Zm-180 0q23 0 37.5-15.5T441-612v-148h-78l-22 140q-4 24 10.5 42t37.5 18Zm-178 0q18 0 31.5-13t16.5-33l22-154h-78l-40 134q-6 20 6.5 43t41.5 23Zm540 0q29 0 42-23t6-43l-42-134h-76l22 154q3 20 16.5 33t31.5 13ZM201-200h560v-282q-5 2-6.5 2H751q-27 0-47.5-9T663-518q-18 18-41 28t-49 10q-27 0-50.5-10T481-518q-17 18-39.5 28T393-480q-29 0-52.5-10T299-518q-21 21-41.5 29.5T211-480h-4.5q-2.5 0-5.5-2v282Zm560 0H201h560Z" />
-                    </svg>
-                    <span>Gestion de Stock</span>
-                </a>
-            </li>
-            <li>
-                <a href="gestorProducto.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M640-80q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170T640-80Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm-480 0q-33 0-56.5-23.5T80-240v-304q0-8 1.5-16t4.5-16l80-184h-6q-17 0-28.5-11.5T120-800v-40q0-17 11.5-28.5T160-880h280q17 0 28.5 11.5T480-840v40q0 17-11.5 28.5T440-760h-6l66 152q-19 10-36 21t-32 25l-84-198h-96l-92 216v304h170q5 21 13.5 41.5T364-160H160Zm480-440q-42 0-71-29t-29-71q0-42 29-71t71-29v200q0-42 29-71t71-29q42 0 71 29t29 71H640Z" />
-                    </svg>
-                    <span>Gestion de Producto</span>
-                </a>
-            </li>
-            <li>
-                <a href="gestorPedido.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z" />
-                    </svg>
-                    <span>Gestion de Pedido</span>
-                </a>
-            </li>
-            <li>
-                <a href="gestorUsuario.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" />
-                    </svg>
-                    <span>Gestor de Usuario</span>
-                </a>
-            </li>
-            <li>
-                <a href="gestorContabilidad.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                        fill="#e8eaed">
-                        <path
-                            d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" />
-                    </svg>
-                    <span>Gestor de Contabilidad</span>
-                </a>
-            </li>
-        </ul>
-        <hr>
-        <li style="list-style: none; position: relative; margin-top: 100%; margin-bottom: 0%;" class="user-user">
-            <button onclick="toggleSubMenuUser(this)" class="dropdown-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                    fill="#e8eaed">
-                    <path
-                        d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
-                </svg>
-                <span>User</span>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                    fill="#e8eaed">
-                    <path d="M480-360 280-560h400L480-360Z" />
-                </svg>
-            </button>
-            <ul class="sub-menu-user">
-                <div>
-                    <li><a href="#">Ajuste</a></li>
-                    <li><a href="#">Perfil</a></li>
-                    <hr>
-                    <li><a href="#">Sign out</a></li>
                 </div>
-            </ul>
-        </li>
-    </nav>
-
-
-
-    <!-- Sección Principal -->
-    <main id="content" class="main-container">
-        <div class="container">
-            <h1>Añadir Nuevo Producto</h1>
-            <br>
-            <form id="formularioProducto">
-                <div class="mb-3">
-                    <label class="form-label" for="nombre_producto">Nombre del producto:</label>
-                    <input type="text" class="form-control" id="nombre_producto" required />
-                    <div class="form-text text-danger d-none" id="nombreProducto_error">Este campo es obligatorio.</div>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" for="descripcion">Descripción:</label>
-                    <textarea class="form-control" id="descripcion" placeholder="Escriba una descripción del producto" style="height: 100px" required></textarea>
-                    <div id="descripcion_error" class="form-text text-danger d-none">Este campo es obligatorio.</div>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" for="precio">Precio:</label>
-                    <input type="number" class="form-control" id="precio" step="0.01" min="0" required />
-                    <div class="form-text text-danger d-none" id="precio_error">Ingrese un precio válido.</div>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" for="imagen">Imagen (URL):</label>
-                    <input type="url" class="form-control" id="imagen" required />
-                    <div class="form-text text-danger d-none" id="imagen_error">Ingrese una URL válida para la imagen.</div>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" for="existencia">Existencia:</label>
-                    <input type="number" class="form-control" id="existencia" min="0" required />
-                    <div class="form-text text-danger d-none" id="existencia_error">Ingrese un número de existencias válido.</div>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" for="ulActualizacion">Última Actualización:</label>
-                    <input type="date" class="form-control" id="ulActualizacion" required />
-                    <div class="form-text text-danger d-none" id="ulActualizacion_error">Este campo es obligatorio.</div>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" for="categoria">Categoría:</label>
-                    <select class="form-select" id="categoria" required>
-                        <option value="">Seleccione una Categoría</option>
-                        <option value="Portatiles">Portátiles</option>
-                        <option value="Celulares">Celulares</option>
-                        <option value="Relojes">Relojes</option>
-                        <option value="Auriculares">Auriculares</option>
-                        <option value="Monitores">Monitores</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                    <div class="form-text text-danger d-none" id="categoria_error">Seleccione una categoría.</div>
-                </div>
-                <button type="button" class="btn btn-secondary" id="addCategoryBtn">Añadir Categoría</button>
-
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
-            
+            </footer>
         </div>
-        
-        
+    </div>
 
 
-    </main>
 
+
+
+    <script src="../js/app.js"></script>
+    <script src="../js/añadirNuevoProducto.js"></script>
+    <!-- ========================= JS here ========================= 
     <script src="../js/scripts.js"></script>
-    <!-- ========================= JS here ========================= -->
-
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/tiny-slider.js"></script>
     <script src="../js/glightbox.min.js"></script>
-
-    <script type="text/javascript"></script>
-
-
-    <script src="../js/añadirNuevoProducto.js"></script>
-
+    <script type="text/javascript"></script>-->
 </body>
 
 </html>
-
