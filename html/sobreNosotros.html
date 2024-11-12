@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/tiny-slider.css" />
     <link rel="stylesheet" href="/css/glightbox.min.css" />
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/asistente.css" />
+    <link rel="stylesheet" href="/css/sobreNosotros.css" />
 
 </head>
 <body>
@@ -29,8 +29,7 @@
                             <li>
                                 <div class="select-position">
                                     <select id="select5">
-                                        <option value="0" selected>English</option>
-                                        <option value="1">Español</option>
+                                        <option value="0" selected>Español</option>
                                     </select>
                                 </div>
                             </li>
@@ -40,10 +39,8 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-middle">
                         <ul class="useful-links">
-                        <li><a href="index.html">Hogar</a></li>
-                            <li><a href="about-us.html">Sobre Nosotros</a></li>
-                            <li><a href="contact.html">Contactanos</a></li>
-                            <li><a href="html/asistente.html">Asistente</a></li>
+                        <li><a href="../index.html">Hogar</a></li>
+                            <li><a href="sobreNosotros.html">Sobre Nosotros</a></li>
                         </ul>
                     </div>
                 </div>
@@ -52,12 +49,6 @@
                         <div class="user">
                         </div>
                         <ul class="user-login">
-                            <li>
-                                <a href="login.html">Sign In</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Register</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -71,7 +62,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <!-- Start Header Logo -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/index.html">
                         <h2>TechShop</h2>
                     </a>
                     <!-- End Header Logo -->
@@ -82,10 +73,10 @@
                         <!-- navbar search start -->
                         <div class="navbar-search search-style-5">
                             <div class="search-input">
-                                <input type="text" placeholder="Search">
+                                <input class="search" type="text" placeholder="Search">
                             </div>
                             <div class="search-btn">
-                                <button><i class="lni lni-search-alt"></i></button>
+                                <button onclick="guardarBusqueda()"><i class="lni lni-search-alt"></i></button>
                             </div>
                         </div>
                         <!-- navbar search Ends -->
@@ -120,16 +111,6 @@
             <div class="col-lg-8 col-md-6 col-12">
                 <div class="nav-inner">
                     <!-- Start Mega Category Menu -->
-                    <div class="mega-category-menu">
-                        <span class="cat-button"><i class="lni lni-menu"></i>Categorias</span>
-                        <ul class="sub-category">
-                            <li><a href="product-grids.html">Portatiles</a></li>
-                            <li><a href="product-grids.html">Celulares</a></li>
-                            <li><a href="product-grids.html">Relojes</a></li>
-                            <li><a href="product-grids.html">Auriculares</a></li>
-                            <li><a href="product-grids.html">Monitores</a></li>
-                        </ul>
-                    </div>
                     <!-- End Mega Category Menu -->
                     <!-- Start Navbar -->
                     <nav class="navbar navbar-expand-lg">
@@ -158,9 +139,6 @@
                         <li>
                             <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
-                        </li>
                     </ul>
                 </div>
                 <!-- End Nav Social -->
@@ -169,17 +147,45 @@
     </div>
     <!-- End Header Bottom -->
 </header>
-    <main>
-        <div class="chat-container">
-            <div class="chat-box">
-                <p class="placeholder-text">Chatea con nuestro asistente virtual</p>
-            </div>
-            <div class="input-section">
-                <input type="text" class="chat-input" placeholder="Escribe tu mensaje aquí...">
-            </div>
+<main>
+    <section class="about-us-section py-5">
+      <div class="container">
+        <h2 class="about-title mb-4">Sobre Nosotros</h2>
+        <p class="about-text">
+          Bienvenidos a <span class="highlight">TechShop</span>, un e-commerce dedicado a ofrecer una experiencia de compra confiable y accesible en el ámbito de la tecnología. Somos una tienda en línea fundada por estudiantes apasionados de Ingeniería en Sistemas, con una visión clara de cómo queremos impactar el mercado: simplificar el acceso a productos electrónicos de alta calidad a través de una plataforma amigable, segura y eficiente. Sabemos que en un mundo en constante avance tecnológico, la rapidez y la confianza son esenciales para nuestros clientes, y por eso diseñamos TechShop no solo como una tienda, sino como una experiencia de compra integral, donde la satisfacción del usuario es nuestra máxima prioridad.
+        </p>
+  
+        <div class="about-images row my-5">
+          <div class="col-md-6">
+            <h4 class="image-title mt-2">Nuestra Misión</h4>
+            <p class="about-text">En TechShop, nuestra misión es redefinir el proceso de compra online de productos electrónicos, brindando una plataforma innovadora y accesible para todos. Nos esforzamos por ofrecer no solo productos de tecnología de alta calidad, sino también un servicio que atienda las necesidades únicas de cada cliente. A través de un enfoque en la personalización y el soporte en tiempo real, buscamos asegurar que cada persona encuentre el producto adecuado de forma rápida y con la tranquilidad de saber que siempre hay alguien disponible para resolver sus dudas. Trabajamos para hacer de cada interacción una experiencia positiva, eficiente y memorable.</p>
+          </div>
+          <div class="col-md-6">
+            <h4 class="image-title mt-2">Nuestra Visión</h4>
+            <p class="about-text">Aspiramos a que TechShop se convierta en la tienda de referencia en el mundo del comercio electrónico de tecnología, no solo por la calidad y variedad de nuestros productos, sino también por el compromiso que ponemos en cada transacción y en cada interacción con nuestros usuarios. Visualizamos un futuro en el que TechShop sea reconocida por liderar con transparencia, innovación y un servicio que no solo cumpla sino que exceda las expectativas del cliente. Queremos ser pioneros en hacer del comercio digital una experiencia personal y significativa, generando una conexión auténtica con cada usuario, y apoyando sus decisiones tecnológicas de manera confiable y eficaz.</p>
+          </div>
         </div>
-    </main>
-
+  
+        <h3 class="subsection-title mt-5">Nuestros Valores</h3>
+        <ul class="values-list mt-3">
+          <li>Compromiso con la calidad y el servicio al cliente</li>
+          <li>Transparencia y honestidad en cada transacción</li>
+          <li>Innovación constante para mejorar la experiencia de compra</li>
+          <li>Responsabilidad social y ambiental</li>
+        </ul>
+  
+        <h3 class="subsection-title mt-5">Equipo de Fundadores</h3>
+        <p class="about-text">
+          Nuestro equipo está formado por dos apasionados de la tecnología, ambos estudiantes de Ingeniería en Sistemas, que compartimos una visión de futuro orientada al aprendizaje constante y la innovación. Como fundadores de TechShop, no solo buscamos desarrollar un sitio de ventas, sino un espacio confiable donde cada usuario pueda disfrutar de una experiencia amigable y eficiente. Creemos firmemente que la tecnología es una herramienta poderosa para transformar ideas en realidades, y ese es el impulso que nos lleva a dar lo mejor de nosotros en cada paso.
+        </p>
+  
+        <h3 class="subsection-title mt-5">Servicios y Productos que Ofrecemos</h3>
+        <p class="about-text">
+          En TechShop, nos especializamos en ofrecer productos electrónicos de alta calidad que cumplen con las expectativas de nuestros clientes y las exigencias del mercado. Nuestro catálogo incluye desde dispositivos de última generación hasta accesorios esenciales, todos seleccionados cuidadosamente para satisfacer las necesidades tecnológicas de cada usuario. Para enriquecer la experiencia de compra, hemos desarrollado un sistema de chatbot que no solo responde preguntas en tiempo real, sino que también recomienda productos según las preferencias y necesidades del usuario. Además, contamos con un equipo de soporte altamente capacitado para resolver cualquier inquietud de forma ágil y personalizada, asegurando así una experiencia completa y satisfactoria.
+        </p>
+      </div>
+    </section>
+  </main>  
     <footer class="footer">
       <!-- Start Footer Top -->
       <!-- End Footer Top -->
@@ -193,9 +199,7 @@
                           <div class="single-footer f-contact">
                               <h3>Contactanos</h3>
                               <p class="phone">Telefono: +57 314 781 0003</p>
-                              <p class="mail">
-                                  <a href="jbaleta@unibarranquilla.edu.co">jbaleta@unibarranquilla.edu.co</a>
-                              </p>
+                              <p class="phone">jbaleta@unibarranquilla.edu.co</p>
                           </div>
                           <!-- End Single Widget -->
                       </div>
@@ -205,24 +209,13 @@
                           <div class="single-footer f-link">
                               <h3>Informacion</h3>
                               <ul>
-                                  <li><a href="about-us.html">Sobre Nosotros</a></li>
-                                  <li><a href="contact.html">Contactanos</a></li>
+                                  <li><a href="sobreNosotros.html">Sobre Nosotros</a></li>
                               </ul>
                           </div>
                           <!-- End Single Widget -->
                       </div>
                       <div class="col-lg-3 col-md-6 col-12">
                           <!-- Single Widget -->
-                          <div class="single-footer f-link">
-                              <h3>Categorias Populares</h3>
-                              <ul>
-                                  <li><a href="product-grids.html">Portatiles</a></li>
-                                  <li><a href="product-grids.html">Celulares</a></li>
-                                  <li><a href="product-grids.html">Relojes</a></li>
-                                  <li><a href="product-grids.html">Auriculares</a></li>
-                                  <li><a href="product-grids.html">Monitores</a></li>
-                              </ul>
-                          </div>
                           <!-- End Single Widget -->
                       </div>
                   </div>
@@ -254,7 +247,6 @@
                               <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
                               <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
                               <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
-                              <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
                           </ul>
                       </div>
                   </div>
@@ -264,5 +256,6 @@
       <!-- End Footer Bottom -->
   </footer>
     <script src="../js/validar-sesion.js"></script>
+    <script src="/js/validar-sesion.js"></script>
 </body>
 </html>

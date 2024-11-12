@@ -13,162 +13,139 @@
     <link rel="stylesheet" href="/css/LineIcons.3.0.css" />
     <link rel="stylesheet" href="/css/tiny-slider.css" />
     <link rel="stylesheet" href="/css/glightbox.min.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="../css/carrito.css">
+    <link rel="stylesheet" href="/css/buscador.css" />
 
 </head>
 <body>
-  <header class="header navbar-area">
-    <!-- Start Topbar -->
-    <div class="topbar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="top-left">
-                        <ul class="menu-top-link">
-                            <li>
-                                <div class="select-position">
-                                    <select id="select5">
-                                        <option value="0" selected>English</option>
-                                        <option value="1">Español</option>
-                                    </select>
+    <header class="header navbar-area">
+        <!-- Start Topbar -->
+        <div class="topbar">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="top-left">
+                            <ul class="menu-top-link">
+                                <li>
+                                    <div class="select-position">
+                                        <select id="select5">
+                                            <option value="0" selected>Español</option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="top-middle">
+                            <ul class="useful-links">
+                            <li><a href="../index.html">Hogar</a></li>
+                                <li><a href="sobreNosotros.html">Sobre Nosotros</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <div class="top-end">
+                            <div class="user">
+                            </div>
+                            <ul class="user-login">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Topbar -->
+        <!-- Start Header Middle -->
+        <div class="header-middle">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3 col-7">
+                        <!-- Start Header Logo -->
+                        <a class="navbar-brand" href="/index.html">
+                            <h2>TechShop</h2>
+                        </a>
+                        <!-- End Header Logo -->
+                    </div>
+                    <div class="col-lg-5 col-md-7 d-xs-none">
+                        <!-- Start Main Menu Search -->
+                        <div class="main-menu-search">
+                            <!-- navbar search start -->
+                            <div class="navbar-search search-style-5">
+                                <div class="search-input">
+                                    <input class="search" type="text" placeholder="Search">
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="top-middle">
-                        <ul class="useful-links">
-                        <li><a href="index.html">Hogar</a></li>
-                            <li><a href="about-us.html">Sobre Nosotros</a></li>
-                            <li><a href="contact.html">Contactanos</a></li>
-                            <li><a href="html/asistente.html">Asistente</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="top-end">
-                        <div class="user">
+                                <div class="search-btn">
+                                    <button onclick="guardarBusqueda()"><i class="lni lni-search-alt"></i></button>
+                                </div>
+                            </div>
+                            <!-- navbar search Ends -->
                         </div>
-                        <ul class="user-login">
-                            <li>
-                                <a href="login.html">Sign In</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Register</a>
-                            </li>
-                        </ul>
+                        <!-- End Main Menu Search -->
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-5">
+                        <div class="middle-right-area">
+                            <div class="nav-hotline">
+                                <i class="lni lni-phone"></i>
+                                <h3>Linea Directa:
+                                    <span>(+57) 314 781 0003</span>
+                                </h3>
+                            </div>
+                            <div class="navbar-cart">
+                                <div class="cart-items">
+                                    <a href="/html/carrito.html" class="main-btn">
+                                        <i class="lni lni-cart"></i>
+                                        <span class="cart-counter"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Topbar -->
-    <!-- Start Header Middle -->
-    <div class="header-middle">
-        <div class="container">
+        <!-- End Header Middle -->
+        <!-- Start Header Bottom -->
+        <div class="container my-3">
             <div class="row align-items-center">
-                <div class="col-lg-3 col-md-3 col-7">
-                    <!-- Start Header Logo -->
-                    <a class="navbar-brand" href="index.html">
-                        <h2>TechShop</h2>
-                    </a>
-                    <!-- End Header Logo -->
-                </div>
-                <div class="col-lg-5 col-md-7 d-xs-none">
-                    <!-- Start Main Menu Search -->
-                    <div class="main-menu-search">
-                        <!-- navbar search start -->
-                        <div class="navbar-search search-style-5">
-                            <div class="search-input">
-                                <input class="search" type="text" placeholder="Search">
-                            </div>
-                            <div class="search-btn">
-                                <button onclick="guardarBusqueda()"><i class="lni lni-search-alt"></i></button>
-                            </div>
-                        </div>
-                        <!-- navbar search Ends -->
-                    </div>
-                    <!-- End Main Menu Search -->
-                </div>
-                <div class="col-lg-4 col-md-2 col-5">
-                    <div class="middle-right-area">
-                        <div class="nav-hotline">
-                            <i class="lni lni-phone"></i>
-                            <h3>Linea Directa:
-                                <span>(+57) 314 781 0003</span>
-                            </h3>
-                        </div>
-                        <div class="navbar-cart">
-                            <div class="cart-items">
-                                <a href="/html/carrito.html" class="main-btn">
-                                    <i class="lni lni-cart"></i>
-                                    <span class="cart-counter"></span>
-                                </a>
-                            </div>
-                        </div>
+                <div class="col-lg-8 col-md-6 col-12">
+                    <div class="nav-inner">
+                        <!-- Start Mega Category Menu -->
+                        <!-- End Mega Category Menu -->
+                        <!-- Start Navbar -->
+                        <nav class="navbar navbar-expand-lg">
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                        </nav>
+                        <!-- End Navbar -->
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Header Middle -->
-    <!-- Start Header Bottom -->
-    <div class="container my-3">
-        <div class="row align-items-center">
-            <div class="col-lg-8 col-md-6 col-12">
-                <div class="nav-inner">
-                    <!-- Start Mega Category Menu -->
-                    <div class="mega-category-menu">
-                        <span class="cat-button"><i class="lni lni-menu"></i>Categorias</span>
-                        <ul class="sub-category">
-                            <li><a href="product-grids.html">Portatiles</a></li>
-                            <li><a href="product-grids.html">Celulares</a></li>
-                            <li><a href="product-grids.html">Relojes</a></li>
-                            <li><a href="product-grids.html">Auriculares</a></li>
-                            <li><a href="product-grids.html">Monitores</a></li>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Start Nav Social -->
+                    <div class="nav-social">
+                        <h5 class="title">Siguenos:</h5>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
+                            </li>
                         </ul>
                     </div>
-                    <!-- End Mega Category Menu -->
-                    <!-- Start Navbar -->
-                    <nav class="navbar navbar-expand-lg">
-                        <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="toggler-icon"></span>
-                            <span class="toggler-icon"></span>
-                            <span class="toggler-icon"></span>
-                        </button>
-                    </nav>
-                    <!-- End Navbar -->
+                    <!-- End Nav Social -->
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <!-- Start Nav Social -->
-                <div class="nav-social">
-                    <h5 class="title">Siguenos:</h5>
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- End Nav Social -->
             </div>
         </div>
-    </div>
-    <!-- End Header Bottom -->
-</header>
+        <!-- End Header Bottom -->
+    </header>
 
 <div class="container">
   <div class="cart-container">
@@ -178,87 +155,73 @@
 </div>
 
 <footer class="footer">
-  <!-- Start Footer Top -->
-  <!-- End Footer Top -->
-  <!-- Start Footer Middle -->
-  <div class="footer-middle">
-      <div class="container">
-          <div class="bottom-inner">
-              <div class="row">
-                  <div class="col-lg-3 col-md-6 col-12">
-                      <!-- Single Widget -->
-                      <div class="single-footer f-contact">
-                          <h3>Contactanos</h3>
-                          <p class="phone">Telefono: +57 314 781 0003</p>
-                          <p class="mail">
-                              <a href="jbaleta@unibarranquilla.edu.co">jbaleta@unibarranquilla.edu.co</a>
-                          </p>
-                      </div>
-                      <!-- End Single Widget -->
-                  </div>
-                  
-                  <div class="col-lg-3 col-md-6 col-12">
-                      <!-- Single Widget -->
-                      <div class="single-footer f-link">
-                          <h3>Informacion</h3>
-                          <ul>
-                              <li><a href="about-us.html">Sobre Nosotros</a></li>
-                              <li><a href="contact.html">Contactanos</a></li>
-                          </ul>
-                      </div>
-                      <!-- End Single Widget -->
-                  </div>
-                  <div class="col-lg-3 col-md-6 col-12">
-                      <!-- Single Widget -->
-                      <div class="single-footer f-link">
-                          <h3>Categorias Populares</h3>
-                          <ul>
-                              <li><a href="product-grids.html">Portatiles</a></li>
-                              <li><a href="product-grids.html">Celulares</a></li>
-                              <li><a href="product-grids.html">Relojes</a></li>
-                              <li><a href="product-grids.html">Auriculares</a></li>
-                              <li><a href="product-grids.html">Monitores</a></li>
-                          </ul>
-                      </div>
-                      <!-- End Single Widget -->
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- End Footer Middle -->
-  <!-- Start Footer Bottom -->
-  <div class="footer-bottom">
-      <div class="container">
-          <div class="inner-content">
-              <div class="row align-items-center">
-                  <div class="col-lg-4 col-12">
-                      <div class="payment-gateway">
-                          <span>Aceptamos:</span>
-                          <img src="/images/footer/credit-cards-footer.png" alt="#">
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-12">
-                      <div class="copyright">
-                          <p>Diseñado y Desarrollado por TechShop</p>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-12">
-                      <ul class="socila">
-                          <li>
-                              <span>Siguenos en:</span>
-                          </li>
-                          <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                          <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                          <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
-                          <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- End Footer Bottom -->
+    <!-- Start Footer Top -->
+    <!-- End Footer Top -->
+    <!-- Start Footer Middle -->
+    <div class="footer-middle">
+        <div class="container">
+            <div class="bottom-inner">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-contact">
+                            <h3>Contactanos</h3>
+                            <p class="phone">Telefono: +57 314 781 0003</p>
+                            <p class="phone">jbaleta@unibarranquilla.edu.co</p>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-link">
+                            <h3>Informacion</h3>
+                            <ul>
+                                <li><a href="sobreNosotros.html">Sobre Nosotros</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <!-- End Single Widget -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Middle -->
+    <!-- Start Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="inner-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-12">
+                        <div class="payment-gateway">
+                            <span>Aceptamos:</span>
+                            <img src="/images/footer/credit-cards-footer.png" alt="#">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div class="copyright">
+                            <p>Diseñado y Desarrollado por TechShop</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <ul class="socila">
+                            <li>
+                                <span>Siguenos en:</span>
+                            </li>
+                            <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Bottom -->
 </footer>
   <script src="/js/buscador.js"></script>
   <script src="/js/validar-sesion.js"></script>
