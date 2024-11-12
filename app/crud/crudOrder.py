@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from app.models import orderModel
 from app.schemas import orderShema
+from app.schemas.orderShema import OrderUpdate
 
 def get_orders(db: Session, id_usuario: int):
     return db.query(orderModel.Order).filter(orderModel.Order.id_usuario == id_usuario).all()
@@ -17,18 +18,11 @@ def create_order(db: Session, order: orderShema.OrderCreate):
     db.refresh(db_order)
     return db_order
   
-def update_order(db: Session, id: int, updated_order: orderShema.OrderCreate):
+def update_order(db: Session, id: int, updated_order: OrderUpdate):
     db_order = db.query(orderModel.Order).filter(orderModel.Order.id == id).first()
     if not db_order:
         return None
-    db_order.id_usuario = updated_order.id_usuario
-    db_order.estado = updated_order.estado
-    db_order.nombre_envio = updated_order.nombre_envio
-    db_order.telefono_envio = updated_order.telefono_envio
-    db_order.correo_envio = updated_order.correo_envio
-    db_order.direccion_envio = updated_order.direccion_envio
-    db_order.cantidad_total = updated_order.cantidad_total
-    db_order.precio_total = updated_order.precio_total
+    db_order.estado = updated_order.estado  # Solo se actualiza el estado
     db.commit()
     db.refresh(db_order)
-    return db_order  
+    return db_order
