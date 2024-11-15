@@ -3209,6 +3209,49 @@ top: 2px;
   display: inline-block;
 }
 
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+
+.card-item {
+  flex: 0 0 25%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.carousel-prev, .carousel-next {
+  background-color: #0167F3;
+  border-color: #0167F3;
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.carousel-prev {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+
 /* End Single Product */
 .trending-product {
   background-color: #f9f9f9;

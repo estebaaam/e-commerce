@@ -1,4 +1,4 @@
-async function traerProductos(){
+async function traerProductos() {
   try {
       const responseProductos = await fetch('http://127.0.0.1:8000/products/active');
       const productos = await responseProductos.json();
@@ -7,50 +7,58 @@ async function traerProductos(){
           throw new Error('Error al traer los productos');
       }
 
-     let categorias = await traerCategorias();
-     let productosHTML = ''
+      let categorias = await traerCategorias();
+      let productosHTML = '';
 
-     categorias.forEach(categoria => {
-      productosHTML += `<h3 class="category-products mt-5">${categoria.nombre}</h3>`
-      productos.forEach(producto => {
-        if(categoria.id === producto.id_categoria){
-          productosHTML += `
-          <div class="col-lg-3 col-md-6 col-12">
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="${producto.imagen}">
-                            <div onclick="validarIdProducto(${producto.id})" class="button">
-                                <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">${categoria.nombre}</span>
-                            <h4 class="title">
-                                <a>${producto.nombre}</a>
-                            </h4>
-                            <div class="price">
-                                <span>$${producto.precio}</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCartFromStore(${producto.id})" class="btn btn-primary">Add To Cart</button>
-                        <div class="added-to-cart${producto.id}"></div>
-                    </div>
-                </div>
-          `
-        }
+      categorias.forEach(categoria => {
+          productosHTML += `<h3 class="category-products mt-5">${categoria.nombre}</h3>`;
+          productosHTML += `<div class="carousel-container">`;
+          productosHTML += `<button class="carousel-prev">←</button>`;
+          productosHTML += `<div class="carousel">`
+          
+          let contador = 0;
+          productos.forEach(producto => {
+              if (categoria.id === producto.id_categoria) {
+                  productosHTML += `
+                  <div class="card-item">
+                      <div class="single-product">
+                          <div class="product-image">
+                              <img src="${producto.imagen}">
+                              <div onclick="validarIdProducto(${producto.id})" class="button">
+                                  <a href="/html/product-details.html" class="btn"><i class="lni lni-cart"></i>Ver Mas</a>
+                              </div>
+                          </div>
+                          <div class="product-info">
+                              <span class="category">${categoria.nombre}</span>
+                              <h4 class="title">
+                                  <a>${producto.nombre}</a>
+                              </h4>
+                              <div class="price">
+                                  <span>$${producto.precio}</span>
+                              </div>
+                          </div>
+                          <button onclick="addToCartFromStore(${producto.id})" class="btn btn-primary">Add To Cart</button>
+                          <div class="added-to-cart${producto.id}"></div>
+                      </div>
+                  </div>
+                  `;
+                  contador++;
+              }
+          });
+          
+          productosHTML += `</div>`;
+          productosHTML += `<button class="carousel-next">→</button>`;
+          productosHTML += `</div>`;
       });
-     });
       
       document.querySelector('.products-container').innerHTML = productosHTML;
 
-      localStorage.setItem('productos',JSON.stringify(productos));
-
- 
-  }catch (error) {
+  } catch (error) {
       console.error('Hubo un problema al traer los productos:', error);
       alert('Hubo un error al traer los productos.');
   }
 }
+
 
 async function traerCategorias(){
   try {
@@ -86,3 +94,13 @@ async function traerCategorias(){
 }
 
 traerProductos();
+
+document.addEventListener("click", function(event) {
+  if (event.target.classList.contains("carousel-next")) {
+      const carousel = event.target.previousElementSibling;
+      carousel.scrollBy({ left: 300, behavior: "smooth" });
+  } else if (event.target.classList.contains("carousel-prev")) {
+      const carousel = event.target.nextElementSibling;
+      carousel.scrollBy({ left: -300, behavior: "smooth" });
+  }
+});
