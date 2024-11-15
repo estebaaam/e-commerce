@@ -1,6 +1,4 @@
 // Variables de configuración y datos de productos
-let currentPage = 1;
-const productsPerPage = 8;
 let products = [];
 let categories = [];
 
@@ -26,7 +24,7 @@ async function fetchProducts() {
         }
         
         products = await response.json();
-        renderProducts();
+        renderProducts();  // Renderiza todos los productos sin paginación
     } catch (error) {
         console.error('Error al obtener productos:', error);
     }
@@ -40,13 +38,10 @@ function getCategoryNameById(id) {
 // Renderizar la lista de productos en la página
 function renderProducts() {
     const productList = document.getElementById('productList');
-    productList.innerHTML = '';
+    productList.innerHTML = '';  // Limpiar la lista actual de productos
 
-    const start = (currentPage - 1) * productsPerPage;
-    const end = start + productsPerPage;
-    const paginatedProducts = products.slice(start, end);
-
-    paginatedProducts.forEach(product => {
+    // Mostrar todos los productos sin paginación
+    products.forEach(product => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${product.id}</td>
@@ -63,33 +58,7 @@ function renderProducts() {
         `;
         productList.appendChild(row);
     });
-
-    updatePaginationControls();
 }
-
-function updatePaginationControls() {
-    const prevPageButton = document.getElementById('prevPage');
-    const nextPageButton = document.getElementById('nextPage');
-    const pageInfo = document.getElementById('pageInfo');
-
-    prevPageButton.disabled = currentPage === 1;
-    nextPageButton.disabled = currentPage * productsPerPage >= products.length;
-    pageInfo.textContent = `Página ${currentPage}`;
-}
-
-document.getElementById('prevPage').addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        renderProducts();
-    }
-});
-
-document.getElementById('nextPage').addEventListener('click', () => {
-    if (currentPage * productsPerPage < products.length) {
-        currentPage++;
-        renderProducts();
-    }
-});
 
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchCategories();
@@ -156,3 +125,95 @@ async function updateProductStatus() {
         alert('Error de conexión');
     }
 }
+
+
+
+
+// Función de búsqueda
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("keyup", searchTable);
+});
+
+// Función para buscar en la tabla
+function searchTable() {
+    const searchInput = document.getElementById("searchInput");
+    const filter = searchInput.value.toLowerCase();
+    const rows = document.querySelectorAll("#productList tr");
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(filter));
+        row.style.display = match ? "" : "none";
+    });
+}
+
+// Funciones de exportación (PDF, Excel, JSON)
+async function exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let tableContent = document.getElementById("customers_table");
+    let data = [];
+
+    tableContent.querySelectorAll("tbody tr").forEach((row) => {
+        let rowData = [];
+        row.querySelectorAll("td").forEach((cell, index) => {
+            // Omite la columna de imágenes (por ejemplo, si está en la segunda posición, índice 1)
+            if (index !== 1) {
+                rowData.push(cell.innerText);
+            }
+        });
+        data.push(rowData);
+    });
+
+    doc.text("Gestor de Stock", 10, 10); // Título en el PDF
+    doc.autoTable({
+        head: [["Id de Producto", "Nombre de Producto", "Categoría", "Descripción", "Precio", "Existencia", "Estado"]],
+        body: data
+    });
+
+    doc.save("stock.pdf");
+}
+
+// Exportar a JSON
+function exportToJSON() {
+    const rows = Array.from(document.querySelectorAll("#productList tr"));
+    const data = rows.map(row => {
+        const cells = row.querySelectorAll("td");
+        return {
+            id: cells[0].textContent,
+            nombre: cells[2].textContent,
+            categoria: cells[3].textContent,
+            descripcion: cells[4].textContent,
+            precio: cells[5].textContent,
+            existencia: cells[6].textContent
+        };
+    });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "stock.json";
+    link.click();
+}
+
+// Exportar a Excel
+function exportToExcel() {
+    const table = document.getElementById("customers_table");
+    const clonedTable = table.cloneNode(true);
+
+    // Remueve la columna de "Acciones" (última columna) y "Imágenes" (segunda columna en este caso)
+    clonedTable.querySelectorAll("tr").forEach(row => {
+        if (row.children.length > 1) {
+            row.removeChild(row.children[1]); // Elimina la columna de "Imágenes"
+        }
+        row.removeChild(row.lastElementChild); // Elimina la columna de "Acciones"
+    });
+
+    const workbook = XLSX.utils.table_to_book(clonedTable, { sheet: "Sheet1" });
+    XLSX.writeFile(workbook, "stock.xlsx");
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await fetchCategories();
+    await fetchProducts();
+});

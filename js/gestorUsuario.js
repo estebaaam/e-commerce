@@ -1,7 +1,6 @@
-let currentPage = 1;
-const usersPerPage = 14; // Cambia esto según el número de usuarios por página
-let users = [];
+let users = []; // Lista de usuarios sin paginación
 
+// Función para obtener los usuarios desde la API
 async function fetchUsers() {
     try {
         const response = await fetch('http://localhost:8000/users/');
@@ -16,15 +15,13 @@ async function fetchUsers() {
     }
 }
 
+// Función para renderizar los usuarios en la tabla
 function renderUsers() {
     const userList = document.getElementById('customers_table').querySelector('tbody');
-    userList.innerHTML = '';
+    userList.innerHTML = ''; // Limpiar la tabla antes de renderizar
 
-    const start = (currentPage - 1) * usersPerPage;
-    const end = start + usersPerPage;
-    const paginatedUsers = users.slice(start, end);
-
-    paginatedUsers.forEach(user => {
+    // Ya no necesitas la paginación, muestra todos los usuarios
+    users.forEach(user => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${user.id}</td>
@@ -41,41 +38,12 @@ function renderUsers() {
         `;
         userList.appendChild(row);
     });
-
-    updatePaginationControls();
 }
-
-function updatePaginationControls() {
-    const prevPageButton = document.getElementById('prevPage');
-    const nextPageButton = document.getElementById('nextPage');
-    const pageInfo = document.getElementById('pageInfo');
-
-    prevPageButton.disabled = currentPage === 1;
-    nextPageButton.disabled = currentPage * usersPerPage >= users.length;
-    pageInfo.textContent = `Página ${currentPage}`;
-}
-
-document.getElementById('prevPage').addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        renderUsers();
-    }
-});
-
-document.getElementById('nextPage').addEventListener('click', () => {
-    if (currentPage * usersPerPage < users.length) {
-        currentPage++;
-        renderUsers();
-    }
-});
 
 // Llama a la función para cargar los usuarios cuando la página esté lista
 document.addEventListener('DOMContentLoaded', () => {
     fetchUsers();
 });
-
-
-
 
 // Función para abrir el modal de edición de usuario
 function openEditModal(userId) {
@@ -105,7 +73,7 @@ function openEditModal(userId) {
         .catch(error => console.error('Error:', error));
 }
 
-// Función para cerrar el modal
+// Función para cerrar el modal de edición
 function closeEditModal() {
     const modal = document.getElementById('editUserModal');
     modal.style.display = 'none';  // Ocultar el modal
@@ -113,13 +81,6 @@ function closeEditModal() {
     // Limpiar el formulario de edición (opcional)
     document.getElementById('editUserForm').reset();
 }
-
-// Función para cerrar el modal de editar
-function closeEditUserModal() {
-    const modal = document.getElementById('editUserModal');
-    modal.style.display = 'none';  // Ocultar el modal
-}
-
 
 // Función para guardar los cambios del usuario editado
 function saveUserEdit() {
@@ -156,10 +117,7 @@ function saveUserEdit() {
     .catch(error => console.error('Error:', error));
 }
 
-
-
-/*Eliminar USER*/ 
-
+// Eliminar usuario
 let userIdToDelete = null; // Variable para almacenar el ID del usuario a eliminar
 
 // Función para mostrar el modal de confirmación de eliminación
@@ -204,6 +162,99 @@ function confirmDeleteUser() {
         console.error('Error:', error);
         alert('Hubo un problema al eliminar el usuario');
     });
+}
+
+
+
+// Función de búsqueda
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("keyup", searchTable);
+});
+
+// Función para buscar en la tabla
+function searchTable() {
+    const searchInput = document.getElementById("searchInput");
+    const filter = searchInput.value.toLowerCase();
+    const rows = document.querySelectorAll("#userTableBody tr");
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(filter));
+        row.style.display = match ? "" : "none";
+    });
+}
+
+// Funciones de exportación (PDF, Excel, JSON)
+async function exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let tableContent = document.getElementById("customers_table");
+    let data = [];
+
+    tableContent.querySelectorAll("tbody tr").forEach((row) => {
+        let rowData = [];
+        row.querySelectorAll("td").forEach((cell, index) => {
+            // Omite la columna de imágenes (por ejemplo, si está en la segunda posición, índice 1)
+            if (index !== 7) {
+                rowData.push(cell.innerText);
+            }
+        });
+        data.push(rowData);
+    });
+
+    doc.text("Gestor de Usuario", 10, 10); // Título en el PDF
+    doc.autoTable({
+        head: [["Id", "Nombre de Usuario", "Email", "Contraseña", "Telefono", "Dirección", "Rol"]],
+        body: data
+    });
+
+    doc.save("usuario.pdf");
+}
+
+// Exportar a JSON
+function exportToJSON() {
+    const rows = Array.from(document.querySelectorAll("#customers_table tr"));
+    const data = rows.map(row => {
+        const cells = row.querySelectorAll("td");
+
+        if(cells.length >= 6){
+            return {
+                id: cells[0].textContent.trim(),
+                nombre_usuario: cells[1].textContent.trim(),
+                email: cells[2].textContent.trim(),
+                contraseña: cells[3].textContent.trim(),
+                telefono: cells[4].textContent.trim(),
+                direccion: cells[5].textContent.trim(),
+                rol: cells[6].textContent.trim()
+            };
+        } 
+        
+    });
+    if (data.length > 0) {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "usuario.json";
+        link.click();
+    } else {
+        alert("No hay datos disponibles para exportar.");
+    }
+
+}
+
+// Exportar a Excel
+function exportToExcel() {
+    const table = document.getElementById("customers_table");
+    const clonedTable = table.cloneNode(true);
+
+    // Remueve la columna de "Acciones" (última columna) y "Imágenes" (segunda columna en este caso)
+    clonedTable.querySelectorAll("tr").forEach(row => {
+        row.removeChild(row.lastElementChild); // Elimina la columna de "Acciones"
+    });
+
+    const workbook = XLSX.utils.table_to_book(clonedTable, { sheet: "Sheet1" });
+    XLSX.writeFile(workbook, "usuario.xlsx");
 }
 
 

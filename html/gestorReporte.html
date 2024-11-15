@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="../css/app.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/gestorReporte.css">
 </head>
 
 <body>
@@ -51,7 +52,7 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="añadirNuevoProducto.html">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Añadir nuevo
+                            <i class="align-middle" data-feather="upload"></i> <span class="align-middle">Añadir nuevo
                                 Producto</span>
                         </a>
                     </li>
@@ -64,7 +65,7 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="gestorStock.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver Productos
+                            <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Ver Productos
                                 en Stock</span>
                         </a>
                     </li>
@@ -76,7 +77,7 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="gestorPedido.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver
+                            <i class="align-middle" data-feather="truck"></i> <span class="align-middle">Ver
                                 Pedidos</span>
                         </a>
                     </li>
@@ -88,19 +89,19 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="gestorUsuario.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver
+                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Ver
                                 Usuarios</span>
                         </a>
                     </li>
 
                     <li class="sidebar-header">
-                        Gestion de Contabilidad
+                        Gestion de Reporte
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="gestorContabilidad.html">
-                            <i class="align-middle" data-feather="square"></i> <span
-                                class="align-middle">Contabilidad</span>
+                        <a class="sidebar-link" href="gestorReporte.html">
+                            <i class="align-middle" data-feather="printer"></i> <span
+                                class="align-middle">Reporte</span>
                         </a>
                     </li>
             </div>
@@ -290,69 +291,81 @@
             <!-- Sección Principal -->
             <!-- Sección Principal -->
             <main id="content" class="main-container">
-                <h3>Gestor de Contabilidad</h3>
+                <h3>Gestor de Reporte</h3>
 
-                <main class="table" id="customers_table">
-                    <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Id de Transaccion</th>
-                                <th>Tipo</th>
-                                <th>Descripcion</th>
-                                <th>Monto</th>
-                                <th>Fecha</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <div class="d-flex align-items-center">
-                                    <td>1</td>
-                                    <td>Ingreso</td>
-                                    <td>Venta de Teclado</td>
-                                    <td>150.000</td>
-                                    <td>2024-10-01</td>
-                                    <td>Confirmado</td>
-                                    <td>
-                                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                                            data-mdb-ripple-color="dark"> Ver Detalle </button>
-                                    </td>
+                <main class="gestor-reportes">
+                    <div class="container">
+                        <h2>Gestor de Reportes</h2>
+                        
+                        <!-- Filtros para generar los reportes -->
+                        <div class="filtros">
+                            <h3>Filtros de Reporte</h3>
+                            <form id="form-filtros" action="/generar_reporte" method="POST">
+                                <div class="form-group">
+                                    <label for="tipo_reporte">Tipo de Reporte</label>
+                                    <select id="tipo_reporte" name="tipo_reporte" class="form-control">
+                                        <option value="ventas">Reporte de Ventas</option>
+                                        <option value="inventario">Reporte de Productos</option>
+                                        <option value="clientes">Reporte de Clientes</option>
+                                        <!-- Agregar más tipos de reportes si es necesario -->
+                                    </select>
                                 </div>
-                            </tr>
-                            <tr>
-                                <div class="d-flex align-items-center">
-                                    <td>2</td>
-                                    <td>Egreso</td>
-                                    <td>Compra de Suministro</td>
-                                    <td>75.000</td>
-                                    <td>2024-10-02</td>
-                                    <td>Confirmado</td>
-                                    <td>
-                                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                                            data-mdb-ripple-color="dark"> Ver Detalle </button>
-                                    </td>
+                
+                                <div class="form-group">
+                                    <label for="fecha_inicio">Fecha de Inicio</label>
+                                    <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control">
                                 </div>
-                            </tr>
-                            <tr>
-                                <div class="d-flex align-items-center">
-                                    <td>3</td>
-                                    <td>Ingreso</td>
-                                    <td>Venta de Ratones</td>
-                                    <td>250.000</td>
-                                    <td>2024-10-04</td>
-                                    <td>Pendiente</td>
-                                    <td>
-                                        <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold"
-                                            data-mdb-ripple-color="dark"> Ver Detalle </button>
-                                    </td>
+                
+                                <div class="form-group">
+                                    <label for="fecha_fin">Fecha de Fin</label>
+                                    <input type="date" id="fecha_fin" name="fecha_fin" class="form-control">
                                 </div>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
+                
+                                <div class="form-group">
+                                    <label for="producto">Producto</label>
+                                    <select id="producto" name="producto" class="form-control">
+                                        <option value="todos">Todos los productos</option>
+                                        <!-- Opciones de productos se añadirán dinámicamente con JavaScript -->
+                                    </select>
+                                </div>
+                        
+                
+                                <div class="form-group">
+                                    <label for="formato">Formato</label>
+                                    <select id="formato" name="formato" class="form-control">
+                                        <option value="pdf">PDF</option>
+                                        <option value="excel">Excel</option>
+                                    </select>
+                                </div>
+                
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Generar Reporte</button>
+                                </div>
+                            </form>
+                        </div>
+                
+                        <!-- Tabla de Reportes Generados -->
+                        <div class="tabla-reportes">
+                            <h3>Reportes Generados</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tipo de Reporte</th>
+                                        <th>Fecha de Generación</th>
+                                        <th>Filtro Aplicado</th>
+                                        <th>Formato</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-reportes-body">
+                                    <!-- Aquí se agregarán los reportes generados dinámicamente con JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </main>
+                
 
             </main>
 

@@ -8,6 +8,7 @@ from app.routers import orderRouter
 from app.routers import cart_orderRouter
 from app.routers import reviewRouter
 
+
 app = FastAPI()
 
 app.add_middleware(
@@ -26,6 +27,9 @@ app.include_router(orderRouter.router)
 app.include_router(cart_orderRouter.router)
 app.include_router(reviewRouter.router)
 
+
+
+
 @app.get("/")
 async def root():
-    pass
+    return {"message": "API de E-commerce funcionando correctamente"}
