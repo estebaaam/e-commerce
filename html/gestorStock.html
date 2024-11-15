@@ -51,7 +51,7 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="añadirNuevoProducto.html">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Añadir nuevo
+                            <i class="align-middle" data-feather="upload"></i> <span class="align-middle">Añadir nuevo
                                 Producto</span>
                         </a>
                     </li>
@@ -64,7 +64,8 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="gestorStock.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver Productos
+                            <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Ver
+                                Productos
                                 en Stock</span>
                         </a>
                     </li>
@@ -76,7 +77,7 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="gestorPedido.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver
+                            <i class="align-middle" data-feather="truck"></i> <span class="align-middle">Ver
                                 Pedidos</span>
                         </a>
                     </li>
@@ -88,19 +89,19 @@
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="gestorUsuario.html">
-                            <i class="align-middle" data-feather="square"></i> <span class="align-middle">Ver
+                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Ver
                                 Usuarios</span>
                         </a>
                     </li>
 
                     <li class="sidebar-header">
-                        Gestion de Contabilidad
+                        Gestion de Reporte
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="gestorContabilidad.html">
-                            <i class="align-middle" data-feather="square"></i> <span
-                                class="align-middle">Contabilidad</span>
+                        <a class="sidebar-link" href="gestorReporte.html">
+                            <i class="align-middle" data-feather="printer"></i> <span
+                                class="align-middle">Reporte</span>
                         </a>
                     </li>
             </div>
@@ -289,7 +290,19 @@
 
             <!-- Sección Principal -->
             <main id="content" class="main-container">
-                <h3>Gestor de Stock</h3>
+                <h3 class="h3">Gestor de Stock</h3>
+
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Buscar productos...">
+                </div>
+            
+                <!-- Botones de exportación -->
+                <div class="export-buttons">
+                    <button onclick="exportToPDF()">Descargar PDF</button>
+                    <button onclick="exportToJSON()">Exportar a JSON</button>
+                    <button onclick="exportToExcel()">Exportar a Excel</button>
+                </div>
+            
 
                 <main class="table" id="customers_table">
                     <table class="table align-middle mb-0 bg-white">
@@ -311,53 +324,25 @@
                         </tbody>
                     </table>
 
+                    <!-- Modal para Editar Estado del Producto -->
+                    <div id="editProductModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <h3>Editar Estado del Producto</h3>
+                            <input type="hidden" id="productId"> <!-- ID del producto oculto -->
 
+                            <!-- Desplegable para seleccionar el nuevo estado -->
+                            <label for="newProductStatus">Nuevo Estado del Producto:</label>
+                            <select id="newProductStatus">
+                                <option value="activado">Activo</option>
+                                <option value="desactivado">Desactivado</option>
+                            </select>
+                            <br>
 
-                    <div id="paginationControls" class="d-flex justify-content-center" style="margin-top: 20px;">
-                        <button id="prevPage" class="btn btn-secondary" disabled>Anterior</button>
-                        <span id="pageInfo">Página 1</span>
-                        <button id="nextPage" class="btn btn-secondary">Siguiente</button>
+                            <!-- Botones para actualizar o cancelar -->
+                            <button onclick="updateProductStatus()">Actualizar</button>
+                            <button onclick="closeEditProductModal()">Cancelar</button>
+                        </div>
                     </div>
-
-                    <!--
-    <section id="reportes" class="section-contabilidad">
-        <h2>Generar Reportes</h2>
-        <button class="generate-report">Generar Reporte</button>
-        <div class="report-options">
-            <label for="report-type">Tipo de Reporte:</label>
-            <select id="report-type">
-                <option value="diario">Diario</option>
-                <option value="semanal">Semanal</option>
-                <option value="mensual">Mensual</option>
-            </select>
-            <label for="format">Formato:</label>
-            <select id="format">
-                <option value="pdf">PDF</option>
-                <option value="csv">CSV</option>
-            </select>
-        </div>
-    </section>
-    -->
-
-                  <!-- Modal para Editar Estado del Producto -->
-<div id="editProductModal" class="modal" style="display: none;">
-    <div class="modal-content">
-        <h3>Editar Estado del Producto</h3>
-        <input type="hidden" id="productId"> <!-- ID del producto oculto -->
-
-        <!-- Desplegable para seleccionar el nuevo estado -->
-        <label for="newProductStatus">Nuevo Estado del Producto:</label>
-        <select id="newProductStatus">
-            <option value="activado">Activo</option>
-            <option value="desactivado">Desactivado</option>
-        </select>
-        <br>
-
-        <!-- Botones para actualizar o cancelar -->
-        <button onclick="updateProductStatus()">Actualizar</button>
-        <button onclick="closeEditProductModal()">Cancelar</button>
-    </div>
-</div>
 
 
                 </main>
@@ -371,7 +356,8 @@
                     <div class="row text-muted">
                         <div class="col-6 text-start">
                             <p class="mb-0">
-                                <a class="text-muted" href="../index.html" target="_blank"><strong>TechShop</strong></a> - 
+                                <a class="text-muted" href="../index.html" target="_blank"><strong>TechShop</strong></a>
+                                -
                                 <strong class="text-muted">Tu mejor opción</strong> &copy;
                             </p>
                         </div>
@@ -394,6 +380,12 @@
 
 
 
+<!-- Librería para exportar a PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.14/jspdf.plugin.autotable.min.js"></script>
+
+<!-- Librería para exportar a Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
     <script src="../js/app.js"></script>
     <script src="../js/gestorStock.js"></script>
