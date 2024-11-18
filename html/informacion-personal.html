@@ -147,15 +147,7 @@
             <section class="user-personal-info my-5">
                 <div class="title-dropdown">
                     <h2 class="my-5">Tu Información Personal</h2>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Opciones
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><button onclick="editarPerfil()" class="dropdown-item" type="button">Editar perfil</button></li>
-                      <li><button onclick="logout()" class="dropdown-item" type="button">Log out</button></li>
-                    </ul>
-                  </div>
+                    <button onclick="editarPerfil()" class="btn btn-primary">Editar perfil</button>
                 </div>
                 <table class="table caption-top">
                     <tbody>
@@ -178,11 +170,6 @@
                         <th scope="row">4</th>
                         <td>Dirección</td>
                         <td id="direccion"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>Contraseña</td>
-                        <td id="contraseña"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -334,8 +321,8 @@
     <script src="/js/tiny-slider.js"></script>
     <script src="/js/glightbox.min.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/leer-usuario.js"></script>
     <script src="/js/validar-sesion.js"></script>
+    <script src="/js/leer-usuario.js"></script>
     <script src="/js/editar-perfil.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
 </body>

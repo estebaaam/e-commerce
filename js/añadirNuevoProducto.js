@@ -3,7 +3,14 @@ const categoriesMap = {}; // Mapa para almacenar la relación entre nombres de c
 // Función para cargar las categorías al cargar la página
 async function loadCategories() {
     try {
-        const response = await fetch('http://localhost:8000/categories/'); // Asegúrate de que este es el endpoint correcto
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('http://127.0.0.1:8000/categories/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        }); // Asegúrate de que este es el endpoint correcto
         if (!response.ok) {
             throw new Error('Error al obtener las categorías');
         }
@@ -38,10 +45,12 @@ document.getElementById('addCategoryBtn').addEventListener('click', async functi
     
     if (newCategory) {
         try {
-            const response = await fetch('http://localhost:8000/categories/', { // Asegúrate de que este es el endpoint correcto
+            const token = localStorage.getItem('access_token');
+            const response = await fetch('http://127.0.0.1:8000/categories/', { // Asegúrate de que este es el endpoint correcto
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ nombre: newCategory }), // Cambia esto si tu API requiere un formato diferente
             });
@@ -66,7 +75,14 @@ document.getElementById('addCategoryBtn').addEventListener('click', async functi
 
 async function updateCategoryList() {
     try {
-        const response = await fetch('http://localhost:8000/categories/'); // Asegúrate de que este es el endpoint correcto
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('http://127.0.0.1:8000/categories/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        }); // Asegúrate de que este es el endpoint correcto
         if (!response.ok) {
             throw new Error('Error al obtener las categorías');
         }
@@ -120,10 +136,12 @@ document.getElementById('formularioProducto').addEventListener('submit', async f
     };
 
     try {
-        const response = await fetch('http://localhost:8000/products/', { // Updated endpoint here
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('http://127.0.0.1:8000/products/', { // Updated endpoint here
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(productData),
         });

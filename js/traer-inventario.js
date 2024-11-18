@@ -37,7 +37,7 @@ async function traerProductos() {
                                   <span>$${producto.precio}</span>
                               </div>
                           </div>
-                          <button onclick="addToCartFromStore(${producto.id})" class="btn btn-primary">Add To Cart</button>
+                          <button onclick="addToCartFromStore(${producto.id})" class="btn btn-primary">Añadir Al Carrito</button>
                           <div class="added-to-cart${producto.id}"></div>
                       </div>
                   </div>

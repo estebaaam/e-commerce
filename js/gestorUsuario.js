@@ -3,7 +3,14 @@ let users = []; // Lista de usuarios sin paginación
 // Función para obtener los usuarios desde la API
 async function fetchUsers() {
     try {
-        const response = await fetch('http://localhost:8000/users/');
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('http://127.0.0.1:8000/users/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) {
             throw new Error('Error al obtener los usuarios');
         }
@@ -27,7 +34,6 @@ function renderUsers() {
             <td>${user.id}</td>
             <td>${user.nombre}</td>
             <td>${user.correo}</td>
-            <td>${user.contraseña}</td>
             <td>${user.telefono}</td>
             <td>${user.direccion}</td>
             <td>${user.rol}</td>
@@ -46,32 +52,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Función para abrir el modal de edición de usuario
-function openEditModal(userId) {
-    fetch(`http://localhost:8000/users/${userId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al obtener los datos del usuario');
+async function openEditModal(userId) {
+    try {
+        const token = localStorage.getItem('access_token');
+        const response = await fetch(`http://127.0.0.1:8000/users/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
-            return response.json();
-        })
-        .then(user => {
-            // Cargar los datos en el formulario
-            document.getElementById('userId').value = user.id;
-            document.getElementById('editUserName').value = user.nombre;
-            document.getElementById('editUserEmail').value = user.correo;
-            document.getElementById('editUserPassword').value = user.contraseña;
-            document.getElementById('editUserPhone').value = user.telefono || ''; // Asegurarse de que sea vacío si no existe
-            document.getElementById('editUserAddress').value = user.direccion || ''; // Asegurarse de que sea vacío si no existe
-            document.getElementById('editUserRole').value = user.rol;
+        });
+        if (!response.ok) {
+            throw new Error('Error al obtener los datos del usuario');
+        }
 
-            // Mostrar el modal
-            const modal = document.getElementById('editUserModal');
-            modal.style.display = 'flex'; 
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-        })
-        .catch(error => console.error('Error:', error));
+        const user = await response.json();
+
+        // Cargar los datos en el formulario
+        document.getElementById('userId').value = user.id;
+        document.getElementById('editUserName').value = user.nombre;
+        document.getElementById('editUserEmail').value = user.correo;
+        document.getElementById('editUserPassword').value = user.contraseña;
+        document.getElementById('editUserPhone').value = user.telefono || ''; // Asegurarse de que sea vacío si no existe
+        document.getElementById('editUserAddress').value = user.direccion || ''; // Asegurarse de que sea vacío si no existe
+        document.getElementById('editUserRole').value = user.rol;
+
+        // Mostrar el modal
+        const modal = document.getElementById('editUserModal');
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
+
 
 // Función para cerrar el modal de edición
 function closeEditModal() {
@@ -95,10 +111,12 @@ function saveUserEdit() {
         rol: document.getElementById('editUserRole').value,
     };
 
-    fetch(`http://localhost:8000/users/${userId}`, {
+    const token = localStorage.getItem('access_token');
+    fetch(`http://127.0.0.1:8000/users/${userId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(updatedUser),
     })
@@ -144,8 +162,13 @@ function closeDeleteModal() {
 function confirmDeleteUser() {
     if (!userIdToDelete) return;
 
-    fetch(`http://localhost:8000/users/${userIdToDelete}`, {
-        method: 'DELETE', // Método DELETE para eliminar
+    const token = localStorage.getItem('access_token');
+    fetch(`http://127.0.0.1:8000/users/${userIdToDelete}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        } // Método DELETE para eliminar
     })
     .then(response => {
         if (!response.ok) {

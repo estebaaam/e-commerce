@@ -4,6 +4,7 @@ from app.crud import crudProduct
 from app.models import productModel
 from app.schemas import productSchema
 from app.core.config import SessionLocal, engine
+from app.core.security import verify_token
 
 productModel.Base.metadata.create_all(bind=engine)
 
@@ -18,12 +19,12 @@ def get_db():
         
 
 @router.post("/products/", response_model=productSchema.ProductCreate)
-def create_product(product: productSchema.ProductCreate, db: Session = Depends(get_db)):
+def create_product(product: productSchema.ProductCreate, db: Session = Depends(get_db), email: str = Depends(verify_token)):
   return crudProduct.create_product(db=db, product=product)
 
 
 @router.get("/products/", response_model=list[productSchema.Product])
-def read_products(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def read_products(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), email: str = Depends(verify_token)):
     products = crudProduct.get_products(db, skip=skip, limit=limit)
     return products
 
@@ -40,7 +41,7 @@ def read_product(id: int, db: Session = Depends(get_db)):
     return db_product
 
 @router.put("/products/{id}", response_model=productSchema.Product)
-def update_product(id: int, product: productSchema.ProductCreate, db: Session = Depends(get_db)):
+def update_product(id: int, product: productSchema.ProductCreate, db: Session = Depends(get_db), email: str = Depends(verify_token)):
     db_product = crudProduct.get_product(db, id=id)
     if db_product is None:
         raise HTTPException(status_code=404, detail="User not found")
@@ -48,7 +49,7 @@ def update_product(id: int, product: productSchema.ProductCreate, db: Session = 
     return updated_product
   
 @router.delete("/products/{id}", response_model=productSchema.Product)
-def delete_product(id: int, db: Session = Depends(get_db)):
+def delete_product(id: int, db: Session = Depends(get_db), email: str = Depends(verify_token)):
     db_product = crudProduct.get_product(db, id=id)
     if db_product is None:
         raise HTTPException(status_code=404, detail="User not found")

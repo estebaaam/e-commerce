@@ -14,7 +14,6 @@ class User(BaseModel):
     correo: str
     telefono: str
     direccion: str
-    contraseña: str
     rol: str
 
     class Config:

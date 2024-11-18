@@ -3,7 +3,15 @@ let orders = [];
 // Función para traer pedidos y almacenarlos
 async function fetchOrders() {
     try {
-        const response = await fetch('http://127.0.0.1:8000/orders/');
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('http://127.0.0.1:8000/orders/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
         orders = await response.json();
 
         if (!orders.length) {
@@ -66,10 +74,12 @@ async function updateOrderStatus() {
     const newStatus = document.querySelector('#newStatus').value;
 
     try {
+        const token = localStorage.getItem('access_token');
         const response = await fetch(`http://127.0.0.1:8000/orders/${orderId}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 estado: newStatus

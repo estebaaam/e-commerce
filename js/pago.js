@@ -1,7 +1,5 @@
 let cartCounter = parseInt(localStorage.getItem('cartCounter'));
-let totalPrice = parseFloat(localStorage.getItem('totalPrice'));
-let userId = localStorage.getItem('userId');
-if(!cartCounter || !totalPrice || !userId){
+if(!cartCounter){
   window.location.href = "../index.html";
 }else{
   document.querySelector('.right-column').innerHTML = `
@@ -15,15 +13,15 @@ if(!cartCounter || !totalPrice || !userId){
 `
 }
 
-const autoComplete = () => {
-  let user = JSON.parse(localStorage.getItem('user'));
+async function autoComplete() {
+  let userId = localStorage.getItem('userId');
+  let user = await getUser(userId)
 
   document.getElementById('nombre').value = user.nombre;
   document.getElementById('telefono').value = user.telefono;
   document.getElementById('correo').value = user.correo;
-  document.getElementById('direccion').value = user.direccion;
+  document.getElementById('direccion').value = user.direccion; 
 }
-
 async function placeOrder(event) {
 
   event.preventDefault();
@@ -49,11 +47,13 @@ async function placeOrder(event) {
   }
 
   try {
+    const token = localStorage.getItem('access_token');
     const response = await fetch('http://127.0.0.1:8000/orders/', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        },
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
         body: JSON.stringify(order)
     });
     if (!response.ok) {
@@ -65,19 +65,15 @@ async function placeOrder(event) {
     let id_pedido = orderResponse.id;
 
     let contadorProductos = JSON.parse(localStorage.getItem('contadorProductos'));
-    let productos = JSON.parse(localStorage.getItem('productos'));
 
     for (let idProducto in contadorProductos) {
-      let producto = productos.find(producto => producto.id === parseInt(idProducto));
+      let producto = await getProduct(parseInt(idProducto));
     
       if (producto) {
         producto.existencias -= contadorProductos[idProducto];
         await updateProducts(producto, idProducto);
       }
     }
-
-    localStorage.setItem('productos', JSON.stringify(productos));
-
 
     for (const [id_producto, cantidad] of Object.entries(contadorProductos)) {
       let cart_order = {
@@ -107,9 +103,6 @@ async function placeOrder(event) {
     localStorage.setItem('cartCounter', cartCounter);
     localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
 
-    await getCartOrder(id_usuario);
-    await getOrders(id_usuario);
-
     alert('su pedido se realizo con exito')
     window.location.href = "../html/informacion-personal.html";
 
@@ -122,11 +115,13 @@ async function placeOrder(event) {
 
 async function saveCartOrder(cart_order) {
   try {
+    const token = localStorage.getItem('access_token');
     const response = await fetch('http://127.0.0.1:8000/cartOrder/', {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
-      },
+    },
       body: JSON.stringify(cart_order)
     });
     if (!response.ok) {
@@ -140,11 +135,13 @@ async function saveCartOrder(cart_order) {
 
 async function deleteCart(carritoAeliminar) {
   try {
+    const token = localStorage.getItem('access_token');
     const updateResponse = await fetch(`http://127.0.0.1:8000/cart/${carritoAeliminar.id_usuario}/${carritoAeliminar.id_producto}`, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
-        },
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
     });
     if (!updateResponse.ok) {
       throw new Error('Error al eliminar el registro');
@@ -156,47 +153,15 @@ async function deleteCart(carritoAeliminar) {
 }
 }
 
-async function getCartOrder(id_usuario){
-  try {
-      const response = await fetch(`http://127.0.0.1:8000/cartOrder/${id_usuario}`);
-      const cart_order = await response.json();
-
-      if (!cart_order) {
-        throw new Error('Error al traer los pedidos');
-      }
-
-      localStorage.setItem('cart_order',JSON.stringify(cart_order));
-
-  }catch (error) {
-      console.error('Hubo un problema al traer los pedidos:', error);
-      alert('Hubo un error al traer los pedidos.');
-  }
-}
-
-async function getOrders(id_usuario){
-  try {
-      const response = await fetch(`http://127.0.0.1:8000/orders/${id_usuario}`);
-      const orders = await response.json();
-
-      if (!orders) {
-        throw new Error('Error al traer los pedidos');
-      }
-
-      localStorage.setItem('orders',JSON.stringify(orders));
-
-  }catch (error) {
-      console.error('Hubo un problema al traer los pedidos:', error);
-      alert('Hubo un error al traer los pedidos.');
-  }
-}
-
 async function updateProducts(Productoctualizado,id_producto) {
   try {
+    const token = localStorage.getItem('access_token');
     const updateResponse = await fetch(`http://127.0.0.1:8000/products/${id_producto}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-        },
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
         body: JSON.stringify(Productoctualizado)
     });
     if (!updateResponse.ok) {
@@ -207,4 +172,46 @@ async function updateProducts(Productoctualizado,id_producto) {
     console.error('Hubo un problema con el producto actualizado:', error);
     alert('Hubo un problema con el producto actualizado. Por favor, intenta de nuevo.');
 }
+}
+
+async function getUser(id){
+  try {
+      const token = localStorage.getItem('access_token');
+      const responseUser = await fetch(`http://127.0.0.1:8000/users/id/${id}`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          }
+      });
+
+
+      if (!responseUser) {
+          throw new Error('Error al traer el usuario');
+      }
+
+      const user = await responseUser.json();
+      return user;
+ 
+  }catch (error) {
+      console.error('Hubo un problema al traer el usuario:', error);
+      alert('Hubo un error al traer el usuario.');
+  }
+}
+
+async function getProduct(id_producto){
+  try {
+      const response = await fetch(`http://127.0.0.1:8000/products/${id_producto}`);
+      const product = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Error al cargar el producto');
+      }
+
+      return product;
+
+  }catch (error) {
+      console.error('Hubo un problema al cargar el producto:', error);
+      alert('Hubo un error al cargar el producto.');
+  }
 }
