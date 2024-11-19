@@ -163,7 +163,7 @@ function exportToJSON() {
             console.error("Fila incompleta encontrada, no se puede exportar.");
             return null;  // En caso de que falten celdas
         }
-    }).filter(item => item !== null);  // Eliminar cualquier fila incompleta
+       }).filter(item => item !== null);  // Eliminar cualquier fila incompleta
 
     // Verificar que se haya obtenido datos
     if (data.length > 0) {
