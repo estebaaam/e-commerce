@@ -187,7 +187,8 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button onclick="placeOrder(event)" class="btn btn-primary">realizar pedido</button>
+                      <div id="paypal-button-container" class="paypal-button-container"></div>
+                      <p id="result-message"></p>
                     </div>
                   </form>
             </div>
@@ -267,7 +268,9 @@
         <!-- End Footer Bottom -->
     </footer>
     <script src="../js/validar-sesion.js"></script>
-    <script src="../js/pago.js"></script>
+    <script src="../js/validar-pago-sesion.js"></script>
     <script src="../js/app.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AbaObwdE2ZLmGLoTaD5Q42OOz7Kh-0Qbd22zk2Uj-mBFsWFZwEsU32HHczh3QqylPDTbcLpqwoDz2Ngn&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo"></script>
+    <script src="paypal.js"></script>
 </body>
 </html>

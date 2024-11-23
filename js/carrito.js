@@ -62,7 +62,7 @@ async function mostrarCarrito() {
   <div class="cart-summary">
               <h2>Resumen del Carrito</h2>
               <p>Subtotal (${cartCounter} productos): <span>$${totalPrice}</span></p>
-              <a href="pago.html">
+              <a href="../paypal/pago.html">
               <button class="btn btn-primary">Proceder con el Pago</button>
               </a>
           </div>
