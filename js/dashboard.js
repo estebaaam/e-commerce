@@ -1,8 +1,36 @@
+const token = localStorage.getItem('access_token');
+
 // Función para obtener y mostrar los datos en las tarjetas
 async function updateDashboard() {
+  /*
+  try {
+    const token = localStorage.getItem('access_token');
+    const response = await fetch('http://127.0.0.1:8000/products/', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+    if (!response.ok) {
+        throw new Error('Error al obtener los productos');
+    }
+    
+    products = await response.json();
+    renderProducts();  // Renderiza todos los productos
+}
+*/
+  
     try {
+      const token = localStorage.getItem('access_token');
         // Card: Ventas (Total de pedidos)
-        const ordersResponse = await fetch('http://127.0.0.1:8000/orders/');
+        const ordersResponse = await fetch('http://127.0.0.1:8000/orders/', {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          }
+      });
         if (!ordersResponse.ok) throw new Error('Error al obtener los pedidos');
         const ordersData = await ordersResponse.json();
 
@@ -12,7 +40,13 @@ async function updateDashboard() {
         document.getElementById('ventas-count').textContent = ordersData.length;
 
         // Card: Usuarios Registrados
-        const usersResponse = await fetch('http://127.0.0.1:8000/users/');
+        const usersResponse = await fetch('http://127.0.0.1:8000/users/',{
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
         if (!usersResponse.ok) throw new Error('Error al obtener los usuarios');
         const usersData = await usersResponse.json();
 
@@ -20,7 +54,13 @@ async function updateDashboard() {
         document.getElementById('usuarios-count').textContent = usersData.length;
 
         // Card: Productos Activos
-        const productsResponse = await fetch('http://127.0.0.1:8000/products/');
+        const productsResponse = await fetch('http://127.0.0.1:8000/products/',{
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
         if (!productsResponse.ok) throw new Error('Error al obtener los productos');
         const productsData = await productsResponse.json();
 
@@ -71,7 +111,13 @@ const myChartProductoStock = new Chart(ctx, {
 /* Función para obtener los productos desde la API */
 async function fetchProducts() {
   try {
-    const response = await fetch('http://localhost:8000/products/');
+    const response = await fetch('http://localhost:8000/products/',{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     if (!response.ok) {
       throw new Error('Error al obtener los productos');
     }
@@ -103,7 +149,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function fetchOrders() {
       try {
-          const response = await fetch(apiUrl);
+          const response = await fetch(apiUrl,{
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
           if (!response.ok) throw new Error("Error al obtener los pedidos.");
           return await response.json();
       } catch (error) {
@@ -185,11 +237,23 @@ document.addEventListener("DOMContentLoaded", function () {
 /* Función para obtener los productos y las categorías desde la API */
 async function fetchCategoriesAndProducts() {
   try {
-    const categoriesResponse = await fetch("http://localhost:8000/categories/");
+    const categoriesResponse = await fetch("http://localhost:8000/categories/",{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     if (!categoriesResponse.ok) throw new Error("Error al obtener las categorías");
     const categories = await categoriesResponse.json();
 
-    const productsResponse = await fetch("http://localhost:8000/products/");
+    const productsResponse = await fetch("http://localhost:8000/products/",{
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     if (!productsResponse.ok) throw new Error("Error al obtener los productos");
     const products = await productsResponse.json();
 
@@ -245,8 +309,16 @@ document.addEventListener("DOMContentLoaded", fetchCategoriesAndProducts);
 
 /* Función para obtener y mostrar los productos con bajo stock */
 async function fetchLowStockProducts() {
+
   try {
-      const response = await fetch('http://localhost:8000/products/');
+    const token = localStorage.getItem('access_token');
+      const response = await fetch('http://localhost:8000/products/', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    });
       if (!response.ok) {
           throw new Error('Error al obtener los productos');
       }
@@ -294,7 +366,13 @@ document.addEventListener('DOMContentLoaded', fetchLowStockProducts);
 /* Función para obtener y procesar el estado de los pedidos */
 async function fetchOrderStatusData() {
   try {
-      const response = await fetch('http://127.0.0.1:8000/orders/');
+      const response = await fetch('http://127.0.0.1:8000/orders/',{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
       if (!response.ok) {
           throw new Error('Error al obtener los pedidos');
       }
@@ -368,7 +446,13 @@ document.addEventListener('DOMContentLoaded', fetchOrderStatusData);
 /* Función para obtener y mostrar los últimos pedidos */
 async function fetchAndDisplayRecentOrders() {
   try {
-      const response = await fetch('http://127.0.0.1:8000/orders/');
+      const response = await fetch('http://127.0.0.1:8000/orders/',{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
       if (!response.ok) {
           throw new Error('Error al obtener los pedidos');
       }
