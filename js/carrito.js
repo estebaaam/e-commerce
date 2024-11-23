@@ -1,25 +1,30 @@
-function filtrarProductos() {
+async function filtrarProductos() {
   let contadorProductos = JSON.parse(localStorage.getItem('contadorProductos'));
   const listaIdProductos = Object.keys(contadorProductos);
-  const productos = JSON.parse(localStorage.getItem('productos'));
-  const productosFiltrados = productos.filter(producto => listaIdProductos.includes(String(producto.id)));
+  let productosFiltrados = [];
+  for (const id of listaIdProductos) {
+    let producto = await getProduct(id);
+    productosFiltrados.push(producto);
+  }
   localStorage.setItem('listaIdProductos', JSON.stringify(listaIdProductos));
   return productosFiltrados;
 }
 
-function mostrarCarrito() {
+async function mostrarCarrito() {
   let cartCounter = parseInt(localStorage.getItem('cartCounter'));
   let userId = parseInt(localStorage.getItem('userId'));
   if (!cartCounter) {
     document.querySelector('.cart-wrapper').innerHTML = `
   <div class="empty-cart-message-container">
   <h2 class="my-4">su carrito está vacío.</h2>
+  <a href="../index.html">
   <button class="btn btn-primary">Explorar la tienda</button>
+  </a>
   </div>
   `
   document.querySelector('.cart-summary-wrapper').innerHTML = '';
   } else {
-    const productosFiltrados = filtrarProductos();
+    const productosFiltrados = await filtrarProductos();
     let contadorProductos = JSON.parse(localStorage.getItem('contadorProductos'));
     const listaIdProductos = JSON.parse(localStorage.getItem('listaIdProductos'));
     let productosHTML = '';
@@ -57,7 +62,7 @@ function mostrarCarrito() {
   <div class="cart-summary">
               <h2>Resumen del Carrito</h2>
               <p>Subtotal (${cartCounter} productos): <span>$${totalPrice}</span></p>
-              <a href="pago.html">
+              <a href="../paypal/pago.html">
               <button class="btn btn-primary">Proceder con el Pago</button>
               </a>
           </div>
@@ -97,8 +102,7 @@ function mostrarCarrito() {
 
     document.querySelectorAll('.plus-sign').forEach((minusSign, index) => {
       minusSign.addEventListener('click', async () => {
-        const productos = JSON.parse(localStorage.getItem('productos'));
-        const producto = productos.find(producto => producto.id === parseInt(listaIdProductos[index]));
+        const producto = await getProduct(parseInt(listaIdProductos[index]));
         contadorProductos[listaIdProductos[index]]++;
         if(contadorProductos[listaIdProductos[index]] > producto.existencias){
           alert('Ups! Parece que nos quedamos sin este producto')
@@ -159,11 +163,13 @@ function mostrarCarrito() {
 
 async function updateCart(carritoActualizado) {
   try {
+    const token = localStorage.getItem('access_token');
     const updateResponse = await fetch(`http://127.0.0.1:8000/cart/${carritoActualizado.id_usuario}/${carritoActualizado.id_producto}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-        },
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
         body: JSON.stringify(carritoActualizado)
     });
     if (!updateResponse.ok) {
@@ -178,11 +184,13 @@ async function updateCart(carritoActualizado) {
 
 async function deleteCart(carritoAeliminar) {
   try {
+    const token = localStorage.getItem('access_token');
     const updateResponse = await fetch(`http://127.0.0.1:8000/cart/${carritoAeliminar.id_usuario}/${carritoAeliminar.id_producto}`, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
-        },
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
     });
     if (!updateResponse.ok) {
       throw new Error('Error al eliminar el registro');
@@ -192,6 +200,23 @@ async function deleteCart(carritoAeliminar) {
     console.error('Hubo un problema con el carrito:', error);
     alert('Hubo un problema con el carrito. Por favor, intenta de nuevo.');
 }
+}
+
+async function getProduct(id_producto){
+  try {
+      const response = await fetch(`http://127.0.0.1:8000/products/${id_producto}`);
+      const product = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Error al cargar el producto');
+      }
+
+      return product;
+
+  }catch (error) {
+      console.error('Hubo un problema al cargar el producto:', error);
+      alert('Hubo un error al cargar el producto.');
+  }
 }
 
 

@@ -4,6 +4,7 @@ from app.crud import crudCart_order
 from app.models import cart_orderModel
 from app.schemas import cart_orderSchema
 from app.core.config import SessionLocal, engine
+from app.core.security import verify_token
 
 cart_orderModel.Base.metadata.create_all(bind=engine)
 
@@ -18,12 +19,12 @@ def get_db():
         
 
 @router.post("/cartOrder/", response_model=cart_orderSchema.CartOrder)
-def create_cart_order(cart_order: cart_orderSchema.CartOrder, db: Session = Depends(get_db)):
+def create_cart_order(cart_order: cart_orderSchema.CartOrder, db: Session = Depends(get_db), email: str = Depends(verify_token)):
   return crudCart_order.create_cart_order(db=db, cart_order=cart_order)
   
 
 @router.get("/cartOrder/{id_usuario}", response_model=list[cart_orderSchema.CartOrder])
-def read_cart_order(id_usuario: int, db: Session = Depends(get_db)):
+def read_cart_order(id_usuario: int, db: Session = Depends(get_db), email: str = Depends(verify_token)):
     cart_order = crudCart_order.get_cart_order(db, id_usuario=id_usuario)
     if cart_order is None:
         raise HTTPException(status_code=404, detail="Cart Order not found")

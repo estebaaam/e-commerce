@@ -5,7 +5,14 @@ let categories = [];
 // Función para obtener categorías
 async function fetchCategories() {
     try {
-        const response = await fetch('http://localhost:8000/categories/');
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('http://127.0.0.1:8000/categories/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) {
             throw new Error('Error al obtener las categorías');
         }
@@ -18,7 +25,14 @@ async function fetchCategories() {
 // Función para obtener productos
 async function fetchProducts() {
     try {
-        const response = await fetch('http://localhost:8000/products/');
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('http://127.0.0.1:8000/products/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) {
             throw new Error('Error al obtener los productos');
         }
@@ -103,10 +117,12 @@ async function updateProductStatus() {
     };
 
     try {
+        const token = localStorage.getItem('access_token');
         const response = await fetch(`http://127.0.0.1:8000/products/${productId}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(updatedProductData)  // Enviar todos los campos
         });

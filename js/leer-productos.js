@@ -1,17 +1,19 @@
-const idProducto = localStorage.getItem('idProducto');
-const productos = JSON.parse(localStorage.getItem('productos'));  
+async function loadProduct() {
+  const idProducto = localStorage.getItem('idProducto');
+  const productoSeleccionado = await getProduct(idProducto);
 
-const productoSeleccionado = productos.find(producto => producto.id == idProducto);
+  document.getElementById('product-name').innerHTML = productoSeleccionado.nombre;
+  document.getElementById('price').innerHTML = `$${productoSeleccionado.precio}`;
+  document.getElementById('description').innerHTML = productoSeleccionado.descripcion;
+  document.getElementById('product-img').src = productoSeleccionado.imagen;
+  const stockText = productoSeleccionado.existencias ? "En stock" : "Agotado";
+  document.getElementById('stock').innerHTML = stockText;
+}
 
-document.getElementById('product-name').innerHTML = productoSeleccionado.nombre;
-document.getElementById('price').innerHTML = `$${productoSeleccionado.precio}`;
-document.getElementById('description').innerHTML = productoSeleccionado.descripcion;
-document.getElementById('product-img').src = productoSeleccionado.imagen;
-const stockText = productoSeleccionado.existencias ? "En stock" : "Agotado";
-document.getElementById('stock').innerHTML = stockText;
+loadProduct();
 
 async function loadComments() {
-
+  const idProducto = localStorage.getItem('idProducto');
   const reseñas = await getReviews(idProducto);
   let commentsHTML = ''
   const calificacionesPendientes = [];
@@ -116,7 +118,7 @@ async function getReviews(id_producto) {
 
 async function getUser(id) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/users/${id}`);
+    const response = await fetch(`http://127.0.0.1:8000/users/id/${id}`);
     const user = await response.json();
 
     if (!response.ok) {
@@ -167,4 +169,21 @@ function calculateRating(data) {
   document.querySelector('.rating_average p').innerHTML = total_rating.toLocaleString();
   document.querySelector('.rating_average h1').innerHTML = rating_average;
   document.querySelector('.star-inner').style.width = (rating_average / 5) * 100 + "%";
+}
+
+async function getProduct(id_producto){
+  try {
+      const response = await fetch(`http://127.0.0.1:8000/products/${id_producto}`);
+      const product = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Error al cargar el producto');
+      }
+
+      return product;
+
+  }catch (error) {
+      console.error('Hubo un problema al cargar el producto:', error);
+      alert('Hubo un error al cargar el producto.');
+  }
 }

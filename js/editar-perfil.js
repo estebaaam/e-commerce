@@ -1,19 +1,6 @@
-const logout = () => {
-  localStorage.removeItem('userName');
-  localStorage.removeItem('user');
-  localStorage.removeItem('productos');
-  localStorage.removeItem('contadorProductos');
-  localStorage.removeItem('cartCounter');
-  localStorage.removeItem('userId');
-  localStorage.removeItem('listaIdProductos');
-  localStorage.removeItem('idProducto');
-  localStorage.removeItem('cart_order');
-  localStorage.removeItem('orders');
-  window.location.href = "../index.html";
-}
-
 async function editarPerfil(){
-  user = JSON.parse(localStorage.getItem('user'))
+  userId = localStorage.getItem('userId');
+  user = await getUser(userId);
   document.querySelector('.container-information').innerHTML = `
   <div class="col-lg-6 mb-5 mb-lg-0">
               <div class="card-body py-5 px-md-5">
@@ -41,11 +28,6 @@ async function editarPerfil(){
                     <label class="form-label" for="direccion">Dirección</label>
                   </div>
 
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" value="${user.contraseña}" id="contraseña" class="form-control" />
-                    <label class="form-label" for="contraseña">Contraseña</label>
-                  </div>
-  
                   <button type="button" onclick="updateUser()" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary me-3">
                     Actualizar
                   </button>
@@ -63,35 +45,41 @@ async function updateUser() {
   let correo = document.getElementById('correo').value;
   let telefono = document.getElementById('telefono').value;
   let direccion = document.getElementById('direccion').value;
-  let contraseña = document.getElementById('contraseña').value;
   let rol = 'cliente';
 
+  let userId = parseInt(localStorage.getItem('userId'));
+  const token = localStorage.getItem('access_token');
+
   let usuarioActualizado = {
+    id: userId,
     nombre: nombre,
     correo: correo,
     telefono: telefono,
     direccion: direccion,
-    contraseña: contraseña,
     rol: rol
   }
 
-  let userId = parseInt(localStorage.getItem('userId'));
   try {
     const updateResponse = await fetch(`http://127.0.0.1:8000/users/${userId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(usuarioActualizado)
     });
 
     if (!updateResponse.ok) {
-      throw new Error('Error al al actualizar el usuario');
-    }else{
-      localStorage.setItem('user', JSON.stringify(usuarioActualizado));
+      if (updateResponse.status === 401) {
+          alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+          window.location.href = "../html/login.html";
+          return;
+      }
+      throw new Error('Error al actualizar el usuario');
+  } else {
       localStorage.setItem('userName', usuarioActualizado.nombre);
       window.location.href = "../html/informacion-personal.html";
-    }
+  }
 
 }catch (error) {
     console.error('Hubo un problema al actualizar el usuario:', error);
@@ -100,18 +88,20 @@ async function updateUser() {
 }
 
 async function loadOrders() {
-  let cart_orders = JSON.parse(localStorage.getItem('cart_order'));
-if(!cart_orders){
+  let userId = parseInt(localStorage.getItem('userId'));
+  let cart_orders = await getCartOrder(userId);
+if(!cart_orders.length){
   document.querySelector('.orders-wrapper').innerHTML = `
   <div class="empty-orders-message-container">
   <h2 class="my-5">no tienes pedidos</h2>
+  <a href="../index.html">
   <button class="btn btn-primary">Explorar la tienda</button>
+  </a>
   </div>
   `
 }else{
   let userId = parseInt(localStorage.getItem('userId'));
-  const productos = JSON.parse(localStorage.getItem('productos'));
-  let orders = JSON.parse(localStorage.getItem('orders'));
+  let orders = await getOrders(userId);
   let reseñasUsuario = await getReviews(userId);
 
   let productosHTML = '';
@@ -119,8 +109,8 @@ if(!cart_orders){
 
   productosHTML += '<h2 class="my-5">tus pedidos</h2>'
 
-  cart_orders.forEach(cart_order => {
-    const producto = productos.find(producto => producto.id === cart_order.id_producto);
+  for(const cart_order of cart_orders) {
+    const producto = await getProduct(cart_order.id_producto);
     const order = orders.find(order => order.id === cart_order.id_pedido);
     if(order.estado === 'entregado'){
       const comentarioExistente = reseñasUsuario.find(reseña => 
@@ -208,7 +198,7 @@ if(!cart_orders){
   </div>
   `
     }
-  });
+  };
   
   document.querySelector('.orders-wrapper').innerHTML = productosHTML;
 
@@ -250,9 +240,11 @@ async function submitCreateReview(){
   };
 
   try {
-    const response = await fetch('http://127.0.0.1:8000/reviews', {
+    const token = localStorage.getItem('access_token');      
+    const response = await fetch('http://127.0.0.1:8000/reviews/', {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(review)
@@ -272,12 +264,20 @@ async function submitCreateReview(){
 
 async function getReviews(id_usuario) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/reviews/user/${id_usuario}`);
-    const userReviews = await response.json();
+    const token = localStorage.getItem('access_token');
+    const response = await fetch(`http://127.0.0.1:8000/reviews/user/${id_usuario}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
 
     if (!response.ok) {
       throw new Error('Error con las reseñas');
     }
+
+    const userReviews = await response.json();
 
     return userReviews;
 
@@ -318,9 +318,11 @@ async function submitUpdatedComment() {
   };
 
   try {
+    const token = localStorage.getItem('access_token');      
     const response = await fetch(`http://127.0.0.1:8000/reviews/${id}`, {
       method: 'PUT',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(reviewUpdate)
@@ -344,10 +346,12 @@ async function deleteReview(id){
 async function submitDeleteComment() {
   const id = window.currentCommentId;
   try {
+    const token = localStorage.getItem('access_token');
     const updateResponse = await fetch(`http://127.0.0.1:8000/reviews/${id}`, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
     });
     if (!updateResponse.ok) {
@@ -404,5 +408,81 @@ function calificarActualizacion(item){
     }else{
       document.getElementById(`${index+1}-star-actualizar`).style.color = "gray";
     }
+  }
+}
+
+async function getUser(id) {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/users/id/${id}`);
+    const user = await response.json();
+
+    if (!response.ok) {
+      throw new Error('Error al traer el usuario');
+    }
+
+    return user;
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Hubo un error al traer el usuario.');
+  }
+}
+
+async function getCartOrder(id_usuario){
+  try {
+      const token = localStorage.getItem('access_token');
+      const response = await fetch(`http://127.0.0.1:8000/cartOrder/${id_usuario}`,{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const cart_orders = await response.json();
+
+      return cart_orders;
+
+  }catch (error) {
+      console.error('Hubo un problema al traer los pedidos:', error);
+      alert('Hubo un error al traer los pedidos.');
+  }
+}
+
+async function getProduct(id_producto){
+  try {
+      const response = await fetch(`http://127.0.0.1:8000/products/${id_producto}`);
+      const product = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Error al cargar el producto');
+      }
+
+      return product;
+
+  }catch (error) {
+      console.error('Hubo un problema al cargar el producto:', error);
+      alert('Hubo un error al cargar el producto.');
+  }
+}
+
+async function getOrders(id_usuario){
+  try {
+      const token = localStorage.getItem('access_token');
+      const response = await fetch(`http://127.0.0.1:8000/orders/${id_usuario}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const orders = await response.json();
+
+      return orders;
+
+  }catch (error) {
+      console.error('Hubo un problema al traer los pedidos:', error);
+      alert('Hubo un error al traer los pedidos.');
   }
 }

@@ -1,5 +1,5 @@
 async function signIn (event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const nombre = document.getElementById('nombre').value;
     const telefono = document.getElementById('telefono').value;
@@ -17,22 +17,24 @@ async function signIn (event) {
     };
 
     try {
-        const updateResponse = await fetch('http://127.0.0.1:8000/users/', {
+        const response = await fetch('http://127.0.0.1:8000/users/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(nuevoUsuario)
         });
-        if (updateResponse.ok) {
-            localStorage.setItem('userName',nuevoUsuario.nombre);
-            localStorage.setItem('user', JSON.stringify(nuevoUsuario));
+        if (response.ok) {
+            const data = await response.json();
+            const access_token = data.access_token;
+            localStorage.setItem('access_token', access_token);
+            const user = await getUser(correo);
+            localStorage.setItem('userId', user.id);
+            localStorage.setItem('userName',user.nombre);
             let contadorProductos = {};
             let cartCounter = 0;
             localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
             localStorage.setItem('cartCounter',cartCounter)
-            await traerUsuario(nuevoUsuario.correo);
-            await traerProductos();
             window.location.href = "../index.html";
         } else {
             throw new Error('Error al guardar el usuario');
@@ -44,37 +46,27 @@ async function signIn (event) {
     }
 }
 
-async function traerProductos(){
+async function getUser(correo){
     try {
-        const responseProductos = await fetch('http://127.0.0.1:8000/products/');
-        const productos = await responseProductos.json();
+        const token = localStorage.getItem('access_token');
+        const responseUser = await fetch(`http://127.0.0.1:8000/users/${correo}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
 
-        if (!responseProductos.ok) {
-            throw new Error('Error al traer los productos');
-        }else{
-            localStorage.setItem('productos',JSON.stringify(productos));   
+
+        if (!responseUser) {
+            throw new Error('Error al traer el usuario');
         }
+
+        const user = await responseUser.json();
+        return user;
    
     }catch (error) {
-        console.error('Hubo un problema al traer los productos:', error);
-        alert('Hubo un error al traer los productos.');
-    }
-}
-
-async function traerUsuario(correo){
-    try {
-        const responseUsers = await fetch('http://127.0.0.1:8000/users/');
-        const users = await responseUsers.json();
-        const user = users.find(user => user.correo === correo);
-
-        if (!user) {
-            throw new Error('Error al traer los usuarios');
-        }else{
-            localStorage.setItem('userId', user.id);
-        }
-   
-    }catch (error) {
-        console.error('Hubo un problema al traer los usuarios:', error);
-        alert('Hubo un error al traer los usuarios.');
+        console.error('Hubo un problema al traer el usuario:', error);
+        alert('Hubo un error al traer el usuario.');
     }
 }

@@ -9,12 +9,12 @@
         <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.svg" />
     
         <!-- ========================= CSS here ========================= -->
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/LineIcons.3.0.css" />
-        <link rel="stylesheet" href="/css/tiny-slider.css" />
-        <link rel="stylesheet" href="/css/glightbox.min.css" />
-        <link rel="stylesheet" href="/css/main.css" />
-        <link rel="stylesheet" href="/css/pago.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/LineIcons.3.0.css" />
+        <link rel="stylesheet" href="../css/tiny-slider.css" />
+        <link rel="stylesheet" href="../css/glightbox.min.css" />
+        <link rel="stylesheet" href="../css/main.css" />
+        <link rel="stylesheet" href="../css/pago.css" />
     
     </head>
     <header class="header navbar-area">
@@ -28,8 +28,7 @@
                                 <li>
                                     <div class="select-position">
                                         <select id="select5">
-                                            <option value="0" selected>English</option>
-                                            <option value="1">Español</option>
+                                            <option value="0" selected>Español</option>
                                         </select>
                                     </div>
                                 </li>
@@ -39,10 +38,8 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-middle">
                             <ul class="useful-links">
-                            <li><a href="index.html">Hogar</a></li>
-                                <li><a href="about-us.html">Sobre Nosotros</a></li>
-                                <li><a href="contact.html">Contactanos</a></li>
-                                <li><a href="html/asistente.html">Asistente</a></li>
+                            <li><a href="../index.html">Hogar</a></li>
+                                <li><a href="../html/sobreNosotros.html">Sobre Nosotros</a></li>
                             </ul>
                         </div>
                     </div>
@@ -51,12 +48,6 @@
                             <div class="user">
                             </div>
                             <ul class="user-login">
-                                <li>
-                                    <a href="login.html">Sign In</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -70,7 +61,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-7">
                         <!-- Start Header Logo -->
-                        <a class="navbar-brand" href="index.html">
+                        <a class="navbar-brand" href="../index.html">
                             <h2>TechShop</h2>
                         </a>
                         <!-- End Header Logo -->
@@ -81,10 +72,10 @@
                             <!-- navbar search start -->
                             <div class="navbar-search search-style-5">
                                 <div class="search-input">
-                                    <input type="text" placeholder="Search">
+                                    <input class="search" type="text" placeholder="Search">
                                 </div>
                                 <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
+                                    <button onclick="guardarBusqueda()"><i class="lni lni-search-alt"></i></button>
                                 </div>
                             </div>
                             <!-- navbar search Ends -->
@@ -101,7 +92,7 @@
                             </div>
                             <div class="navbar-cart">
                                 <div class="cart-items">
-                                    <a href="/html/carrito.html" class="main-btn">
+                                    <a href="../html/carrito.html" class="main-btn">
                                         <i class="lni lni-cart"></i>
                                         <span class="cart-counter"></span>
                                     </a>
@@ -122,11 +113,6 @@
                         <div class="mega-category-menu">
                             <span class="cat-button"><i class="lni lni-menu"></i>Categorias</span>
                             <ul class="sub-category">
-                                <li><a href="product-grids.html">Portatiles</a></li>
-                                <li><a href="product-grids.html">Celulares</a></li>
-                                <li><a href="product-grids.html">Relojes</a></li>
-                                <li><a href="product-grids.html">Auriculares</a></li>
-                                <li><a href="product-grids.html">Monitores</a></li>
                             </ul>
                         </div>
                         <!-- End Mega Category Menu -->
@@ -156,9 +142,6 @@
                             </li>
                             <li>
                                 <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -204,7 +187,8 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button onclick="placeOrder(event)" class="btn btn-primary">realizar pedido</button>
+                      <div id="paypal-button-container" class="paypal-button-container"></div>
+                      <p id="result-message"></p>
                     </div>
                   </form>
             </div>
@@ -227,9 +211,7 @@
                             <div class="single-footer f-contact">
                                 <h3>Contactanos</h3>
                                 <p class="phone">Telefono: +57 314 781 0003</p>
-                                <p class="mail">
-                                    <a href="jbaleta@unibarranquilla.edu.co">jbaleta@unibarranquilla.edu.co</a>
-                                </p>
+                                <p class="phone">jbaleta@unibarranquilla.edu.co</p>
                             </div>
                             <!-- End Single Widget -->
                         </div>
@@ -239,24 +221,13 @@
                             <div class="single-footer f-link">
                                 <h3>Informacion</h3>
                                 <ul>
-                                    <li><a href="about-us.html">Sobre Nosotros</a></li>
-                                    <li><a href="contact.html">Contactanos</a></li>
+                                    <li><a href="../html/sobreNosotros.html">Sobre Nosotros</a></li>
                                 </ul>
                             </div>
                             <!-- End Single Widget -->
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
-                            <div class="single-footer f-link">
-                                <h3>Categorias Populares</h3>
-                                <ul>
-                                    <li><a href="product-grids.html">Portatiles</a></li>
-                                    <li><a href="product-grids.html">Celulares</a></li>
-                                    <li><a href="product-grids.html">Relojes</a></li>
-                                    <li><a href="product-grids.html">Auriculares</a></li>
-                                    <li><a href="product-grids.html">Monitores</a></li>
-                                </ul>
-                            </div>
                             <!-- End Single Widget -->
                         </div>
                     </div>
@@ -272,7 +243,7 @@
                         <div class="col-lg-4 col-12">
                             <div class="payment-gateway">
                                 <span>Aceptamos:</span>
-                                <img src="/images/footer/credit-cards-footer.png" alt="#">
+                                <img src="../images/footer/credit-cards-footer.png" alt="#">
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -288,7 +259,6 @@
                                 <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
                                 <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
                                 <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -298,6 +268,9 @@
         <!-- End Footer Bottom -->
     </footer>
     <script src="../js/validar-sesion.js"></script>
-    <script src="../js/pago.js"></script>
+    <script src="../js/validar-pago-sesion.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AbaObwdE2ZLmGLoTaD5Q42OOz7Kh-0Qbd22zk2Uj-mBFsWFZwEsU32HHczh3QqylPDTbcLpqwoDz2Ngn&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo"></script>
+    <script src="paypal.js"></script>
 </body>
 </html>

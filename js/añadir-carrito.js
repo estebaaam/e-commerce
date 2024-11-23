@@ -63,15 +63,14 @@ async function addToCart() {
 };
 
 async function buySingleProduct() {
-  if (!localStorage.getItem('userName')) {
+  if (!localStorage.getItem('userId')) {
     window.location.href = "../html/log-in.html";
   } else {
     let contadorProductos = JSON.parse(localStorage.getItem('contadorProductos'));
     let userId = parseInt(localStorage.getItem('userId'));
     let cantidadSeleccionada = parseInt(document.getElementById('quantity').value);
     let idProducto = parseInt(localStorage.getItem('idProducto'));
-    const productos = JSON.parse(localStorage.getItem('productos'));
-    const producto = productos.find(producto => producto.id === idProducto);
+    const producto = await getProduct(idProducto);
 
     if(contadorProductos[idProducto] <= producto.existencias  || !contadorProductos[idProducto]){
       if (contadorProductos[idProducto]) {
@@ -117,9 +116,8 @@ async function buySingleProduct() {
     localStorage.setItem('cartCounter', cartCounter);
 
     document.querySelector('.cart-counter').innerHTML = cartCounter;
-
-    window.location.href = "../html/pago.html";
   }
+  window.location.href = "../html/pago.html";
 };
 
 async function addToCartFromStore(idProducto) {
@@ -128,8 +126,7 @@ async function addToCartFromStore(idProducto) {
   } else {
     let contadorProductos = JSON.parse(localStorage.getItem('contadorProductos'));
     let userId = parseInt(localStorage.getItem('userId'));
-    const productos = JSON.parse(localStorage.getItem('productos'));
-    const producto = productos.find(producto => producto.id === idProducto);
+    const producto = await getProduct(idProducto)
 
     if(contadorProductos[idProducto] <= producto.existencias  || !contadorProductos[idProducto]){
       if (contadorProductos[idProducto]) {
@@ -186,11 +183,13 @@ async function addToCartFromStore(idProducto) {
 
 async function addCart(nuevoCarrito) {
   try {
+    const token = localStorage.getItem('access_token');
     const updateResponse = await fetch('http://127.0.0.1:8000/cart/', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        },
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
         body: JSON.stringify(nuevoCarrito)
     });
     if (!updateResponse.ok) {
@@ -205,11 +204,13 @@ async function addCart(nuevoCarrito) {
 
 async function updateCart(carritoActualizado) {
   try {
+    const token = localStorage.getItem('access_token');
     const updateResponse = await fetch(`http://127.0.0.1:8000/cart/${carritoActualizado.id_usuario}/${carritoActualizado.id_producto}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-        },
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
         body: JSON.stringify(carritoActualizado)
     });
     if (!updateResponse.ok) {
@@ -220,4 +221,21 @@ async function updateCart(carritoActualizado) {
     console.error('Hubo un problema con el carrito:', error);
     alert('Hubo un problema con el carrito. Por favor, intenta de nuevo.');
 }
+}
+
+async function getProduct(id_producto){
+  try {
+      const response = await fetch(`http://127.0.0.1:8000/products/${id_producto}`);
+      const product = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Error al cargar el producto');
+      }
+
+      return product;
+
+  }catch (error) {
+      console.error('Hubo un problema al cargar el producto:', error);
+      alert('Hubo un error al cargar el producto.');
+  }
 }
