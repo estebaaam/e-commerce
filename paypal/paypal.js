@@ -13,11 +13,13 @@ window.paypal
 
     async createOrder() {
       try {
+        const token = localStorage.getItem('access_token');
         const response = await fetch("http://127.0.0.1:8000/api/orders", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-          },
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
           // use the "body" param to optionally pass additional order information
           // like product ids and quantities
           body: JSON.stringify({
@@ -45,11 +47,13 @@ window.paypal
 
     async onApprove(data, actions) {
       try {
+        const token = localStorage.getItem('access_token');
         const response = await fetch(`http://127.0.0.1:8000/api/orders/${data.orderID}/capture`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-          },
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
         });
 
         const responeData = await response.json();

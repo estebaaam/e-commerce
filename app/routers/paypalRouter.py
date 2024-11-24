@@ -1,6 +1,6 @@
 import logging
 import os
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from dotenv import load_dotenv
 from paypalserversdk.http.auth.o_auth_2 import ClientCredentialsAuthCredentials
 from paypalserversdk.logging.configuration.api_logging_configuration import (
@@ -13,6 +13,7 @@ from paypalserversdk.models.checkout_payment_intent import CheckoutPaymentIntent
 from paypalserversdk.models.order_request import OrderRequest
 from paypalserversdk.models.purchase_unit_request import PurchaseUnitRequest
 from paypalserversdk.api_helper import ApiHelper
+from app.core.security import verify_token
 
 # Inicializar FastAPI
 router = APIRouter()
@@ -44,7 +45,7 @@ orders_controller: OrdersController = paypal_client.orders
 
 # Rutas
 @router.post("/api/orders")
-async def create_order(request: Request):
+async def create_order(request: Request, email: str = Depends(verify_token)):
     """
     Crear una orden para iniciar la transacción.
     """
@@ -69,7 +70,7 @@ async def create_order(request: Request):
     return ApiHelper.json_serialize(order.body)
 
 @router.post("/api/orders/{order_id}/capture")
-async def capture_order(order_id: str):
+async def capture_order(order_id: str, email: str = Depends(verify_token)):
     """
     Capturar el pago de una orden para completar la transacción.
     """
