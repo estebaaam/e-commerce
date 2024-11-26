@@ -14,7 +14,6 @@ async function verifyUser (){
     localStorage.removeItem('cartCounter');
     localStorage.removeItem('userId');
     localStorage.removeItem('listaIdProductos');
-    localStorage.removeItem('idProducto');
     localStorage.removeItem('busquedaUsuario');
     localStorage.removeItem('totalPrice');
     localStorage.removeItem('access_token');

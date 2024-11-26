@@ -6,8 +6,7 @@ async function addToCart() {
     let userId = parseInt(localStorage.getItem('userId'));
     let cantidadSeleccionada = parseInt(document.getElementById('quantity').value);
     let idProducto = parseInt(localStorage.getItem('idProducto'));
-    const productos = JSON.parse(localStorage.getItem('productos'));
-    const producto = productos.find(producto => producto.id === idProducto);
+    const producto = await getProduct(idProducto)
 
     if(contadorProductos[idProducto] <= producto.existencias  || !contadorProductos[idProducto]){
       if (contadorProductos[idProducto]) {
@@ -117,7 +116,7 @@ async function buySingleProduct() {
 
     document.querySelector('.cart-counter').innerHTML = cartCounter;
   }
-  window.location.href = "../html/pago.html";
+  window.location.href = "../html/carrito.html";
 };
 
 async function addToCartFromStore(idProducto) {
