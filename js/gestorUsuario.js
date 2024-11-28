@@ -39,7 +39,6 @@ function renderUsers() {
             <td>${user.rol}</td>
             <td>
                 <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold" data-mdb-ripple-color="dark" onclick="openEditModal(${user.id})">Editar</button>
-                <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold btn-delete" data-mdb-ripple-color="dark" onclick="deleteEditModal(${user.id})">Eliminar</button>
             </td>
         `;
         userList.appendChild(row);
