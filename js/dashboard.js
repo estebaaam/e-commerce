@@ -349,7 +349,6 @@ function renderLowStockProducts(products) {
       const row = document.createElement('tr');
       row.innerHTML = `
           <td>${product.id}</td>
-          <td><img src="${product.imagen}" alt="${product.nombre}" style="width: 50px;"></td>
           <td>${product.nombre}</td>
           <td>${product.existencias}</td>
       `;

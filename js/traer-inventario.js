@@ -11,7 +11,7 @@ async function traerProductos() {
       let productosHTML = '';
 
       categorias.forEach(categoria => {
-          productosHTML += `<h3 class="category-products mt-5">${categoria.nombre}</h3>`;
+          productosHTML += `<h3 id="categoria-${categoria.id}" class="category-products mt-5">${categoria.nombre}</h3>`;
           productosHTML += `<div class="carousel-container">`;
           productosHTML += `<button class="carousel-prev">←</button>`;
           productosHTML += `<div class="carousel">`
@@ -74,7 +74,7 @@ async function traerCategorias(){
       if(categorias.length > 0){
         categorias.forEach(categoria => {
           categoriasHTML += `
-          <li><a href="">${categoria.nombre}</a></li>
+          <li><a href="#categoria-${categoria.id}">${categoria.nombre}</a></li>
           `
         });
       }else{

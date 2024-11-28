@@ -1,95 +1,118 @@
-let totalPrice = localStorage.getItem('totalPrice')
-window.paypal
-  .Buttons({
-    style: {
-      shape: "rect",
-      layout: "vertical",
-      color: "gold",
-      label: "paypal",
-    },
-    message: {
-      amount: totalPrice,
-    },
+function verifyCheckBox(event) {
+  event.preventDefault();
 
-    async createOrder() {
-      try {
-        const token = localStorage.getItem('access_token');
-        const response = await fetch("http://127.0.0.1:8000/api/orders", {
-          method: "POST",
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+  const form = document.getElementById('formulario');
+  const isValid = form.checkValidity();
+
+  if (isValid) {
+    const elements = form.elements;
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].disabled = true;
+    }
+    document.querySelector('.btn-autocompletar').disabled = true;
+    const paypalContainer = document.querySelector('.paypal-container');
+    paypalContainer.innerHTML = `
+      <div id="paypal-button-container" class="paypal-button-container"></div>
+      <p id="result-message"></p>
+    `;
+
+    let totalPrice = localStorage.getItem('totalPrice')
+    window.paypal
+      .Buttons({
+        style: {
+          shape: "rect",
+          layout: "vertical",
+          color: "gold",
+          label: "paypal",
         },
-          // use the "body" param to optionally pass additional order information
-          // like product ids and quantities
-          body: JSON.stringify({
-            amount: totalPrice,
-          }),
-        });
-
-        const responeData = await response.json();
-        const orderData = JSON.parse(responeData);
-
-        if (orderData.id) {
-          return orderData.id;
-        }
-        const errorDetail = orderData?.details?.[0];
-        const errorMessage = errorDetail
-          ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
-          : JSON.stringify(orderData);
-
-        throw new Error(errorMessage);
-      } catch (error) {
-        console.error(error);
-        resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
-      }
-    },
-
-    async onApprove(data, actions) {
-      try {
-        const token = localStorage.getItem('access_token');
-        const response = await fetch(`http://127.0.0.1:8000/api/orders/${data.orderID}/capture`, {
-          method: "POST",
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+        message: {
+          amount: totalPrice,
         },
-        });
 
-        const responeData = await response.json();
-        const orderData = JSON.parse(responeData);
+        async createOrder() {
+          try {
+            const token = localStorage.getItem('access_token');
+            const response = await fetch("http://127.0.0.1:8000/api/orders", {
+              method: "POST",
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+              // use the "body" param to optionally pass additional order information
+              // like product ids and quantities
+              body: JSON.stringify({
+                amount: totalPrice,
+              }),
+            });
 
-        // Three cases to handle:
-        //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-        //   (2) Other non-recoverable errors -> Show a failure message
-        //   (3) Successful transaction -> Show confirmation or thank you message
+            const responeData = await response.json();
+            const orderData = JSON.parse(responeData);
 
-        const errorDetail = orderData?.details?.[0];
+            if (orderData.id) {
+              return orderData.id;
+            }
+            const errorDetail = orderData?.details?.[0];
+            const errorMessage = errorDetail
+              ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+              : JSON.stringify(orderData);
 
-        if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
-          // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-          // recoverable state, per
-          // https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
-          return actions.restart();
-        } else if (errorDetail) {
-          // (2) Other non-recoverable errors -> Show a failure message
-          throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
-        } else if (!orderData.purchase_units) {
-          throw new Error(JSON.stringify(orderData));
-        } else {
-          // (3) Successful transaction -> Show confirmation or thank you message
-          // Or go to another URL:  
-          placeOrder();
-        }
-      } catch (error) {
-        console.error(error);
-        resultMessage(
-          `Sorry, your transaction could not be processed...<br><br>${error}`
-        );
-      }
-    },
-  })
-  .render("#paypal-button-container");
+            throw new Error(errorMessage);
+          } catch (error) {
+            console.error(error);
+            resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
+          }
+        },
+
+        async onApprove(data, actions) {
+          try {
+            const token = localStorage.getItem('access_token');
+            const response = await fetch(`http://127.0.0.1:8000/api/orders/${data.orderID}/capture`, {
+              method: "POST",
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            });
+
+            const responeData = await response.json();
+            const orderData = JSON.parse(responeData);
+
+            // Three cases to handle:
+            //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+            //   (2) Other non-recoverable errors -> Show a failure message
+            //   (3) Successful transaction -> Show confirmation or thank you message
+
+            const errorDetail = orderData?.details?.[0];
+
+            if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
+              // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+              // recoverable state, per
+              // https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
+              return actions.restart();
+            } else if (errorDetail) {
+              // (2) Other non-recoverable errors -> Show a failure message
+              throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
+            } else if (!orderData.purchase_units) {
+              throw new Error(JSON.stringify(orderData));
+            } else {
+              // (3) Successful transaction -> Show confirmation or thank you message
+              // Or go to another URL:  
+              placeOrder();
+            }
+          } catch (error) {
+            console.error(error);
+            resultMessage(
+              `Sorry, your transaction could not be processed...<br><br>${error}`
+            );
+          }
+        },
+      })
+      .render("#paypal-button-container");
+
+  } else {
+    form.reportValidity();
+  }
+}
 
 // Example function to show a result to the user. Your site's UI library can be used instead.
 function resultMessage(message) {
@@ -100,6 +123,7 @@ function resultMessage(message) {
 async function placeOrder() {
 
   let userId = localStorage.getItem('userId');
+  let totalPrice = localStorage.getItem('totalPrice')
 
   let id_usuario = userId
   let estado = 'pendiente'
@@ -178,8 +202,16 @@ async function placeOrder() {
     localStorage.setItem('cartCounter', cartCounter);
     localStorage.setItem('contadorProductos', JSON.stringify(contadorProductos));
 
-    alert('su pedido se realizo con exito')
-    window.location.href = "../html/informacion-personal.html";
+    Swal.fire({
+      title: "confimacion de compra",
+      text: "su pedido se realizo con exito!",
+      icon: "success",
+      confirmButtonColor: "#3085d6",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "../html/informacion-personal.html";
+      }
+    });
 
 }catch (error) {
     console.error('Hubo un problema al realizar el pedido:', error);
